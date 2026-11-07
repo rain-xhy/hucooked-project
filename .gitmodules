@@ -4,3 +4,6 @@
 [submodule "replay_frontend"]
 	path = replay_frontend
 	url = https://github.com/LynxPeng/Better-replay-frontend-of-overcook-ai.git
+[submodule "nest_rl_adaptive_rl"]
+	path = reproduction/nest_rl/adaptive-RL
+	url = https://github.com/upasana27/adaptive-RL.git

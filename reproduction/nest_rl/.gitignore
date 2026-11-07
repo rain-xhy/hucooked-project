@@ -1,0 +1,6 @@
+/.conda/
+/checkpoint-eval/
+/deps/
+/deps-legacy/
+/*.download
+__pycache__/
