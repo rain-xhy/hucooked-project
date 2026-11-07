@@ -1,0 +1,3 @@
+[submodule "hucooked"]
+	path = hucooked
+	url = https://github.com/rain-xhy/hucooked.git
