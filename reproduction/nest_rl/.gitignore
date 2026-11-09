@@ -1,5 +1,6 @@
 /.conda/
 /checkpoint-eval/
+/runs/
 /deps/
 /deps-legacy/
 /*.download

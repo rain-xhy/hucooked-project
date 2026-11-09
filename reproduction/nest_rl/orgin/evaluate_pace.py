@@ -2,10 +2,11 @@
 
 import argparse
 import os
-from pathlib import Path
 import runpy
 import shutil
 import sys
+
+from overcooked_setup import CONFIG, RECIPES, ROOT, UPSTREAM, activate_upstream, rule_partner
 
 
 def main():
@@ -17,46 +18,47 @@ def main():
     )
     parser.add_argument("--passes", type=int, default=10)
     parser.add_argument("--seed", type=int, default=1)
+    parser.add_argument("--recipe", choices=RECIPES, default="lettuce-onion")
+    parser.add_argument("--partner-mode", choices=("full", "minimum"), default="full")
     args = parser.parse_args()
     if args.passes < 1:
         parser.error("--passes must be positive")
 
-    root = Path(__file__).resolve().parent
-    upstream = root / "adaptive-RL"
-    overcooked = upstream / "environment" / "overcooked"
-    checkpoint = upstream / "logs" / "Overcooked" / args.checkpoint / "ppo" / "latest.pt"
+    checkpoint = UPSTREAM / "logs" / "Overcooked" / args.checkpoint / "ppo" / "latest.pt"
     if not checkpoint.is_file():
         parser.error("initialize the adaptive-RL submodule to fetch the published checkpoint")
 
-    output = root / "checkpoint-eval" / f"{args.checkpoint}-{args.seed}"
+    output = ROOT / "checkpoint-eval" / f"{args.checkpoint}-{args.seed}-{args.partner_mode}-{args.recipe}"
     output.mkdir(parents=True, exist_ok=True)
     local_checkpoint = output / "latest.pt"
     # Upstream writes its result pickle beside the checkpoint.
     shutil.copyfile(checkpoint, local_checkpoint)
-    os.chdir(upstream)
-    sys.path[:0] = [str(upstream), str(overcooked), str(overcooked / "gym_cooking" / "rebar")]
-    os.environ.update(
-        WANDB_MODE="disabled",
-        MPLBACKEND="Agg",
-        OMP_NUM_THREADS="1",
-        MKL_NUM_THREADS="1",
-        TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD="1",
-    )
+    activate_upstream()
+    os.environ["TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD"] = "1"
 
     import evaluation_
+    from environment.overcooked import policy
 
     evaluate = evaluation_.evaluate
+    original_pool = policy.get_train_eval_pool
 
     def evaluate_metrics(*args, **kwargs):
         # The CLI expects a metrics dict; the current evaluator also returns recipe history.
         metrics, _ = evaluate(*args, **kwargs)
         return metrics
 
+    def evaluation_pool(upstream_args):
+        # Retain upstream pool setup and its RNG draws for paired comparisons.
+        train_pool, _ = original_pool(upstream_args)
+        print(f"Evaluation partner: {args.partner_mode} / {args.recipe}")
+        return train_pool, [rule_partner(args.recipe, args.partner_mode)]
+
     evaluation_.evaluate = evaluate_metrics
+    policy.get_train_eval_pool = evaluation_pool
     sys.argv = [
         "online_test_.py",
         "--env-name", "Overcooked",
-        "--env_config", "environment/overcooked/config/fc_small_test.yaml",
+        "--env_config", CONFIG,
         "--player-id", "0",
         "--recipe-type", "cross",
         "--train-pool-size", "3",
