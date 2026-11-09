@@ -6,7 +6,6 @@ from dataclasses import dataclass
 from itertools import zip_longest
 import os
 import random
-import sys
 from typing import NamedTuple
 
 import numpy as np
@@ -250,9 +249,6 @@ def main():
     if not args.cpu_reference_only and args.device == "cuda" and not torch.cuda.is_available():
         parser.error("CUDA is unavailable in this PyTorch installation")
 
-    for path in (ROOT / "runs/cuda-deps", ROOT / "deps-legacy", ROOT / ".conda/Lib/site-packages"):
-        if path.is_dir():
-            sys.path.append(str(path))
     os.environ.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
     os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
     os.environ.setdefault("SDL_AUDIODRIVER", "dummy")

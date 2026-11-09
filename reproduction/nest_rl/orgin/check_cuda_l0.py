@@ -5,7 +5,6 @@ from collections import Counter
 from dataclasses import dataclass
 import os
 import random
-import sys
 from typing import NamedTuple
 from unittest.mock import patch
 
@@ -229,9 +228,6 @@ def main():
         parser.error("--random-episodes must be positive")
     if not args.cpu_reference_only and args.device == "cuda" and not torch.cuda.is_available():
         parser.error("CUDA is unavailable in this PyTorch installation")
-    for path in (ROOT / "runs/cuda-deps", ROOT / "deps-legacy", ROOT / ".conda/Lib/site-packages"):
-        if path.is_dir():
-            sys.path.append(str(path))
     os.environ.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
     os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
     os.environ.setdefault("SDL_AUDIODRIVER", "dummy")

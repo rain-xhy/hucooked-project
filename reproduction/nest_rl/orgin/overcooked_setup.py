@@ -4,8 +4,8 @@ import os
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parent.parent
-UPSTREAM = ROOT / "adaptive-RL"
+ROOT = Path(__file__).resolve().parent
+UPSTREAM = ROOT.parent / "adaptive-RL"
 CONFIG = "environment/overcooked/config/fc_small_test.yaml"
 RECIPES = {
     "lettuce-onion": ["Lettuce", "Onion"],

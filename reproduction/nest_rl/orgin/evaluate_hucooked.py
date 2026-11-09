@@ -18,7 +18,7 @@ def main():
     if not checkpoint.is_file():
         parser.error(f"Checkpoint does not exist: {checkpoint}")
 
-    sys.path.insert(0, str(ROOT.parents[1] / "hucooked" / "src"))
+    sys.path.insert(0, str(ROOT.parents[2] / "hucooked" / "src"))
     activate_upstream()
 
     import numpy as np

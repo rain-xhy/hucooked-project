@@ -9,7 +9,7 @@
 | [orgin/](orgin/) | 论文原始复现：使用论文作者改进的胡闹厨房环境和论文的嵌套训练方法训练、评估 L1/L2 策略。 | 已有训练、评估和性能工具；当前训练配置与论文仍有差异，详见下表。 |
 | [cnn_standard/](cnn_standard/) | 标准 Overcooked 环境的空间观测与 CNN 实验，作为后续对照路线。 | 仅建立目录和说明，尚未实现或验证。 |
 
-`adaptive-RL/` 是两条路线可参考的作者代码子模块，固定版本与配置见 [orgin 使用说明](orgin/README.md)。论文 PDF 和共享子模块保留在本目录；训练脚本、评估脚本和依赖清单位于 `orgin/`。本地生成的 `runs/`、`checkpoint-eval/`、依赖缓存及 Conda 环境仍保留在本目录，并被 Git 忽略。
+`adaptive-RL/` 是两条路线可参考的作者代码子模块，固定版本与配置见 [orgin 使用说明](orgin/README.md)。论文 PDF 和共享子模块保留在本目录；训练脚本、评估脚本和依赖清单位于 `orgin/`。原始复现使用 `orgin/.conda/`，训练和评估产物分别写入 `orgin/runs/` 和 `orgin/checkpoint-eval/`。标准路线使用独立的 `cnn_standard/.conda/`。两个环境和本地运行产物均被 Git 忽略。
 
 ## 复现进度与计划
 
@@ -36,7 +36,7 @@
    git submodule update --init -- reproduction/nest_rl/adaptive-RL
    ```
 
-2. 阅读 [orgin/README.md](orgin/README.md)，按其中的环境准备和命令评估公开 checkpoint 或启动短训练。命令均从 `reproduction/nest_rl` 执行，输出写入该目录下的 `checkpoint-eval/` 或 `runs/`。
+2. 阅读 [orgin/README.md](orgin/README.md)，按其中的环境准备和命令评估公开 checkpoint 或启动短训练。初始化子模块后，进入 `reproduction/nest_rl/orgin` 执行训练或评估命令。
 3. 标准环境 CNN 路线尚无可运行训练入口；后续工作见 [cnn_standard/README.md](cnn_standard/README.md)。
 
 论文与代码：[arXiv v2](https://arxiv.org/abs/2602.17737v2) · [作者代码固定版本](https://github.com/upasana27/adaptive-RL/tree/33bb3222563735893ceb9258ebd3ea310583a148) · [论文 PDF](NestRL-2602.17737v2.pdf)

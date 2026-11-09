@@ -1,7 +1,6 @@
-/.conda/
-/checkpoint-eval/
-/runs/
-/deps/
-/deps-legacy/
+/orgin/.conda/
+/orgin/checkpoint-eval/
+/orgin/runs/
+/cnn_standard/.conda/
 /*.download
 __pycache__/

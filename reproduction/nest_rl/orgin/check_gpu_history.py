@@ -1,7 +1,6 @@
 """Compare the CUDA learner history and encoder gradients against pinned NestRL."""
 
 import os
-import sys
 
 import torch
 
@@ -9,9 +8,6 @@ from overcooked_setup import ROOT, activate_upstream
 
 
 def main():
-    for path in (ROOT / "runs/cuda-deps", ROOT / "deps-legacy", ROOT / ".conda/Lib/site-packages"):
-        if path.is_dir():
-            sys.path.append(str(path))
     os.environ.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
     os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
     os.environ.setdefault("SDL_AUDIODRIVER", "dummy")

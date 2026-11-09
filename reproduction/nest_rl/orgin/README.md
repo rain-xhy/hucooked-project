@@ -1,4 +1,4 @@
-> 本页记录 `orgin/` 的既有实现和历史实验。训练与评估结果文件保存在上一级 `runs/` 和 `checkpoint-eval/`；命令以 `reproduction/nest_rl` 为当前目录。当前实现与论文附录仍有差异，见[复现进度](../README.md)。
+> 本页记录 `orgin/` 的既有实现和历史实验。本路线使用本目录的 `.conda/` 环境。训练与评估结果分别写入本目录的 `runs/` 和 `checkpoint-eval/`。当前实现与论文附录仍有差异，见[复现进度](../README.md)。
 
 # NestRL 的 Overcooked 复现
 
@@ -8,26 +8,56 @@ PDF 的 SHA-256 为 `c81b9eec95d79929b2516d18ecf0c2ec95cb9ee3deff1837a8be51f1878
 
 `adaptive-RL` 子模块固定到作者公开仓库的 `33bb3222563735893ceb9258ebd3ea310583a148`。实验使用作者仓库内置的 Overcooked 环境及 `fc_small_test.yaml`，方便与其公开 checkpoint 对接。[作者代码](https://github.com/upasana27/adaptive-RL/tree/33bb3222563735893ceb9258ebd3ea310583a148)
 
-在本项目根目录初始化源码后，进入复现目录创建 Windows CPU 环境。
+从仓库根目录初始化源码，再进入 `orgin`。已有 `.conda/` 时直接复用，首次运行按下方命令创建 Windows CPU 环境。
 
 ```powershell
 git submodule update --init -- reproduction/nest_rl/adaptive-RL
-Set-Location reproduction/nest_rl
+Set-Location reproduction/nest_rl/orgin
 conda create --prefix .conda python=3.10 pip -y
 conda run --prefix .conda python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.9.1+cpu
-conda run --prefix .conda python -m pip install -r orgin/requirements.txt
+conda run --prefix .conda python -m pip install -r requirements.txt
 conda run --prefix .conda python -m pip install --no-deps --ignore-requires-python pettingzoo==1.9.0 stable-baselines3==1.7.0
 ```
 
 作者旧版 Gym 接口在 Windows 上使用 Gym 0.23.1。PettingZoo 1.9.0 的元数据限制 Python 版本，Stable-Baselines3 1.7.0 声明依赖 Gym 0.21。上述安装命令为 checkpoint 评估选用兼容版本组合。
+
+## 作者公开 PACE 权重的模型结构
+
+以下两张图由 [Torchview](https://github.com/mert-kurttutan/torchview) 跟踪作者公开权重的前向计算得到。图中的历史张量使用一个样本、5 局、每局 40 步作为示例。两种权重都使用 MLP 历史编码器。
+
+- **73 维观测**是作者 Overcooked 环境提供给策略的单步特征向量。历史编码器把每步观测与队友动作的 6 维 one-hot 向量拼接，得到 79 维历史输入。
+- **128 维历史向量**由历史编码器生成。编码器先对每步做 MLP 变换，再沿一局内的有效步和跨局的有效局分别求均值，最后用 MLP 输出历史向量。Actor 和 Critic 分别将它与当前 73 维观测拼接，各接收 201 维输入。Actor 输出 6 个动作的对数概率，Critic 输出 1 个状态价值。
+- **两种结构的区别在辅助分类头**。它只接收 128 维历史向量。`ppo_pace_seed1` 输出 3 类队友策略的 logits，三个公开的 `ppo_pace_two_ing_*_seed1` 权重使用同一种 2 类结构。两种结构的动作空间都是 6 个动作。
+
+**`ppo_pace_seed1` · 3 类辅助分类头**
+
+![作者 PACE 策略，3 类辅助分类头](model_graphs/author_pace_policy.png)
+
+[SVG 矢量图](model_graphs/author_pace_policy.svg) · [DOT 源文件](model_graphs/author_pace_policy.dot)
+
+**`ppo_pace_two_ing_1_seed1` · 2 类辅助分类头**
+
+![作者 PACE two_ing 策略，2 类辅助分类头](model_graphs/ppo_pace_two_ing_1_seed1.png)
+
+[SVG 矢量图](model_graphs/ppo_pace_two_ing_1_seed1.svg) · [DOT 源文件](model_graphs/ppo_pace_two_ing_1_seed1.dot)
+
+[绘图脚本](draw_author_model.py)会将动作、价值和辅助分类输出与原策略逐项核对。Torchview 漏掉了作者代码中经过原地赋值的一条依赖，脚本按实际数据流补上了从局编码器到跨局编码器的连线。
+
+在 `orgin/` 中运行以下命令可重新生成两张图。需先安装 [Graphviz](https://graphviz.org/download/)，并确保 `dot` 在 PATH 中。
+
+```powershell
+conda run --prefix .conda python -m pip install torchview==0.2.7 graphviz==0.21
+conda run --prefix .conda python draw_author_model.py
+conda run --prefix .conda python draw_author_model.py --checkpoint ppo_pace_two_ing_1_seed1
+```
 
 ## PACE 权重评估
 
 用作者的 `ppo_pace_seed1` 权重与指定食谱的固定规则伙伴搭档，默认随机种子为 1，运行 10 轮，每轮 5 局。每轮局数与 checkpoint 的历史窗口一致。
 
 ```powershell
-conda run --no-capture-output --prefix .conda python orgin/evaluate_pace.py --recipe lettuce-onion
-conda run --no-capture-output --prefix .conda python orgin/evaluate_pace.py --recipe lettuce-onion --partner-mode minimum
+conda run --no-capture-output --prefix .conda python evaluate_pace.py --recipe lettuce-onion
+conda run --no-capture-output --prefix .conda python evaluate_pace.py --recipe lettuce-onion --partner-mode minimum
 ```
 
 原评估入口从 `environment/overcooked/policy.py` 取 `minimum` 伙伴。这种伙伴会取食材、放到隔板，并在成品可用时尝试送餐，但不切菜或装盘。作者的 L1 规则池在 `environment/overcooked/policy_server.py` 选用 `full`。保持 checkpoint、地图、初始随机种子和轮数一致，替换伙伴得到下列结果。
@@ -46,9 +76,9 @@ conda run --no-capture-output --prefix .conda python orgin/evaluate_pace.py --re
 下面的命令以默认短训练设置启动两次右侧 L1 和一次左侧 L2。每个 L1 与三种全功能规则伙伴训练。L2 的训练池使用种子 1 的 L1，评估池使用种子 2 的 L1。每次运行使用一个独立的 `--run-name`，权重和启动配置写入 `runs/<run-name>/`。
 
 ```powershell
-conda run --no-capture-output --prefix .conda python orgin/train_nestrl.py l1 --player 1 --seed 1 --run-name l1-right-s1
-conda run --no-capture-output --prefix .conda python orgin/train_nestrl.py l1 --player 1 --seed 2 --run-name l1-right-s2
-conda run --no-capture-output --prefix .conda python orgin/train_nestrl.py l2 --player 0 --seed 3 --run-name l2-left-s3 --partners runs/l1-right-s1/ppo/latest.pt --eval-partners runs/l1-right-s2/ppo/latest.pt
+conda run --no-capture-output --prefix .conda python train_nestrl.py l1 --player 1 --seed 1 --run-name l1-right-s1
+conda run --no-capture-output --prefix .conda python train_nestrl.py l1 --player 1 --seed 2 --run-name l1-right-s2
+conda run --no-capture-output --prefix .conda python train_nestrl.py l2 --player 0 --seed 3 --run-name l2-left-s3 --partners runs/l1-right-s1/ppo/latest.pt --eval-partners runs/l1-right-s2/ppo/latest.pt
 ```
 
 | 短训练 | 交互步数 | PPO 更新 | 末次评估完成局数 |
