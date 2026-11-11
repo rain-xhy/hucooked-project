@@ -9,7 +9,7 @@ from time import perf_counter
 
 
 class RolloutProfile:
-    def __init__(self, enabled, adaptive, training_factory=None, evaluation_factory=None):
+    def __init__(self, enabled, adaptive, training_factory=None, evaluation_factory=None, cuda_stages=False):
         self.enabled = enabled
         self.adaptive = adaptive
         self.wall = defaultdict(float)
@@ -20,17 +20,30 @@ class RolloutProfile:
         self.measuring = False
         self.training_factory = training_factory
         self.evaluation_factory = evaluation_factory
+        self.cuda_stages = cuda_stages
+        self.cuda_spans = defaultdict(list)
 
-    def timed(self, method, bucket):
+    def timed(self, method, bucket, *, cuda=False):
+        if cuda and self.cuda_stages:
+            from torch.cuda import Event
+        else:
+            Event = None
+
         @wraps(method)
         def measure(*args, **kwargs):
             if self.evaluating or self.measuring:
                 return method(*args, **kwargs)
             self.measuring = True
             start = perf_counter()
+            if Event is not None:
+                gpu_start, gpu_end = Event(enable_timing=True), Event(enable_timing=True)
+                gpu_start.record()
             try:
                 return method(*args, **kwargs)
             finally:
+                if Event is not None:
+                    gpu_end.record()
+                    self.cuda_spans[bucket].append((gpu_start, gpu_end))
                 self.wall[bucket] += perf_counter() - start
                 self.measuring = False
 
@@ -68,7 +81,9 @@ class RolloutProfile:
 
                 vec.close = close_training_vector
                 if self.enabled:
-                    vec.step = self.timed(vec.step, "vector_wait")
+                    vec.step = self.timed(vec.step, "vector_wait", cuda=True)
+                    if getattr(vec, "defer_rollout_stats", False):
+                        vec.finish_rollout = self.timed(vec.finish_rollout, "rollout_statistics")
             else:
                 vec = make_vec(args, env_name, seed, num_processes, log_dir, device, *extra, **kwargs)
                 backend = type(vec.venv).__name__
@@ -98,8 +113,10 @@ class RolloutProfile:
                     self.wall["evaluation"] += perf_counter() - start
 
             trainer.evaluate = measure_evaluation
-            trainer.LatentPolicy.act = self.timed(trainer.LatentPolicy.act, "policy")
-            trainer.algo.PPO_.update = self.timed(trainer.algo.PPO_.update, "ppo")
+            trainer.LatentPolicy.act = self.timed(trainer.LatentPolicy.act, "policy", cuda=True)
+            trainer.algo.PPO_.update = self.timed(trainer.algo.PPO_.update, "ppo", cuda=True)
+            trainer.RolloutStorage.insert = self.timed(trainer.RolloutStorage.insert, "rollout_insert", cuda=True)
+            trainer.RolloutStorage.compute_returns = self.timed(trainer.RolloutStorage.compute_returns, "returns", cuda=True)
             vec_class.step_async = self.timed(vec_class.step_async, "vector_send")
             vec_class.step_wait = self.timed(vec_class.step_wait, "vector_wait")
 
@@ -126,4 +143,9 @@ class RolloutProfile:
                 "wall_seconds": dict(self.wall),
                 "kitchens": self.kitchens,
             }
+            if self.cuda_stages:
+                data["cuda_stream_seconds"] = {
+                    name: sum(start.elapsed_time(end) for start, end in spans) / 1000
+                    for name, spans in self.cuda_spans.items()
+                }
             (output / "profile.json").write_text(json.dumps(data, indent=2), encoding="utf-8")

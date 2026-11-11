@@ -9,11 +9,12 @@ from time import perf_counter
 
 
 class TrackioTraining:
-    def __init__(self, options, output, train_pool, eval_pool):
+    def __init__(self, options, output, train_pool, eval_pool, initial_env_steps=0):
         self.project = options.trackio_project
         self.rounds = options.eval_rounds
         self.sample_every = options.trackio_sample_every
         self.output = output
+        self.initial_env_steps = initial_env_steps
         self.config = json.loads(json.dumps({
             **vars(options), "train_pool": train_pool, "eval_pool": eval_pool,
         }, default=str))
@@ -75,7 +76,7 @@ class TrackioTraining:
             self.run.finish()
             self.run = None
 
-    def install(self, trainer, args):
+    def install(self, trainer, args, *, defer_rollout_stats=False):
         import numpy as np
         import torch
         import evaluation_
@@ -112,12 +113,40 @@ class TrackioTraining:
             }, step=log_steps)
 
         trainer.evaluate = repeat
-        if self.sample_every:
-            self.install_sampling_log(trainer, args.num_steps)
+        if self.sample_every and not defer_rollout_stats:
+            self.install_sampling_log(trainer, args.num_steps, args.num_processes)
 
-    def install_sampling_log(self, trainer, rollout_steps):
+    def log_rollout_samples(self, batches, start_step, rollout_steps, num_envs):
+        if not self.sample_every:
+            return
+        start_vector = start_step // num_envs
+        first_boundary = self.sample_every - start_vector % self.sample_every
+        ends = [*range(first_boundary, rollout_steps, self.sample_every), rollout_steps]
+        batch_index = 0
+        for end in ends:
+            count = success_count = 0
+            reward = 0.0
+            while batch_index < len(batches) and batches[batch_index][0] <= end:
+                _, rewards, successes = batches[batch_index]
+                count += rewards.size
+                reward += float(rewards.sum())
+                success_count += int(successes.sum())
+                batch_index += 1
+            metrics = {"sample/episodes": count}
+            if count:
+                metrics.update({"sample/reward": reward / count, "sample/success_rate": success_count / count})
+            if end == rollout_steps:
+                self.pending_sample = metrics
+            else:
+                env_steps = start_step + end * num_envs
+                self.run.log({**metrics, "env_steps": env_steps, "wall_seconds": perf_counter() - self.started},
+                             step=env_steps)
+
+    def install_sampling_log(self, trainer, rollout_steps, num_envs):
         insert = trainer.RolloutStorage.insert
-        vector_steps = env_steps = episodes = successes = 0
+        vector_steps = self.initial_env_steps // num_envs
+        episodes = successes = 0
+        env_steps = self.initial_env_steps
         total_reward = 0.0
 
         def record(storage, obs, next_obs, recurrent_hidden_states, actions, action_log_probs,

@@ -8,23 +8,25 @@ from overcooked_setup import rule_partner
 HISTORY_SIZE = 5
 
 
-def load_adaptive_policy(path, device):
+def load_adaptive_policy(path, device, obs_size=73):
     import torch
 
     model = torch.load(path, map_location=device, weights_only=False)
     if not model.latent_training_mode or model.is_recurrent:
         raise ValueError(f"Expected a latent PPO checkpoint from this runner: {path}")
+    if getattr(model.actor.cnn, "observation_size", 73) != obs_size:
+        raise ValueError(f"Checkpoint observation mode does not match the kitchen: {path}")
     return model.eval().requires_grad_(False)
 
 
-def load_adaptive_partner(path):
+def load_adaptive_partner(path, obs_size=73):
     import torch
     from learning.storage_ import PeriodicHistoryStorage
 
     class AdaptivePartner:
         def __init__(self, path):
             self.path = path
-            self.model = load_adaptive_policy(path, "cpu")
+            self.model = load_adaptive_policy(path, "cpu", obs_size)
             self.history = None
             self.episodes = 0
             self.episodes_with_context = 0
@@ -74,7 +76,7 @@ def load_adaptive_partner(path):
     return AdaptivePartner(path)
 
 
-def kitchen_factory(make_env, profile):
+def kitchen_factory(make_env, profile, spatial_obs=False):
     """Install the runner's environment inside the thunk that SB3 spawns."""
     def make_kitchen(*args, **kwargs):
         build = make_env(*args, **kwargs)
@@ -85,6 +87,9 @@ def kitchen_factory(make_env, profile):
 
             torch.set_num_threads(1)
             original = overcooked_single.Overcooked_SingleEnv
+            if spatial_obs:
+                from gym.spaces import Box
+                from spatial_observation import GRID_CELLS, OBSERVATION_SIZE, pack_world, world_tiles
 
             class Kitchen(original):
                 def __init__(self, env):
@@ -92,11 +97,25 @@ def kitchen_factory(make_env, profile):
                     self.profiling = profile
                     self.partner_history_seconds = 0.0
                     self.adaptive = False
+                    if spatial_obs:
+                        self.observation_space = Box(-1.0, GRID_CELLS - 1.0, shape=(OBSERVATION_SIZE,))
+                        self.spatial_tiles = None
+
+                def spatial_view(self, actions=(-1, -1)):
+                    world = self.env.get_env_world()
+                    if self.spatial_tiles is None:
+                        self.spatial_tiles = world_tiles(world)
+                    self.last_obs = dict(zip(self.players, pack_world(world, self.spatial_tiles, actions)))
+                    return self.last_obs[f"player_{self._id}"]
+
+                def reset(self):
+                    obs = super().reset()
+                    return self.spatial_view() if spatial_obs else obs
 
                 def set_opponent(self, spec):
                     self.adaptive = isinstance(spec, Path)
                     if self.adaptive:
-                        partner = load_adaptive_partner(spec)
+                        partner = load_adaptive_partner(spec, self.observation_space.shape[0])
                         partner.horizon = self.episode_length()
                     else:
                         partner = rule_partner(spec)
@@ -104,6 +123,9 @@ def kitchen_factory(make_env, profile):
 
                 def step(self, action):
                     obs, reward, done, info = super().step(action)
+                    if spatial_obs:
+                        joint = (int(action), int(info["opponent_act"]))
+                        obs = self.spatial_view(joint if self._id == 0 else joint[::-1])
                     if self.adaptive:
                         start = perf_counter() if self.profiling else 0.0
                         partner = self.opponent

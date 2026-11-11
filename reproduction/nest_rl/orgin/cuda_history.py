@@ -34,7 +34,7 @@ class CudaHistory:
         length = self.lengths[self.rows, self.episode_id % self.episode_capacity]
         return period, episode, length
 
-    def append(self, obs, actions, terminal_obs, done, finished):
+    def append(self, obs, actions, terminal_obs, done, finished=None):
         slot = self.episode_id % self.episode_capacity
         frame = self.cursor % self.frame_capacity
         self.obs[self.rows, frame] = obs
@@ -53,7 +53,8 @@ class CudaHistory:
         self.lengths[self.rows, next_slot] = torch.where(
             done, 0, self.lengths[self.rows, next_slot],
         )
-        self.current_episode[finished] = (self.current_episode[finished] + 1) % self.clear_period
+        if finished is not None:
+            self.current_episode[finished] = (self.current_episode[finished] + 1) % self.clear_period
         return done & (self.episode_id % self.clear_period == 0)
 
     def trim(self):
@@ -87,6 +88,8 @@ def encode_cuda_history(encoder, history):
     keys, inverse = torch.unique(period * storage.num_envs + process, return_inverse=True)
     obs, actions, lengths = storage.get_periods(keys % storage.num_envs, keys // storage.num_envs)
     action_ids = torch.arange(encoder.action_dim, device=storage.device)
+    if encoder.cnn is not None:
+        obs = encoder.cnn(obs)
     inputs = torch.cat((obs, actions[..., None] == action_ids), dim=-1)
     base = encoder.base
     cumulative = base.pre_agg_mlp(inputs).cumsum(dim=-2)
@@ -133,7 +136,7 @@ def install_cuda_history(storage_class, encoder_class):
     def forward(encoder, history, agent_indices):
         if history is not None and isinstance(history[0], CudaHistory):
             assert isinstance(encoder.base, AggregatedMLPEncoder) and encoder.base.agg_func == "mean"
-            assert encoder.deterministic_latent and encoder.discrete_action and encoder.cnn is None
+            assert encoder.deterministic_latent and encoder.discrete_action
             return encode_cuda_history(encoder, history), ()
         return original_forward(encoder, history, agent_indices)
 

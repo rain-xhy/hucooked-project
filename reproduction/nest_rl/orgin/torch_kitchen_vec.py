@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 from functools import wraps
+from typing import NamedTuple
 
 from gym.spaces import Box, Discrete
 import numpy as np
@@ -10,6 +11,7 @@ import torch
 from learning.model import AggregatedMLPEncoder
 from cuda_history import CudaHistory
 from rollout_env import HISTORY_SIZE, load_adaptive_policy
+from spatial_observation import GRID_CELLS, OBSERVATION_SIZE, pack_kitchen
 from torch_kitchen import HORIZON, TorchKitchen
 from torch_kitchen_features import RECIPE_NAMES
 
@@ -20,13 +22,14 @@ class FrozenPartnerBatch:
     def __init__(self, path, indices, device, obs_size, actions):
         self.path = path
         self.indices = indices
-        self.model = load_adaptive_policy(path, device)
+        self.model = load_adaptive_policy(path, device, obs_size)
         encoder = self.model.encoder
         self.base = encoder.base
+        self.cnn = encoder.cnn
         if (
             not isinstance(self.base, AggregatedMLPEncoder) or self.base.agg_func != "mean"
             or not encoder.deterministic_latent or not encoder.discrete_action
-            or encoder.action_dim != actions or encoder.cnn is not None
+            or encoder.action_dim != actions
         ):
             raise ValueError(f"Expected a deterministic mean-MLP L1 encoder: {path}")
         self.action_ids = torch.arange(actions, device=device)
@@ -34,7 +37,8 @@ class FrozenPartnerBatch:
         self.rows = torch.arange(len(indices), device=device)
         self.no_action = torch.zeros((len(indices), actions), device=device)
         with torch.no_grad():
-            sample = self.base.pre_agg_mlp(torch.zeros((1, obs_size + actions), device=device))
+            feature_size = obs_size if self.cnn is None else self.cnn.out_dim
+            sample = self.base.pre_agg_mlp(torch.zeros((1, feature_size + actions), device=device))
         self.sums = sample.new_zeros((len(indices), HISTORY_SIZE, sample.shape[-1]))
         self.lengths = sample.new_zeros((len(indices), HISTORY_SIZE, 1))
 
@@ -54,6 +58,8 @@ class FrozenPartnerBatch:
 
     def observe(self, obs, action, terminal_obs, done, episode):
         one_hot = action[:, None] == self.action_ids
+        if self.cnn is not None:
+            obs, terminal_obs = self.cnn(obs), self.cnn(terminal_obs)
         embedding = self.base.pre_agg_mlp(torch.cat((obs, one_hot), dim=-1))
         terminal = self.base.pre_agg_mlp(torch.cat((terminal_obs, self.no_action), dim=-1))
         self.sums[self.rows, episode] += embedding + terminal * done[:, None]
@@ -74,12 +80,26 @@ class KitchenInfos(list):
         self.finished = finished
 
 
+class CudaKitchenTransition(NamedTuple):
+    opponent_actions: torch.Tensor
+    terminal_obs: torch.Tensor
+    done: torch.Tensor
+
+
 class TorchKitchenVecEnv:
-    def __init__(self, num_envs, device, seed, player, profile=False):
-        self.kitchen = TorchKitchen(num_envs, device, seed)
+    kitchen_type = TorchKitchen
+    horizon = HORIZON
+    observation_size = 73
+    recipe_names = RECIPE_NAMES
+
+    def __init__(self, num_envs, device, seed, player, profile=False, spatial_obs=False):
+        self.kitchen = self.kitchen_type(num_envs, device, seed)
         self.num_envs = num_envs
         self.device = torch.device(device)
-        self.observation_space = Box(-1.0, 1.0, shape=(73,), dtype=np.float32)
+        self.spatial_obs = spatial_obs
+        shape, high = (((OBSERVATION_SIZE,), GRID_CELLS - 1.0) if spatial_obs
+                       else ((self.observation_size,), 1.0))
+        self.observation_space = Box(-1.0, high, shape=shape, dtype=np.float32)
         self.action_space = Discrete(6)
         self.player = player
         self.profile = profile
@@ -98,7 +118,7 @@ class TorchKitchenVecEnv:
     def env_method(self, name, *args, indices=None):
         # This adapter implements the calls made by the pinned training loop.
         if name == "episode_length":
-            return [HORIZON] if indices is not None else [HORIZON] * self.num_envs
+            return [self.horizon] if indices is not None else [self.horizon] * self.num_envs
         if name == "set_opponent":
             self.opponent_specs[indices] = args[0]
             return [None]
@@ -116,14 +136,10 @@ class TorchKitchenVecEnv:
         raise ValueError(f"Unsupported CUDA kitchen method: {name}")
 
     def reset(self):
-        self.obs = self.kitchen.reset()
+        self.obs = self.observe(self.kitchen.reset())
         if self.rule_partner is None and not self.partners:
             if all(isinstance(spec, str) for spec in self.opponent_specs):
-                from cuda_l0 import CudaRulePartner
-
-                self.rule_partner = CudaRulePartner(
-                    self.kitchen, self.opponent_specs, player=1 - self.player, seed=self.rule_seed,
-                )
+                self.rule_partner = self.make_rule_partner()
             else:
                 groups = defaultdict(list)
                 for index, path in enumerate(self.opponent_specs):
@@ -137,8 +153,18 @@ class TorchKitchenVecEnv:
                 ]
         return self.obs[:, self.player]
 
+    def make_rule_partner(self):
+        from cuda_l0 import CudaRulePartner
+
+        return CudaRulePartner(
+            self.kitchen, self.opponent_specs, player=1 - self.player, seed=self.rule_seed,
+        )
+
+    def observe(self, dense, joint_actions=None):
+        return pack_kitchen(self.kitchen, joint_actions) if self.spatial_obs else dense
+
     def reset_rule_evaluation(self, seed):
-        self.kitchen = TorchKitchen(self.num_envs, self.device, seed)
+        self.kitchen = self.kitchen_type(self.num_envs, self.device, seed)
         self.rule_seed = seed + 2
         self.rule_partner = None
         self.env_method("full_reset")
@@ -170,6 +196,7 @@ class TorchKitchenVecEnv:
         if self.player == 1:
             joint_actions = joint_actions.flip((1,))
         terminal, reward, done, truncated, recipe = self.kitchen.step(joint_actions)
+        terminal = self.observe(terminal, joint_actions)
         after_kitchen = self.mark()
 
         for partner in self.partners:
@@ -191,7 +218,7 @@ class TorchKitchenVecEnv:
         self.obs = terminal
         if finished.size:
             start_reset = self.mark()
-            reset_obs = self.kitchen.reset(mask=done)
+            reset_obs = self.observe(self.kitchen.reset(mask=done))
             self.obs = torch.where(done[:, None, None], reset_obs, terminal)
             if self.profile:
                 self.spans.append(("reset", start_reset, self.mark()))
@@ -203,8 +230,8 @@ class TorchKitchenVecEnv:
             self.rounds += ends_period
             for index in finished:
                 _, timeout, recipe_index, ticks, episode = flags[index]
-                reason = (f"{RECIPE_NAMES[recipe_index]} is completed"
-                          if recipe_index >= 0 else f"passed {HORIZON} timesteps")
+                reason = (f"{self.recipe_names[recipe_index]} is completed"
+                          if recipe_index >= 0 else f"passed {self.horizon} timesteps")
                 info = {
                     "t": int(ticks),
                     "termination_info": f"Terminating because {reason}",
@@ -255,8 +282,8 @@ def evaluate_cuda_rules(_args, pool, episodes, envs, _history, policy, _log_step
     """Evaluate one equally weighted set of episodes per recipe on CUDA."""
     assert use_latent and update_history and len(pool) == envs.num_envs
     obs = envs.reset_rule_evaluation(torch.initial_seed() + 1_000_000)
-    history = CudaHistory(envs.num_envs, episodes * HORIZON, envs.observation_space.shape,
-                          HORIZON, HISTORY_SIZE, envs.device)
+    history = CudaHistory(envs.num_envs, episodes * envs.horizon, envs.observation_space.shape,
+                          envs.horizon, HISTORY_SIZE, envs.device)
     rows = torch.arange(envs.num_envs, device=envs.device)
     masks = torch.zeros((envs.num_envs, 1), device=envs.device)
     counts = np.zeros(envs.num_envs, dtype=np.int64)
@@ -287,14 +314,15 @@ def install_cuda_kitchen_history(storage_class):
     @wraps(original_insert)
     def insert(storage, obs, next_obs, recurrent_hidden_states, actions, action_log_probs,
                value_preds, rewards, masks, bad_masks, infos, *args, **kwargs):
-        if isinstance(infos, KitchenInfos):
+        if isinstance(infos, (KitchenInfos, CudaKitchenTransition)):
             history = storage.history
             assert storage.self_obs_mode and not storage.self_action_mode and not storage.collect_peer_traj
             assert storage.use_meta_episode
             previous = storage.obs[storage.step]
             if isinstance(history, CudaHistory):
                 end_period = history.append(
-                    previous, infos.opponent_actions, infos.terminal_obs, infos.done, infos.finished,
+                    previous, infos.opponent_actions, infos.terminal_obs, infos.done,
+                    getattr(infos, "finished", None),
                 )
                 masks = (~end_period).unsqueeze(1).to(storage.masks.dtype)
                 bad_masks = torch.ones_like(masks)

@@ -3,9 +3,8 @@
 from functools import wraps
 
 
-def install_lr_warmup(ppo_class, warmup_steps):
+def install_lr_warmup(ppo_class, warmup_steps, completed_steps=0, target_rate=None):
     original_update = ppo_class.update
-    completed_steps = 0
     target_rates = None
     handle = None
 
@@ -18,7 +17,9 @@ def install_lr_warmup(ppo_class, warmup_steps):
     def update(agent, *args, **kwargs):
         nonlocal target_rates, handle
         if target_rates is None:
-            target_rates = [group["lr"] for group in agent.optimizer.param_groups]
+            target_rates = [
+                group["lr"] if target_rate is None else target_rate for group in agent.optimizer.param_groups
+            ]
 
             def before_step(optimizer, step_args, step_kwargs):
                 nonlocal completed_steps
@@ -27,7 +28,8 @@ def install_lr_warmup(ppo_class, warmup_steps):
                     group["lr"] = target * factor
                 completed_steps += 1
 
-            handle = agent.optimizer.register_step_pre_hook(before_step)
+            if completed_steps < warmup_steps:
+                handle = agent.optimizer.register_step_pre_hook(before_step)
 
         start_rate = target_rates[0] * multiplier()
         info = original_update(agent, *args, **kwargs)
