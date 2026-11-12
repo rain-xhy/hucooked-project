@@ -99,6 +99,8 @@ def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_di
     if gpu_vec_class is not None and (options.env_mode != "gpu" or options.level != "l1"
                                       or options.observation != "dense" or options.history_storage == "cpu"):
         parser.error("The standard kitchen requires GPU L1 training, dense observations and GPU history")
+    if options.player != getattr(gpu_vec_class, "learner_player", options.player):
+        parser.error(f"{gpu_vec_class.layout_name} trains the middle cook (--player {gpu_vec_class.learner_player})")
     if not options.run_name.isascii() or not options.run_name.replace("-", "").replace("_", "").isalnum():
         parser.error("--run-name must contain only ASCII letters, digits, hyphens and underscores")
     if options.rollout_steps < 40 or options.updates < 1:

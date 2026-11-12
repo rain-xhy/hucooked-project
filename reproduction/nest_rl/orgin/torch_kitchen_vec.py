@@ -176,6 +176,10 @@ class TorchKitchenVecEnv:
             event.record()
             return event
 
+    def combine_actions(self, learner, partner):
+        joint = torch.stack((learner, partner), dim=1)
+        return (joint.flip((1,)) if self.player == 1 else joint), partner
+
     @torch.no_grad()
     def step(self, actions):
         start = self.mark()
@@ -192,9 +196,7 @@ class TorchKitchenVecEnv:
                 )
         after_partner = self.mark()
 
-        joint_actions = torch.stack((actions, partner_actions), dim=1)
-        if self.player == 1:
-            joint_actions = joint_actions.flip((1,))
+        joint_actions, history_actions = self.combine_actions(actions, partner_actions)
         terminal, reward, done, truncated, recipe = self.kitchen.step(joint_actions)
         terminal = self.observe(terminal, joint_actions)
         after_kitchen = self.mark()
@@ -214,7 +216,7 @@ class TorchKitchenVecEnv:
         ).cpu().numpy()
         done_cpu = flags[:, 0].astype(bool)
         finished = np.flatnonzero(done_cpu)
-        infos = KitchenInfos(self.num_envs, partner_actions, terminal[:, self.player], done, finished)
+        infos = KitchenInfos(self.num_envs, history_actions, terminal[:, self.player], done, finished)
         self.obs = terminal
         if finished.size:
             start_reset = self.mark()

@@ -51,11 +51,16 @@ class TrainingState:
         if self.snapshot is None:
             return 0
         state = self.snapshot
+        if state.get("layout", "cramped_room") != env.layout_name:
+            raise ValueError("The checkpoint requires the original kitchen layout.")
         policy.load_state_dict(state["policy"])
         agent.optimizer.load_state_dict(state["optimizer"])
-        restore(env.kitchen, state["kitchen"])
+        if hasattr(env.kitchen, "restore_checkpoint"):
+            env.kitchen.restore_checkpoint(state["kitchen"])
+        else:
+            restore(env.kitchen, state["kitchen"])
         restore(env, state["environment"])
-        env.episode_step = int(state["kitchen"]["ticks"][0])
+        env.episode_step = int(env.kitchen.ticks[0])
         restore(rollouts.history, state["history"])
         for field, value in state["rollout_head"].items():
             rollouts_field = getattr(rollouts, field)
@@ -77,11 +82,13 @@ class TrainingState:
             raise RuntimeError("A training checkpoint must be written at a rollout boundary.")
         state = {
             "version": 1,
+            "layout": env.layout_name,
             "config": self.config,
             "completed_updates": completed_updates,
             "policy": policy.state_dict(),
             "optimizer": agent.optimizer.state_dict(),
-            "kitchen": select(env.kitchen, KITCHEN_FIELDS),
+            "kitchen": (env.kitchen.checkpoint() if hasattr(env.kitchen, "checkpoint")
+                        else select(env.kitchen, KITCHEN_FIELDS)),
             "environment": select(env, ENV_FIELDS),
             "history": select(rollouts.history, HISTORY_FIELDS),
             "rollout_head": {

@@ -43,3 +43,22 @@ $trainingArgs = @('--learning-rate', '0.003', '--updates', '75',
 `training-state/<步数>.pt` 是续训记录点，只加载可信来源的文件。`ppo/<步数>.pt` 和 `ppo/latest.pt` 保存供评估的策略。
 
 `--defer-rollout-stats` 在采样时直接用 CUDA 张量更新 reset、mask 和历史，在每轮 rollout 结束后批量取回终局统计。续训时可以打开这个选项。`--profile-cuda-stages` 可在 `profile.json` 额外记录 CUDA 流上的分段用时。
+
+## 三人普通台面交接
+
+`--layout three_player_handoff` 使用 `hucooked` 的 `gpu-dev` CUDA 环境。左边的规则厨师把洋葱放到中央普通台面，L1 学习中间厨师的取料、装锅和开煮，右边的规则厨师取盘、装汤并送餐。两位规则厨师每步在 GPU 上查表选动作。每局 400 步，奖励为出餐分加原生 shaping，至少一次正分出餐即为成功。
+
+每个视角的 80 维观测包含两位队友和中央台面状态。历史编码器将两位队友的动作作为 36 种联合动作输入，Actor 仍输出 6 个动作。
+
+```powershell
+..\orgin\.conda\python.exe check_handoff.py --device cuda
+..\orgin\.conda\python.exe train_mlp.py @trainingArgs --layout three_player_handoff --run-name handoff-l1-3m
+```
+
+在另一个终端从本目录打开 Trackio。续训时保留 `--layout three_player_handoff` 和原训练参数。
+
+```powershell
+$env:TRACKIO_DIR = (Resolve-Path .\runs\trackio).Path
+$env:TRACKIO_STORAGE_MODE = 'sqlite'
+..\orgin\.conda\python.exe -c "import trackio; trackio.show(project='mlp-standard-l1-three-player-handoff', server_port=7863)"
+```

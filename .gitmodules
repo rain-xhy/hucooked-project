@@ -1,7 +1,7 @@
 [submodule "hucooked"]
 	path = hucooked
 	url = https://github.com/rain-xhy/hucooked.git
-	branch = hy
+	branch = gpu-dev
 [submodule "replay_frontend"]
 	path = replay_frontend
 	url = https://github.com/LynxPeng/Better-replay-frontend-of-overcook-ai.git
