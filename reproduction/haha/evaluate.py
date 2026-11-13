@@ -23,6 +23,10 @@ def _json_value(value):
 
 def measure(args, model, stage, layout, role, player, seed, episodes, *,
             deadline, trace=None, persist=None):
+    if args.environment == "mixed":
+        from .mixed_evaluate import measure_mixed
+        return measure_mixed(args, model, stage, layout, role, player, seed, episodes,
+                             deadline=deadline, persist=persist)
     from .train import make_env
 
     result = {"layout": layout, "partner": role, "player": player, "seed": seed,
@@ -111,34 +115,41 @@ def measure(args, model, stage, layout, role, player, seed, episodes, *,
 
 def validate(args, model, stage, deadline):
     results = []
-    for index, layout in enumerate(args.layouts):
-        for player in (0, 1):
-            if time.monotonic() >= deadline:
-                return {"status": "time_limit", "score": None, "results": results}
-            results.append(measure(
-                args, model, stage, layout, "bc", player,
-                args.seed + 500_000 + index * 1000 + player * 100,
-                args.validation_episodes if stage == "worker" else args.validation_games,
-                deadline=deadline,
-            ))
+    mixed = args.environment == "mixed"
+    episodes = args.validation_episodes if stage == "worker" else args.validation_games
+    if mixed and args.validation_backend == "cuda":
+        from .mixed_evaluate import measure_mixed_batch
+        results = measure_mixed_batch(args, model, stage, "bc", episodes, args.seed + 500_000, deadline)
+    else:
+        for index, layout in enumerate(args.layouts):
+            for player in range(3 if mixed else 2):
+                if time.monotonic() >= deadline:
+                    return {"status": "time_limit", "score": None, "results": results}
+                results.append(measure(
+                    args, model, stage, layout, "bc", player,
+                    args.seed + 500_000 + index * 1000 + player * 100, episodes, deadline=deadline,
+                ))
     complete = all(r["status"] == "complete" for r in results)
     if stage == "manager":
         score = float(np.mean([r["mean_return"] for r in results])) if complete else None
         coverage = None
     else:
         # A fixed set prevents picking a checkpoint by succeeding only at easy pickups.
-        core = [0, 2, 4, 7, 10]
+        core, names = (0, 2, 4, 7, 10), NAMES
+        if mixed:
+            from .mixed_tasks import CORE_SKILLS, NAMES as MIXED_NAMES
+            core, names = CORE_SKILLS, MIXED_NAMES
         coverage, rates = {}, []
         for task in core:
-            successes = sum(r["skills"][NAMES[task]]["success"] for r in results)
-            valid = sum(r["skills"][NAMES[task]]["success"] +
-                        r["skills"][NAMES[task]]["failure"] for r in results)
-            coverage[NAMES[task]] = valid
+            successes = sum(r["skills"][names[task]]["success"] for r in results)
+            valid = successes + sum(r["skills"][names[task]]["failure"] for r in results)
+            coverage[names[task]] = valid
             if valid >= args.validation_min_samples:
                 rates.append(successes / valid)
         score = float(np.mean(rates)) if complete and len(rates) == len(core) else None
     return {"status": "complete" if complete else "incomplete", "score": score,
-            "core_skill_samples": coverage, "partner": "bc", "results": results}
+            "core_skill_samples": coverage, "partner": "bc", "backend": args.validation_backend,
+            "results": results}
 
 
 def evaluate(args, device):
@@ -149,7 +160,7 @@ def evaluate(args, device):
     config = preflight(args, device)
     metadata = checkpoint_info(path)
     algorithm = PPO if stage == "worker" else MaskablePPO
-    model = algorithm.load(path, device=device)
+    model = algorithm.load(path, device=device, n_envs=1)
     check_loaded_policy(model, metadata)
     model.policy.set_training_mode(False)
     out = args.run_dir / "evaluation" / f"{stage}_{time.time_ns()}"
@@ -157,8 +168,10 @@ def evaluate(args, device):
     payload = {"config": config, "checkpoint": str(path), "checkpoint_metadata": metadata,
                "policy_parameters": sum(p.numel() for p in model.policy.parameters()),
                "status": "running", "results": [],
-               "note": "Episode SE is not uncertainty across training seeds. Native JSONL is not "
-                       "the group's replay format. Training BC, proxy and random are reported separately."}
+               "note": ("MixedKitchen BC and expert_proxy use scripted demonstrations."
+                        if args.environment == "mixed" else
+                        "Episode SE is not uncertainty across training seeds. Native JSONL is not "
+                        "the group's replay format. Training BC, proxy and random are reported separately.")}
     deadline = time.monotonic() + args.max_hours * 3600
 
     def persist(result):
@@ -169,20 +182,28 @@ def evaluate(args, device):
 
     write_json(out / "results.json", payload)
     try:
-        for index, layout in enumerate(args.layouts):
+        if args.environment == "mixed" and args.validation_backend == "cuda":
+            from .mixed_evaluate import measure_mixed_batch
             for role_index, role in enumerate(args.partners):
-                for player in (0, 1):
-                    trace = None
-                    try:
-                        if args.trajectories and stage == "manager":
-                            trace = (out / f"{layout}_{role}_seat{player}.jsonl").open("w", encoding="utf-8")
-                        result = measure(args, model, stage, layout, role, player,
-                                         args.seed + 1_000_000 + index * 10000 + role_index * 1000 + player * 100,
-                                         args.episodes, deadline=deadline, trace=trace, persist=persist)
-                        print(f"{layout} / {role} / seat {player}: {result['mean_return']} ({result['status']})", flush=True)
-                    finally:
-                        if trace:
-                            trace.close()
+                results = measure_mixed_batch(args, model, stage, role, args.episodes,
+                                              args.seed + 1_000_000 + role_index * 1000, deadline)
+                payload["results"].extend(results)
+                write_json(out / "results.json", payload)
+        else:
+            for index, layout in enumerate(args.layouts):
+                for role_index, role in enumerate(args.partners):
+                    for player in range(3 if args.environment == "mixed" else 2):
+                        trace = None
+                        try:
+                            if args.trajectories and stage == "manager":
+                                trace = (out / f"{layout}_{role}_seat{player}.jsonl").open("w", encoding="utf-8")
+                            result = measure(args, model, stage, layout, role, player,
+                                             args.seed + 1_000_000 + index * 10000 + role_index * 1000 + player * 100,
+                                             args.episodes, deadline=deadline, trace=trace, persist=persist)
+                            print(f"{layout} / {role} / seat {player}: {result['mean_return']} ({result['status']})", flush=True)
+                        finally:
+                            if trace:
+                                trace.close()
         payload["status"] = ("complete" if all(r["status"] == "complete" for r in payload["results"])
                              else "partial")
     except BaseException as exc:

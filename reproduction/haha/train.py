@@ -28,25 +28,38 @@ from .artifacts import (check_loaded_policy, checkpoint_info, read_json, save_po
                         write_json)
 from .bc import BCPartner, RandomPartner, prepare, train_bc
 from .env import CookingEnv
+from .mixed_tasks import (
+    AUTHOR_TASKS, EGOCENTRIC_GOAL, GOAL_ENCODINGS, LEGACY_GOAL, MIXED_COMMIT, MIXED_LAYOUTS,
+    OBS_SIZE, PHYSICAL_TASKS, TASK_RULES, mixed_source,
+)
 from .subtasks import LAYOUTS
 
 
 def arguments():
-    parser = argparse.ArgumentParser(description="Original-environment HA²-BCP reproduction")
+    parser = argparse.ArgumentParser(description="HA²-BCP reproduction and three-chef adaptation")
     parser.add_argument("stage", choices=("prepare", "bc", "worker", "manager", "evaluate"))
+    parser.add_argument("--environment", choices=("original", "mixed"), default="original")
     parser.add_argument("--run-dir", type=Path)
     parser.add_argument("--dataset", type=Path, default=Path(__file__).parent / "cache" / "2019_hh_trials_all.pickle",
                         help="Trusted author human-data pickle; prepare downloads it if absent")
-    parser.add_argument("--layouts", nargs="+", choices=LAYOUTS, default=list(LAYOUTS))
+    parser.add_argument("--layouts", nargs="+", choices=(*LAYOUTS, *MIXED_LAYOUTS))
+    parser.add_argument("--expert-episodes", type=int, default=64,
+                        help="Reference-controller trajectories per MixedKitchen map")
+    parser.add_argument("--expert-workers", type=int, default=4,
+                        help="Independent CPU processes for MixedKitchen expert trajectories")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument("--inference-device", choices=("cpu", "cuda"), default="cpu",
                         help="Device for frozen Workers and BC partners in environment processes")
     parser.add_argument("--torch-threads", type=int, default=1)
-    parser.add_argument("--horizon", type=int, default=400)
+    parser.add_argument("--horizon", type=int)
     parser.add_argument("--task-timeout", type=int, default=40)
     parser.add_argument("--n-envs", type=int, default=5)
-    parser.add_argument("--vec-env", choices=("dummy", "subproc"), default="dummy")
+    parser.add_argument("--vec-env", choices=("auto", "dummy", "subproc", "tensor", "tensor-native"),
+                        default="auto",
+                        help="auto selects CUDA-native training for MixedKitchen when CUDA is available")
+    parser.add_argument("--compile-kitchen", action="store_true",
+                        help="Fuse CUDA kitchen kernels and, for native MixedKitchen PPO, the loss kernels")
     parser.add_argument("--hidden", type=int, default=256)
     parser.add_argument("--n-steps", type=int, default=500)
     parser.add_argument("--batch-size", type=int, default=500)
@@ -66,6 +79,12 @@ def arguments():
     parser.add_argument("--failure-limit", type=int, default=5,
                         help="Author-code Manager training cutoff; 0 disables it; disabled in evaluation")
     parser.add_argument("--no-worker-shaping", action="store_true")
+    parser.add_argument("--mixed-worker-goal", choices=GOAL_ENCODINGS,
+                        help="MixedKitchen observation encoding; new runs default to the egocentric view")
+    parser.add_argument("--mixed-task-rules", choices=TASK_RULES,
+                        help="MixedKitchen task availability; new runs use the author's mask conventions")
+    parser.add_argument("--mixed-handoff-partner-ready", action="store_true", default=None,
+                        help="Require a compatible teammate facing the station (default for new MixedKitchen Workers)")
     parser.add_argument("--epochs", type=int, default=300, help="BC epochs per candidate")
     parser.add_argument("--bc-hidden", type=int, default=64)
     parser.add_argument("--bc-lr", type=float, default=.001)
@@ -77,14 +96,44 @@ def arguments():
     parser.add_argument("--validation-games", type=int, default=3, help="Manager full games per layout/seat")
     parser.add_argument("--validation-min-samples", type=int, default=3, help="Minimum observations for each core Worker skill")
     parser.add_argument("--validation-seconds", type=float, default=180)
+    parser.add_argument("--validation-backend", choices=("auto", "native", "cuda"), default="auto",
+                        help="Batch MixedKitchen validation on CUDA or use its native reference simulator")
     parser.add_argument("--evaluate-stage", choices=("worker", "manager"), default="manager")
-    parser.add_argument("--partners", nargs="+", choices=("bc", "human_proxy", "random"),
-                        default=["human_proxy", "random"])
+    parser.add_argument("--partners", nargs="+", choices=("bc", "human_proxy", "expert_proxy", "random"))
     parser.add_argument("--episodes", type=int, default=20, help="Episodes per layout, partner and player seat")
     parser.add_argument("--deterministic", action="store_true", help="Greedy trained-policy evaluation")
     parser.add_argument("--trajectories", type=int, default=0,
                         help="Export this many native JSONL trajectories per manager evaluation condition")
     args = parser.parse_args()
+    mixed = args.environment == "mixed"
+    if args.vec_env == "auto":
+        cuda_training = mixed and args.stage in {"bc", "worker", "manager"} and (
+            args.device == "cuda" or (args.device == "auto" and torch.cuda.is_available())
+        )
+        args.vec_env = "tensor-native" if cuda_training else "dummy"
+    available = MIXED_LAYOUTS if mixed else LAYOUTS
+    args.layouts = list(available) if args.layouts is None else args.layouts
+    args.horizon = (300 if mixed else 400) if args.horizon is None else args.horizon
+    proxy = "expert_proxy" if mixed else "human_proxy"
+    args.partners = [proxy, "random"] if args.partners is None else args.partners
+    if not set(args.layouts).issubset(available):
+        parser.error(f"Invalid layouts for --environment {args.environment}")
+    if not set(args.partners).issubset({"bc", proxy, "random"}):
+        parser.error(f"Use {proxy} for --environment {args.environment}")
+    if args.validation_backend == "cuda" and (not mixed or args.device == "cpu"):
+        parser.error("CUDA validation requires MixedKitchen and a CUDA policy")
+    if mixed and args.vec_env == "subproc":
+        parser.error("MixedKitchen supports dummy, tensor, and tensor-native collection")
+    if mixed and args.trajectories:
+        parser.error("The original two-chef replay exporter does not support MixedKitchen")
+    mixed_options = (args.mixed_worker_goal, args.mixed_task_rules,
+                     args.mixed_handoff_partner_ready)
+    if any(mixed_options) and not mixed:
+        parser.error("MixedKitchen observation and task options require --environment mixed")
+    if mixed and args.expert_workers < 1:
+        parser.error("--expert-workers must be positive")
+    if mixed and args.expert_episodes < 4:
+        parser.error("MixedKitchen BC needs at least four independent expert episodes per layout")
     if args.max_hours is None:
         args.max_hours = {"bc": 3, "worker": 18, "manager": 16}.get(args.stage, 1)
     positive = ("torch_threads", "horizon", "task_timeout", "n_envs", "hidden", "n_steps",
@@ -103,6 +152,13 @@ def arguments():
         parser.error("failure-limit and trajectories cannot be negative")
     if len(set(args.layouts)) != len(args.layouts):
         parser.error("--layouts cannot contain duplicates")
+    if args.vec_env in {"tensor", "tensor-native"}:
+        stages = {"bc", "worker", "manager"} if args.vec_env == "tensor-native" else {"worker", "manager"}
+        if args.stage not in stages or args.device == "cpu":
+            parser.error("Tensor vector environments require a supported training stage on CUDA")
+    if args.compile_kitchen and (args.vec_env not in {"tensor", "tensor-native"} or
+                                 args.stage not in {"worker", "manager"}):
+        parser.error("--compile-kitchen requires a tensor Worker or Manager environment")
     if args.stage in {"worker", "manager"}:
         if args.n_envs < len(args.layouts):
             parser.error("n-envs must cover all selected layouts; reduce --layouts if necessary")
@@ -114,7 +170,8 @@ def arguments():
         parser.error("--resume currently supports Worker/Manager PPO stages only")
     if args.resume_bc and args.stage != "bc":
         parser.error("--resume-bc is only valid for the BC stage")
-    args.run_dir = (args.run_dir or Path(__file__).parent / "runs" / f"bcp_seed{args.seed}").resolve()
+    label = "mixed_bcp" if mixed else "bcp"
+    args.run_dir = (args.run_dir or Path(__file__).parent / "runs" / f"{label}_seed{args.seed}").resolve()
     args.dataset = args.dataset.resolve()
     preferred_worker = args.run_dir / "worker" / "best.zip"
     args.worker = (args.worker or (preferred_worker if preferred_worker.is_file()
@@ -134,7 +191,7 @@ def make_env(args, stage, layout, rank, *, evaluation=False, partner_role="bc", 
     ))
     worker = None
     if stage == "manager":
-        worker = PPO.load(args.worker, device=args.inference_device)
+        worker = PPO.load(args.worker, device=args.inference_device, n_envs=1)
         check_loaded_policy(worker, checkpoint_info(args.worker))
         worker.policy.set_training_mode(False)
         worker.policy.requires_grad_(False)
@@ -156,14 +213,15 @@ class TrainingProgress(BaseCallback):
         best = output / "best.json"
         if best.exists():
             saved = read_json(best)
-            if saved["artifact_id"] == config["artifact_id"]:
+            if (saved["artifact_id"] == config["artifact_id"] and
+                    saved["config"].get("validation_backend", "native") == args.validation_backend):
                 self.best_score = saved["config"].get("validation_score")
 
     def _on_training_start(self):
         self.started = time.monotonic()
         self.start_steps = self.model.num_timesteps
-        self.next_save = self.start_steps + self.args.save_every
-        self.next_validation = self.start_steps + self.args.validate_every
+        self.next_save = (self.start_steps // self.args.save_every + 1) * self.args.save_every
+        self.next_validation = (self.start_steps // self.args.validate_every + 1) * self.args.validate_every
         self.stream = (self.session / "rollout_events.csv").open("w", newline="", encoding="utf-8")
         self.writer = csv.writer(self.stream)
         self.writer.writerow(["timesteps", "layout", "player", "subtask", "success",
@@ -171,14 +229,25 @@ class TrainingProgress(BaseCallback):
         save_policy(self.output / "last.zip", self.model, self.config)
 
     def _on_step(self):
-        for info, done in zip(self.locals["infos"], self.locals["dones"]):
-            if done or info.get("worker_failed"):
-                self.writer.writerow([
-                    self.model.num_timesteps, info.get("layout"), info.get("player"),
-                    info.get("subtask"), info.get("task_success"), info.get("task_invalidated"),
-                    info.get("task_timeout"), info.get("task_steps"), info.get("worker_failed"),
-                ])
+        if self.args.vec_env != "tensor-native":
+            for info, done in zip(self.locals["infos"], self.locals["dones"]):
+                if done or info.get("worker_failed"):
+                    self.write_event(self.model.num_timesteps, info)
         return time.monotonic() < self.deadline
+
+    def write_event(self, timestep, info):
+        self.writer.writerow(self._event_row(timestep, info))
+
+    def write_events(self, events):
+        self.writer.writerows(self._event_row(timestep, info) for timestep, info in events)
+
+    @staticmethod
+    def _event_row(timestep, info):
+        return (
+            timestep, info.get("layout"), info.get("player"), info.get("subtask"),
+            info.get("task_success"), info.get("task_invalidated"), info.get("task_timeout"),
+            info.get("task_steps"), info.get("worker_failed"),
+        )
 
     def _on_rollout_start(self):
         # Called after the preceding PPO update; saved weights include that update.
@@ -231,8 +300,11 @@ class TrainingProgress(BaseCallback):
 
 def settings(args, device):
     values = {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}
+    inference_device = "cuda" if args.vec_env in {"tensor", "tensor-native"} else args.inference_device
+    mixed = args.environment == "mixed"
     values.update(device_resolved=device, upstream_commit=UPSTREAM_COMMIT,
-                  environment_commit=ENVIRONMENT_COMMIT, evaluation_unstuck=False,
+                  environment_commit=MIXED_COMMIT if mixed else ENVIRONMENT_COMMIT, evaluation_unstuck=False,
+                  frozen_inference_device_resolved=inference_device,
                   implementation="Gymnasium/SB3 2.x port; trajectory-level BC data split", schema=2,
                   checkpoint_selection="BC-only held-out seeds; Worker core-skill macro success, Manager sparse team return")
     expected = {"torch": "2.3.1", "numpy": "1.26.4", "pandas": "2.2.2",
@@ -245,6 +317,11 @@ def settings(args, device):
         if versions[package].split("+")[0] != expected_version:
             raise RuntimeError(f"{package}={versions[package]}, expected {expected_version}")
     values["runtime_versions"] = versions
+    if mixed:
+        mixed_source()
+        values.update(schema=3, implementation="Three-chef HA² adaptation; scripted BC demonstrations",
+                      checkpoint_selection="Worker core-skill macro success; Manager raw return")
+        return values
     distribution = importlib.metadata.distribution("overcooked-ai")
     direct_url = json.loads(distribution.read_text("direct_url.json") or "{}")
     values["environment_install_source"] = direct_url
@@ -264,20 +341,58 @@ def check_config(saved, current, keys):
 
 
 def preflight(args, device):
-    config = settings(args, device)
     stage = args.evaluate_stage if args.stage == "evaluate" else args.stage
+    mixed = args.environment == "mixed"
+    if mixed and stage in ("worker", "manager"):
+        worker_path = args.worker if stage == "manager" or args.stage == "evaluate" else args.resume
+        worker_config = checkpoint_info(worker_path)["config"] if worker_path else {}
+        if worker_path:
+            stored_goal = worker_config.get("mixed_worker_goal", LEGACY_GOAL)
+            if args.mixed_worker_goal not in (None, stored_goal):
+                raise ValueError("MixedKitchen goal observation must match the Worker checkpoint")
+            args.mixed_worker_goal = stored_goal
+            stored_rules = worker_config.get("mixed_task_rules", PHYSICAL_TASKS)
+            if args.mixed_task_rules not in (None, stored_rules):
+                raise ValueError("MixedKitchen task rules must match the Worker checkpoint")
+            args.mixed_task_rules = stored_rules
+            if any(worker_config.get(key, False) for key in (
+                "mixed_handoff_roles", "mixed_teammate_invalidates",
+                "mixed_typed_buffers", "mixed_handoff_stances",
+            )):
+                raise ValueError("Worker checkpoint requires the experimental source from its run archive")
+            stored_partner_ready = worker_config.get("mixed_handoff_partner_ready", False)
+            if args.mixed_handoff_partner_ready and not stored_partner_ready:
+                raise ValueError("MixedKitchen handoff availability must match the Worker checkpoint")
+            args.mixed_handoff_partner_ready = stored_partner_ready
+        else:
+            args.mixed_worker_goal = args.mixed_worker_goal or EGOCENTRIC_GOAL
+            args.mixed_task_rules = args.mixed_task_rules or AUTHOR_TASKS
+            args.mixed_handoff_partner_ready = True
+        if stage == "worker" and worker_path:
+            stored_no_shaping = worker_config.get("no_worker_shaping", True)
+            if args.resume and args.no_worker_shaping and not stored_no_shaping:
+                raise ValueError("MixedKitchen Worker reward must match the resumed checkpoint")
+            args.no_worker_shaping = stored_no_shaping
+        if args.mixed_worker_goal not in GOAL_ENCODINGS:
+            raise ValueError(f"Unknown MixedKitchen Worker goal observation: {args.mixed_worker_goal}")
+        if args.mixed_task_rules not in TASK_RULES:
+            raise ValueError(f"Unknown MixedKitchen task rules: {args.mixed_task_rules}")
+    config = settings(args, device)
     if stage == "prepare":
         return config
     if stage == "bc":
         for layout in args.layouts:
             path = args.run_dir / "data" / f"{layout}.npz"
             with np.load(path, allow_pickle=False) as data:
-                if data["observations"].ndim != 2 or data["observations"].shape[1] != 96:
+                if data["observations"].ndim != 2 or data["observations"].shape[1] != (OBS_SIZE if mixed else 96):
                     raise ValueError(f"Wrong BC observation shape: {path}")
                 if len(data["actions"]) != len(data["groups"]) or len(data["actions"]) != len(data["observations"]):
                     raise ValueError(f"Inconsistent prepared data lengths: {path}")
                 source = json.loads(str(data["source"]))
-                if source["upstream_commit"] != UPSTREAM_COMMIT or source["layout"] != layout:
+                expected_source = ({"environment_commit": MIXED_COMMIT, "kind": "reference_controller",
+                                    "horizon": args.horizon} if mixed else {"upstream_commit": UPSTREAM_COMMIT})
+                if source.get("layout") != layout or any(source.get(key) != val
+                                                         for key, val in expected_source.items()):
                     raise ValueError(f"Wrong prepared data source: {path}")
         return config
     roles = args.partners if args.stage == "evaluate" else ["bc"]
@@ -295,6 +410,9 @@ def preflight(args, device):
             saved = torch.load(path, map_location="cpu", weights_only=True)
             if saved["layout"] != layout or saved["role"] != role:
                 raise ValueError(f"Wrong partner role/layout in {path}")
+            if mixed and (saved.get("environment_commit") != MIXED_COMMIT or
+                          saved.get("horizon") != args.horizon or saved.get("input_dim") != OBS_SIZE):
+                raise ValueError(f"Incompatible MixedKitchen partner: {path}")
             config["partner_artifacts"][f"{layout}/{role}"] = saved["artifact_id"]
     if stage == "manager":
         worker = checkpoint_info(args.worker)
@@ -302,7 +420,7 @@ def preflight(args, device):
             raise ValueError("--worker is not a Worker checkpoint")
         if not set(args.layouts).issubset(worker["config"]["layouts"]):
             raise ValueError("Worker was not trained on all requested layouts")
-        check_config(worker["config"], config, ("horizon", "task_timeout"))
+        check_config(worker["config"], config, ("environment_commit", "horizon", "task_timeout"))
         config["worker_checkpoint_id"] = worker["checkpoint_id"]
         if "validation_score" not in worker["config"]:
             print("WARNING: using a Worker without a valid core-skill validation score; inspect Worker evaluation before full Manager training", flush=True)
@@ -311,7 +429,7 @@ def preflight(args, device):
         checkpoint = checkpoint_info(path)
         if checkpoint["stage"] != stage:
             raise ValueError("Evaluation checkpoint stage differs")
-        check_config(checkpoint["config"], config, ("horizon", "task_timeout"))
+        check_config(checkpoint["config"], config, ("environment_commit", "horizon", "task_timeout"))
         if not set(args.layouts).issubset(checkpoint["config"]["layouts"]):
             raise ValueError("Evaluation layouts are outside the checkpoint's training layouts")
         if stage == "manager":
@@ -319,7 +437,21 @@ def preflight(args, device):
     return config
 
 
+class MaskingSubprocVecEnv(SubprocVecEnv):
+    def get_attr(self, attr_name, indices=None):
+        if attr_name == "action_masks":
+            # MaskablePPO 2.3 probes this attribute before every rollout.
+            # Keep the bound method (and the kitchen) inside its subprocess.
+            return [partial(self._action_masks_at, index)
+                    for index in self._get_indices(indices)]
+        return super().get_attr(attr_name, indices)
+
+    def _action_masks_at(self, index):
+        return self.env_method("action_masks", indices=index)[0]
+
+
 def train_rl(args, device):
+    tensor_env = args.vec_env in {"tensor", "tensor-native"}
     deadline = time.monotonic() + args.max_hours * 3600
     config = preflight(args, device)  # Validate artifacts before constructing any environments.
     output = args.run_dir / args.stage
@@ -329,7 +461,7 @@ def train_rl(args, device):
     if args.resume:
         saved = checkpoint_info(args.resume)
         check_config(saved["config"], config, (
-            "schema", "stage", "layouts", "horizon", "task_timeout", "hidden", "seed",
+            "schema", "environment_commit", "stage", "layouts", "horizon", "task_timeout", "hidden", "seed",
             "n_envs", "n_steps", "batch_size", "ppo_epochs", "no_worker_shaping",
             "unknown_penalty", "failure_limit", "partner_artifacts", "worker_checkpoint_id",
             "validation_episodes", "validation_games", "validation_min_samples", "deterministic",
@@ -339,14 +471,31 @@ def train_rl(args, device):
         config["artifact_id"] = uuid.uuid4().hex
     session = output / f"session_{time.time_ns()}"
     session.mkdir(parents=True, exist_ok=False)
-    factories = [partial(make_env, args, args.stage, args.layouts[i % len(args.layouts)], i)
-                 for i in range(args.n_envs)]
-    factories = [partial(monitored_env, factory, str(session / f"env_{i}"))
-                 for i, factory in enumerate(factories)]
-    vec = (DummyVecEnv(factories) if args.vec_env == "dummy"
-           else SubprocVecEnv(factories, start_method="spawn"))
+    if args.environment == "mixed":
+        from .mixed_env import MixedVecEnv
+        vec = MixedVecEnv(args)
+    elif tensor_env:
+        from .tensor_vec_env import TensorManagerVecEnv, TensorWorkerVecEnv
+        vec_class = TensorWorkerVecEnv if args.stage == "worker" else TensorManagerVecEnv
+        vec = vec_class(args)
+    else:
+        factories = [
+            partial(monitored_env,
+                    partial(make_env, args, args.stage, args.layouts[i % len(args.layouts)], i),
+                    str(session / f"env_{i}"))
+            for i in range(args.n_envs)
+        ]
+        if args.vec_env == "dummy":
+            vec = DummyVecEnv(factories)
+        else:
+            vec_class = MaskingSubprocVecEnv if args.stage == "manager" else SubprocVecEnv
+            vec = vec_class(factories, start_method="spawn")
     vec.seed(args.seed)
-    algorithm = PPO if args.stage == "worker" else MaskablePPO
+    if args.vec_env == "tensor-native":
+        from .tensor_ppo import TensorMaskablePPO, TensorPPO
+        algorithm = TensorPPO if args.stage == "worker" else TensorMaskablePPO
+    else:
+        algorithm = PPO if args.stage == "worker" else MaskablePPO
     progress = TrainingProgress(args, output, config, deadline, session)
     model = None
     try:
@@ -366,6 +515,13 @@ def train_rl(args, device):
                                "activation_fn": torch.nn.Tanh},
             )
             model.haha_artifact_id = config["artifact_id"]
+        if args.environment == "mixed":
+            fused = args.vec_env == "tensor-native"
+            optimizer = model.policy.optimizer
+            if any(bool(group.get("fused")) != fused for group in optimizer.param_groups):
+                from .tensor_ppo import configure_adam
+                model.policy.optimizer = configure_adam(optimizer, fused=fused)
+            config["optimizer_backend"] = "cuda_fused_adam" if fused else "adam"
         model.set_logger(configure(str(session / "log"), ["stdout", "csv"]))
         config["policy_parameters"] = sum(p.numel() for p in model.policy.parameters())
         write_json(session / "config.json", config)
@@ -406,11 +562,22 @@ def main():
     device = "cuda" if args.device == "auto" and torch.cuda.is_available() else args.device
     if device == "auto":
         device = "cpu"
+    if args.validation_backend == "auto":
+        args.validation_backend = ("cuda" if args.environment == "mixed" and device == "cuda" and
+                                   args.vec_env == "tensor-native" else "native")
+    if args.validation_backend == "cuda" and device != "cuda":
+        raise RuntimeError("CUDA validation requires a CUDA policy")
+    if args.vec_env in {"tensor", "tensor-native"} and device != "cuda":
+        raise RuntimeError("CUDA is required for tensor training")
     if (device == "cuda" or args.inference_device == "cuda") and not torch.cuda.is_available():
         raise RuntimeError("CUDA requested but unavailable")
     if args.stage == "prepare":
         preflight(args, device)
-        prepare(args.dataset, args.run_dir / "data", args.layouts, args.seed)
+        if args.environment == "mixed":
+            from .mixed_data import prepare_mixed
+            prepare_mixed(args)
+        else:
+            prepare(args.dataset, args.run_dir / "data", args.layouts, args.seed)
     elif args.stage == "bc":
         directory = args.run_dir / "bc"
         config = preflight(args, device)
@@ -419,7 +586,7 @@ def main():
             if not args.resume_bc:
                 raise FileExistsError(f"BC outputs exist: {directory}; use --resume-bc or a new --run-dir")
             check_config(read_json(config_path), config, (
-                "schema", "layouts", "seed", "bc_hidden", "bc_lr", "bc_batch_size",
+                "schema", "environment_commit", "layouts", "seed", "bc_hidden", "bc_lr", "bc_batch_size",
                 "bc_eval_every", "selection_episodes", "horizon", "epochs",
             ))
         else:

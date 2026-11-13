@@ -49,7 +49,7 @@ export PIP_CACHE_DIR="$storage/pip-cache"
 export TMPDIR="$storage/tmp"
 export PYTHONNOUSERSITE=1
 export PIP_CONFIG_FILE=/dev/null
-export PIP_INDEX_URL=https://pypi.org/simple
+export PIP_INDEX_URL="${HAHA_PIP_INDEX_URL:-https://pypi.org/simple}"
 export PIP_EXTRA_INDEX_URL=
 unset PYTHONPATH PYTHONHOME
 if [[ ! -e "$env_prefix" ]]; then

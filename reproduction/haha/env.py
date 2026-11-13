@@ -19,6 +19,34 @@ class NoExecutableSubtask(RuntimeError):
     """Bounded reset exhausted; record unavailable skills rather than a zero score."""
 
 
+def proximity_bonus(mdp, motion, position, orientation, features, pickup):
+    return counter_transfer_bonus(set(mdp.get_valid_player_positions()), motion.min_cost_to_feature,
+                                  position, orientation, features, pickup)
+
+
+def counter_transfer_bonus(walkable, cost_to_feature, position, orientation, features, pickup):
+    x, y = position
+    dx, dy = orientation
+    obj = (x + dx, y + dy)
+    current, alternative = float("inf"), float("inf")
+    for direction in Direction.ALL_DIRECTIONS:
+        adjacent = (obj[0] + direction[0], obj[1] + direction[1])
+        if adjacent not in walkable:
+            continue
+        facing_object = orientation if adjacent == position else (-direction[0], -direction[1])
+        cost = cost_to_feature((adjacent, facing_object), features)
+        if adjacent == position:
+            current = cost
+        else:
+            alternative = min(alternative, cost)
+    if not np.isfinite(alternative):
+        return 0.0 if pickup else -0.5
+    if not np.isfinite(current):
+        return 0.0 if pickup else float(np.clip(1 - alternative * .1, -.9, 2))
+    delta = alternative - current if pickup else current - alternative
+    return float(np.clip(delta * .1, -.9, 2))
+
+
 class CookingEnv(gym.Env):
     metadata = {"render_modes": []}
 
@@ -145,31 +173,8 @@ class CookingEnv(gym.Env):
 
     def _proximity(self, features, pickup=False):
         player = self.state.players[self.player]
-        x, y = player.position
-        dx, dy = player.orientation
-        obj = (x + dx, y + dy)
-        current, alternative = float("inf"), float("inf")
-        walkable = set(self.mdp.get_valid_player_positions())
-        for direction in Direction.ALL_DIRECTIONS:
-            adjacent = (obj[0] + direction[0], obj[1] + direction[1])
-            if adjacent not in walkable:
-                continue
-            orientation = player.orientation if adjacent == player.position else (
-                -direction[0], -direction[1]
-            )
-            cost = self.planner.motion_planner.min_cost_to_feature(
-                (adjacent, orientation), features
-            )
-            if adjacent == player.position:
-                current = cost
-            else:
-                alternative = min(alternative, cost)
-        if not np.isfinite(alternative):
-            return 0.0 if pickup else -0.5
-        if not np.isfinite(current):
-            return 0.0 if pickup else float(np.clip(1 - alternative * .1, -.9, 2))
-        delta = alternative - current if pickup else current - alternative
-        return float(np.clip(delta * .1, -.9, 2))
+        return proximity_bonus(self.mdp, self.planner.motion_planner, player.position,
+                               player.orientation, features, pickup)
 
     def _skill_bonus(self, task):
         pots = self.mdp.get_pot_locations()
