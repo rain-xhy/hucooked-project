@@ -1,0 +1,8 @@
+# Use Python 3.10–3.12 for the pinned original environment dependencies.
+numpy==1.26.4
+gym==0.26.2
+gymnasium==0.29.1
+pettingzoo==1.24.3
+tqdm==4.66.4
+torch>=2.3.1
+matplotlib>=3.8.4

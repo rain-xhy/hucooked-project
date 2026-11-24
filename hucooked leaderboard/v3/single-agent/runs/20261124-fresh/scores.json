@@ -1,0 +1,102 @@
+{
+  "sync": {
+    "episodes": 240,
+    "mean_score": 188.25,
+    "std_score": 22.2920950114609,
+    "min_score": 140.0,
+    "max_score": 240.0,
+    "orders_completed": {
+      "tomato_egg": 771,
+      "potato": 1218,
+      "potato_tomato_beef": 270
+    },
+    "by_seat": {
+      "left": {
+        "episodes": 80,
+        "mean_score": 188.25,
+        "std_score": 22.2920950114609,
+        "min_score": 140.0,
+        "max_score": 240.0,
+        "orders_completed": {
+          "tomato_egg": 257,
+          "potato": 406,
+          "potato_tomato_beef": 90
+        }
+      },
+      "right_north": {
+        "episodes": 80,
+        "mean_score": 188.25,
+        "std_score": 22.2920950114609,
+        "min_score": 140.0,
+        "max_score": 240.0,
+        "orders_completed": {
+          "tomato_egg": 257,
+          "potato": 406,
+          "potato_tomato_beef": 90
+        }
+      },
+      "right_south": {
+        "episodes": 80,
+        "mean_score": 188.25,
+        "std_score": 22.2920950114609,
+        "min_score": 140.0,
+        "max_score": 240.0,
+        "orders_completed": {
+          "tomato_egg": 257,
+          "potato": 406,
+          "potato_tomato_beef": 90
+        }
+      }
+    }
+  },
+  "counter": {
+    "episodes": 240,
+    "mean_score": 175.5,
+    "std_score": 29.660579899927782,
+    "min_score": 0.0,
+    "max_score": 240.0,
+    "orders_completed": {
+      "tomato_egg": 660,
+      "potato": 1137,
+      "potato_tomato_beef": 309
+    },
+    "by_seat": {
+      "left": {
+        "episodes": 80,
+        "mean_score": 175.5,
+        "std_score": 29.660579899927782,
+        "min_score": 0.0,
+        "max_score": 240.0,
+        "orders_completed": {
+          "tomato_egg": 220,
+          "potato": 379,
+          "potato_tomato_beef": 103
+        }
+      },
+      "right_north": {
+        "episodes": 80,
+        "mean_score": 175.5,
+        "std_score": 29.660579899927782,
+        "min_score": 0.0,
+        "max_score": 240.0,
+        "orders_completed": {
+          "tomato_egg": 220,
+          "potato": 379,
+          "potato_tomato_beef": 103
+        }
+      },
+      "right_south": {
+        "episodes": 80,
+        "mean_score": 175.5,
+        "std_score": 29.660579899927782,
+        "min_score": 0.0,
+        "max_score": 240.0,
+        "orders_completed": {
+          "tomato_egg": 220,
+          "potato": 379,
+          "potato_tomato_beef": 103
+        }
+      }
+    }
+  }
+}

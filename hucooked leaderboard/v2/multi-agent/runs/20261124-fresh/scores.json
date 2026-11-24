@@ -1,0 +1,14 @@
+{
+  "shared": {
+    "episodes": 24,
+    "mean_score": 160.0,
+    "std_score": 0.0,
+    "min_score": 160.0,
+    "max_score": 160.0,
+    "orders_completed": {
+      "normal_completed": 96,
+      "joint_completed": 96
+    },
+    "mean_finish_steps": 117
+  }
+}

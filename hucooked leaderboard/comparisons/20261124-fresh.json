@@ -1,0 +1,540 @@
+{
+  "original": {
+    "revision": "2cf0bd18d2523deb964b40ef99ef6bada19c8923",
+    "modes": {
+      "multi-agent": {
+        "directory": "original/multi-agent/runs/20261124-fresh",
+        "scores": {
+          "counter_circuit_o_1order": {
+            "episodes": 24,
+            "mean_score": 150.83333333333334,
+            "std_score": 79.78704294697368,
+            "min_score": 0.0,
+            "max_score": 200.0,
+            "orders_completed": {
+              "normal_completed": 181
+            }
+          }
+        }
+      },
+      "single-agent": {
+        "directory": "original/single-agent/runs/20261124-fresh",
+        "scores": {
+          "counter_circuit_o_1order": {
+            "episodes": 48,
+            "mean_score": 150.83333333333334,
+            "std_score": 79.78704294697368,
+            "min_score": 0.0,
+            "max_score": 200.0,
+            "orders_completed": {
+              "normal_completed": 362
+            },
+            "by_seat": {
+              "0": {
+                "episodes": 24,
+                "mean_score": 150.83333333333334,
+                "std_score": 79.78704294697368,
+                "min_score": 0.0,
+                "max_score": 200.0,
+                "orders_completed": {
+                  "normal_completed": 181
+                }
+              },
+              "1": {
+                "episodes": 24,
+                "mean_score": 150.83333333333334,
+                "std_score": 79.78704294697368,
+                "min_score": 0.0,
+                "max_score": 200.0,
+                "orders_completed": {
+                  "normal_completed": 181
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "paired_comparison": {
+      "counter_circuit_o_1order": {
+        "paired_seeds": 24,
+        "single_minus_multi": 0.0,
+        "bootstrap_95_percentile_interval": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "v1": {
+    "revision": "671c17bf4ba48ecb11e056dbf1e077b0bd434b2d",
+    "modes": {
+      "multi-agent": {
+        "directory": "v1/multi-agent/runs/20261124-fresh",
+        "scores": {
+          "compact": {
+            "episodes": 24,
+            "mean_score": 480.0,
+            "std_score": 0.0,
+            "min_score": 480.0,
+            "max_score": 480.0,
+            "orders_completed": {
+              "normal_completed": 192,
+              "joint_completed": 192
+            },
+            "mean_finish_steps": 279.6666666666667
+          },
+          "offset": {
+            "episodes": 24,
+            "mean_score": 480.0,
+            "std_score": 0.0,
+            "min_score": 480.0,
+            "max_score": 480.0,
+            "orders_completed": {
+              "normal_completed": 192,
+              "joint_completed": 192
+            },
+            "mean_finish_steps": 287.125
+          },
+          "bottleneck": {
+            "episodes": 24,
+            "mean_score": 480.0,
+            "std_score": 0.0,
+            "min_score": 480.0,
+            "max_score": 480.0,
+            "orders_completed": {
+              "normal_completed": 192,
+              "joint_completed": 192
+            },
+            "mean_finish_steps": 279.6666666666667
+          }
+        }
+      },
+      "single-agent": {
+        "directory": "v1/single-agent/runs/20261124-fresh",
+        "scores": {
+          "compact": {
+            "episodes": 72,
+            "mean_score": 480.0,
+            "std_score": 0.0,
+            "min_score": 480.0,
+            "max_score": 480.0,
+            "orders_completed": {
+              "normal_completed": 576,
+              "joint_completed": 576
+            },
+            "mean_finish_steps": 279.6666666666667,
+            "by_seat": {
+              "0": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 279.6666666666667
+              },
+              "1": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 279.6666666666667
+              },
+              "2": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 279.6666666666667
+              }
+            }
+          },
+          "offset": {
+            "episodes": 72,
+            "mean_score": 480.0,
+            "std_score": 0.0,
+            "min_score": 480.0,
+            "max_score": 480.0,
+            "orders_completed": {
+              "normal_completed": 576,
+              "joint_completed": 576
+            },
+            "mean_finish_steps": 287.125,
+            "by_seat": {
+              "0": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 287.125
+              },
+              "1": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 287.125
+              },
+              "2": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 287.125
+              }
+            }
+          },
+          "bottleneck": {
+            "episodes": 72,
+            "mean_score": 480.0,
+            "std_score": 0.0,
+            "min_score": 480.0,
+            "max_score": 480.0,
+            "orders_completed": {
+              "normal_completed": 576,
+              "joint_completed": 576
+            },
+            "mean_finish_steps": 279.6666666666667,
+            "by_seat": {
+              "0": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 279.6666666666667
+              },
+              "1": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 279.6666666666667
+              },
+              "2": {
+                "episodes": 24,
+                "mean_score": 480.0,
+                "std_score": 0.0,
+                "min_score": 480.0,
+                "max_score": 480.0,
+                "orders_completed": {
+                  "normal_completed": 192,
+                  "joint_completed": 192
+                },
+                "mean_finish_steps": 279.6666666666667
+              }
+            }
+          }
+        }
+      }
+    },
+    "paired_comparison": {
+      "compact": {
+        "paired_seeds": 24,
+        "single_minus_multi": 0.0,
+        "bootstrap_95_percentile_interval": [
+          0.0,
+          0.0
+        ]
+      },
+      "offset": {
+        "paired_seeds": 24,
+        "single_minus_multi": 0.0,
+        "bootstrap_95_percentile_interval": [
+          0.0,
+          0.0
+        ]
+      },
+      "bottleneck": {
+        "paired_seeds": 24,
+        "single_minus_multi": 0.0,
+        "bootstrap_95_percentile_interval": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "v2": {
+    "revision": "10aba7415fb0ce8340b2cc99025ca1f0627a92e0",
+    "modes": {
+      "multi-agent": {
+        "directory": "v2/multi-agent/runs/20261124-fresh",
+        "scores": {
+          "shared": {
+            "episodes": 24,
+            "mean_score": 160.0,
+            "std_score": 0.0,
+            "min_score": 160.0,
+            "max_score": 160.0,
+            "orders_completed": {
+              "normal_completed": 96,
+              "joint_completed": 96
+            },
+            "mean_finish_steps": 117
+          }
+        }
+      },
+      "single-agent": {
+        "directory": "v2/single-agent/runs/20261124-fresh",
+        "scores": {
+          "shared": {
+            "episodes": 72,
+            "mean_score": 160.0,
+            "std_score": 0.0,
+            "min_score": 160.0,
+            "max_score": 160.0,
+            "orders_completed": {
+              "normal_completed": 288,
+              "joint_completed": 288
+            },
+            "mean_finish_steps": 117,
+            "by_seat": {
+              "0": {
+                "episodes": 24,
+                "mean_score": 160.0,
+                "std_score": 0.0,
+                "min_score": 160.0,
+                "max_score": 160.0,
+                "orders_completed": {
+                  "normal_completed": 96,
+                  "joint_completed": 96
+                },
+                "mean_finish_steps": 117
+              },
+              "1": {
+                "episodes": 24,
+                "mean_score": 160.0,
+                "std_score": 0.0,
+                "min_score": 160.0,
+                "max_score": 160.0,
+                "orders_completed": {
+                  "normal_completed": 96,
+                  "joint_completed": 96
+                },
+                "mean_finish_steps": 117
+              },
+              "2": {
+                "episodes": 24,
+                "mean_score": 160.0,
+                "std_score": 0.0,
+                "min_score": 160.0,
+                "max_score": 160.0,
+                "orders_completed": {
+                  "normal_completed": 96,
+                  "joint_completed": 96
+                },
+                "mean_finish_steps": 117
+              }
+            }
+          }
+        }
+      }
+    },
+    "paired_comparison": {
+      "shared": {
+        "paired_seeds": 24,
+        "single_minus_multi": 0.0,
+        "bootstrap_95_percentile_interval": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "v3": {
+    "revision": "2d0ef3716706206eaecdc61296beccbdd23c31e5",
+    "modes": {
+      "multi-agent": {
+        "directory": "v3/multi-agent/runs/20261124-fresh",
+        "scores": {
+          "sync": {
+            "episodes": 80,
+            "mean_score": 189.5,
+            "std_score": 21.441781642391568,
+            "min_score": 140.0,
+            "max_score": 240.0,
+            "orders_completed": {
+              "tomato_egg": 258,
+              "potato": 404,
+              "potato_tomato_beef": 96
+            }
+          },
+          "counter": {
+            "episodes": 80,
+            "mean_score": 170.75,
+            "std_score": 23.86288959870535,
+            "min_score": 120.0,
+            "max_score": 240.0,
+            "orders_completed": {
+              "tomato_egg": 207,
+              "potato": 379,
+              "potato_tomato_beef": 97
+            }
+          }
+        }
+      },
+      "single-agent": {
+        "directory": "v3/single-agent/runs/20261124-fresh",
+        "scores": {
+          "sync": {
+            "episodes": 240,
+            "mean_score": 188.25,
+            "std_score": 22.2920950114609,
+            "min_score": 140.0,
+            "max_score": 240.0,
+            "orders_completed": {
+              "tomato_egg": 771,
+              "potato": 1218,
+              "potato_tomato_beef": 270
+            },
+            "by_seat": {
+              "left": {
+                "episodes": 80,
+                "mean_score": 188.25,
+                "std_score": 22.2920950114609,
+                "min_score": 140.0,
+                "max_score": 240.0,
+                "orders_completed": {
+                  "tomato_egg": 257,
+                  "potato": 406,
+                  "potato_tomato_beef": 90
+                }
+              },
+              "right_north": {
+                "episodes": 80,
+                "mean_score": 188.25,
+                "std_score": 22.2920950114609,
+                "min_score": 140.0,
+                "max_score": 240.0,
+                "orders_completed": {
+                  "tomato_egg": 257,
+                  "potato": 406,
+                  "potato_tomato_beef": 90
+                }
+              },
+              "right_south": {
+                "episodes": 80,
+                "mean_score": 188.25,
+                "std_score": 22.2920950114609,
+                "min_score": 140.0,
+                "max_score": 240.0,
+                "orders_completed": {
+                  "tomato_egg": 257,
+                  "potato": 406,
+                  "potato_tomato_beef": 90
+                }
+              }
+            }
+          },
+          "counter": {
+            "episodes": 240,
+            "mean_score": 175.5,
+            "std_score": 29.660579899927782,
+            "min_score": 0.0,
+            "max_score": 240.0,
+            "orders_completed": {
+              "tomato_egg": 660,
+              "potato": 1137,
+              "potato_tomato_beef": 309
+            },
+            "by_seat": {
+              "left": {
+                "episodes": 80,
+                "mean_score": 175.5,
+                "std_score": 29.660579899927782,
+                "min_score": 0.0,
+                "max_score": 240.0,
+                "orders_completed": {
+                  "tomato_egg": 220,
+                  "potato": 379,
+                  "potato_tomato_beef": 103
+                }
+              },
+              "right_north": {
+                "episodes": 80,
+                "mean_score": 175.5,
+                "std_score": 29.660579899927782,
+                "min_score": 0.0,
+                "max_score": 240.0,
+                "orders_completed": {
+                  "tomato_egg": 220,
+                  "potato": 379,
+                  "potato_tomato_beef": 103
+                }
+              },
+              "right_south": {
+                "episodes": 80,
+                "mean_score": 175.5,
+                "std_score": 29.660579899927782,
+                "min_score": 0.0,
+                "max_score": 240.0,
+                "orders_completed": {
+                  "tomato_egg": 220,
+                  "potato": 379,
+                  "potato_tomato_beef": 103
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "paired_comparison": {
+      "sync": {
+        "paired_seeds": 80,
+        "single_minus_multi": -1.25,
+        "bootstrap_95_percentile_interval": [
+          -3.0,
+          0.5
+        ]
+      },
+      "counter": {
+        "paired_seeds": 80,
+        "single_minus_multi": 4.75,
+        "bootstrap_95_percentile_interval": [
+          -0.50625,
+          8.5
+        ]
+      }
+    }
+  }
+}

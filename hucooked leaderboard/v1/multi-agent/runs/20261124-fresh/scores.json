@@ -1,0 +1,38 @@
+{
+  "compact": {
+    "episodes": 24,
+    "mean_score": 480.0,
+    "std_score": 0.0,
+    "min_score": 480.0,
+    "max_score": 480.0,
+    "orders_completed": {
+      "normal_completed": 192,
+      "joint_completed": 192
+    },
+    "mean_finish_steps": 279.6666666666667
+  },
+  "offset": {
+    "episodes": 24,
+    "mean_score": 480.0,
+    "std_score": 0.0,
+    "min_score": 480.0,
+    "max_score": 480.0,
+    "orders_completed": {
+      "normal_completed": 192,
+      "joint_completed": 192
+    },
+    "mean_finish_steps": 287.125
+  },
+  "bottleneck": {
+    "episodes": 24,
+    "mean_score": 480.0,
+    "std_score": 0.0,
+    "min_score": 480.0,
+    "max_score": 480.0,
+    "orders_completed": {
+      "normal_completed": 192,
+      "joint_completed": 192
+    },
+    "mean_finish_steps": 279.6666666666667
+  }
+}

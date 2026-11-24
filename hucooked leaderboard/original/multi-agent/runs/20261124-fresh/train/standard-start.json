@@ -1,0 +1,10 @@
+[
+  {
+    "layout": "counter_circuit_o_1order",
+    "horizon": 400,
+    "seed": 84031,
+    "learning_role": null,
+    "score": 200.0,
+    "normal_completed": 10
+  }
+]

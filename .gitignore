@@ -1,4 +1,4 @@
 .DS_Store
-/reproduction/haha/cache/
-/reproduction/haha/runs/
-/reproduction/haha/__pycache__/
+__pycache__/
+/.environment/
+/hucooked haha/haha/cache/
