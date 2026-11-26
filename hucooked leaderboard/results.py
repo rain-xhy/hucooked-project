@@ -37,10 +37,17 @@ def summary(rows):
         counts.update({key: row[key] for key in ("normal_completed", "joint_completed") if key in row})
         for name, count in counts.items():
             order_counts[name] = order_counts.get(name, 0) + count
+    official_metrics = (
+        "meals_per_100_steps", "joint_attempt_success_rate", "joint_wait_steps",
+        "three_contributor_meals", "movement_conflicts", "resource_conflicts",
+    ) if "meals_per_100_steps" in rows[0] else ()
     return {
         "episodes": len(values), "mean_score": mean(values), "std_score": pstdev(values),
         "min_score": min(values), "max_score": max(values), "orders_completed": order_counts,
+        **({"mean_meals_completed": mean(row["meals_completed"] for row in rows)}
+           if all("meals_completed" in row for row in rows) else {}),
         **({"mean_finish_steps": mean(ticks)} if ticks else {}),
+        **{key: mean(row[key] for row in rows) for key in official_metrics},
     }
 
 
@@ -60,17 +67,22 @@ def steps_series(path):
     for line in path.read_text().splitlines():
         entry = json.loads(line)
         if entry.get("stage") not in ("initial", "initialized", "after_imitation", "validation",
-                                      "after_recovery", "after_ppo", "ppo", "update", "ppo_update"):
+                                      "after_recovery", "after_ppo", "ppo", "update", "ppo_update", "search_candidate"):
             continue
         latest_update = entry.get("update", latest_update)
         latest_steps = entry.get("environment_steps", entry.get("env_steps", latest_steps))
         validation = means(entry.get("results", {}))
         if isinstance(entry.get("mean_score"), (int, float)):
             validation = {None: entry["mean_score"]}
+        if entry.get("stage") == "search_candidate":
+            validation = {None: entry["validation_score"]}
         sampled = means(entry.get("training", {}))
         if entry.get("sampled_mean") is not None:
             sampled = {None: entry["sampled_mean"]}
-        for metric, series in (("training", sampled), ("validation", validation)):
+        training_metric = "training"
+        if entry.get("stage") == "search_candidate":
+            training_metric, sampled = "screening", {None: entry["screening_score"]}
+        for metric, series in ((training_metric, sampled), ("validation", validation)):
             for name, value in series.items():
                 if math.isfinite(value):
                     rows.append((latest_update, latest_steps, entry["seconds"], metric, name or "all", value))
@@ -89,9 +101,10 @@ def chart(path, rows):
     for (metric, map_name), points in sorted(grouped.items()):
         steps, scores = zip(*points)
         axis.plot(steps, scores, marker=".", linewidth=1.4,
-                  linestyle="--" if metric == "training" else "-",
+                  linestyle="--" if metric in ("training", "screening") else "-",
                   label=f"{metric} / {map_name}")
-    axis.set(xlabel="PPO updates", ylabel="Mean team score", title="Team score during training")
+    xlabel = "Candidate trials" if any(metric == "screening" for metric, _ in grouped) else "PPO updates"
+    axis.set(xlabel=xlabel, ylabel="Mean team score", title="Team score during training")
     axis.xaxis.set_major_locator(MaxNLocator(integer=True))
     axis.grid(axis="y", alpha=0.25)
     axis.legend(ncols=2, fontsize=8)
@@ -129,6 +142,10 @@ def finish(directory, metadata, env):
     for map_name, groups in by_map.items():
         combined = [r for group in groups.values() for r in group]
         stats[map_name] = summary(combined)
+        if "meals_per_100_steps" in stats[map_name]:
+            reference = selected / "official-reference.json"
+            if reference.is_file():
+                stats[map_name]["official_reference"] = summary(json.loads(reference.read_text()))
         if len(groups) > 1:
             stats[map_name]["by_seat"] = {str(seat): summary(rows) for seat, rows in groups.items()}
         seat, row = max(((seat, row) for seat, group in groups.items() for row in group), key=lambda entry: score(entry[1]))

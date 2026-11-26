@@ -17,6 +17,7 @@ from overcooked_ai_py.cooperative.shared.controller import ScriptedController
 from overcooked_ai_py.cooperative.shared.kitchen import DIRECTIONS, STAY
 from overcooked_ai_py.cooperative.shared.layouts import FLOOR
 
+from haha.artifacts import portable_path
 from .commitment import ScatteredKitchen
 from .policy import GOALS, GET_MAIN, GET_PLATE, GET_SIDE, mlp, reserve, scripted_action, targets
 
@@ -187,7 +188,7 @@ def main():
     pred = prediction(net, torch.as_tensor(test_x, device=args.device))
     candidates = oracle_indices(test_y)
     metrics = {
-        "config": vars(args) | {"output": str(args.output)},
+        "config": vars(args) | {"output": portable_path(args.output)},
         "reference": report(test_y, test_ref[:, 0]), "geodesic": report(test_y, test_ref[:, 1]),
         "learned": report(test_y, pred), "all_permutations_oracle": report(test_y, candidates),
     }

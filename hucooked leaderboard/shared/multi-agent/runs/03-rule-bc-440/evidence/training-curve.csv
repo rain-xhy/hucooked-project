@@ -1,0 +1,14 @@
+update,environment_steps,seconds,metric,map,team_score
+0,0,17.01,validation,all,440.0
+1,2304,21.94,validation,all,440.0
+2,4608,26.99,validation,all,440.0
+3,6912,32.34,validation,all,440.0
+4,9216,37.36,validation,all,440.0
+5,11520,42.59,validation,all,440.0
+6,13824,47.85,validation,all,440.0
+7,16128,52.78,validation,all,440.0
+8,18432,57.65,validation,all,440.0
+9,20736,62.76,validation,all,440.0
+10,23040,67.82,validation,all,440.0
+11,25344,73.0,validation,all,440.0
+12,27648,77.87,validation,all,440.0

@@ -9,7 +9,7 @@
   "device": "cuda",
   "commands": [
     [
-      "/root/miniconda3/bin/python",
+      "python",
       "-m",
       "v1.train",
       "--output",

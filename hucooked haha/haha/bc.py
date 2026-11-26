@@ -102,7 +102,7 @@ def prepare(dataset, output, layouts, seed):
                                 source=json.dumps(spec))
         print(f"prepared {layout}: {len(labels)} player actions, {len(unique)} trajectories", flush=True)
     write_json(output / "source.json", {
-        "url": DATA_URL, "dataset": str(dataset.resolve()), "seed": seed,
+        "url": DATA_URL, "dataset": dataset.name, "seed": seed,
         "layouts": layouts, "split_unit": "trajectory",
         "note": "Trajectory-level split, rather than the upstream row-level random_split.",
     })

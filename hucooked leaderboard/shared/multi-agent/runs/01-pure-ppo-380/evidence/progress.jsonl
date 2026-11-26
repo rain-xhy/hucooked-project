@@ -1,0 +1,103 @@
+{"stage": "config", "seconds": 0.02, "output": "train", "device": "cpu", "seed": 488, "lanes": 12, "steps": 128, "worker_updates": 36, "updates": 84, "resume": "../20261125-pure-joint/train", "resume_last": true, "throughput": true, "manager_only": true, "test_seed_base": 84031, "test_episodes": 24, "environment": "de37e0818c2e76311e105ab8689e5162bd84133f", "initialize": null, "imitation": false, "demonstrations": 0, "execution": {"early": 2, "pipeline": false, "synchronize": false, "horizon": 300, "delay": 0.0, "goal_lock": false, "profile": "continuous", "lock_commitment": false, "queue_prefetch": false, "route_progress": false, "role_allocator": "reference", "role_policy": null}, "worker_reward": "local interaction or wait at goal + shortest-distance progress - step cost", "manager_reward": "native team delivery reward divided by 20", "joint_reward": "team delivery reward with order-progress potential and production-delay costs"}
+{"stage": "initialized", "seconds": 3.25, "update": 0, "environment_steps": 211968, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 47.0, "mean_delivery_tick_sum": 2933.0}
+{"stage": "ppo_update", "seconds": 5.35, "update": 1, "environment_steps": 213504, "joint_steps": 1536, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 7.17, "update": 2, "environment_steps": 215040, "joint_steps": 3072, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 8.75, "update": 3, "environment_steps": 216576, "joint_steps": 4608, "sampled_mean": 370.0}
+{"stage": "ppo_update", "seconds": 10.37, "update": 4, "environment_steps": 218112, "joint_steps": 6144, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 12.18, "update": 5, "environment_steps": 219648, "joint_steps": 7680, "sampled_mean": 378.3333333333333}
+{"stage": "ppo_update", "seconds": 13.85, "update": 6, "environment_steps": 221184, "joint_steps": 9216, "sampled_mean": null}
+{"stage": "validation", "seconds": 17.5, "update": 6, "environment_steps": 221184, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 19.82, "update": 7, "environment_steps": 222720, "joint_steps": 10752, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 21.33, "update": 8, "environment_steps": 224256, "joint_steps": 12288, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 23.23, "update": 9, "environment_steps": 225792, "joint_steps": 13824, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 24.83, "update": 10, "environment_steps": 227328, "joint_steps": 15360, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 26.38, "update": 11, "environment_steps": 228864, "joint_steps": 16896, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 28.1, "update": 12, "environment_steps": 230400, "joint_steps": 18432, "sampled_mean": 365.0}
+{"stage": "validation", "seconds": 31.27, "update": 12, "environment_steps": 230400, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 32.72, "update": 13, "environment_steps": 231936, "joint_steps": 19968, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 34.82, "update": 14, "environment_steps": 233472, "joint_steps": 21504, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 36.17, "update": 15, "environment_steps": 235008, "joint_steps": 23040, "sampled_mean": 376.6666666666667}
+{"stage": "ppo_update", "seconds": 37.96, "update": 16, "environment_steps": 236544, "joint_steps": 24576, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 39.6, "update": 17, "environment_steps": 238080, "joint_steps": 26112, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 41.26, "update": 18, "environment_steps": 239616, "joint_steps": 27648, "sampled_mean": null}
+{"stage": "validation", "seconds": 44.68, "update": 18, "environment_steps": 239616, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 18.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.35714285714285715, "joint_wait_steps": 47.0, "mean_delivery_tick_sum": 2933.0}
+{"stage": "ppo_update", "seconds": 46.76, "update": 19, "environment_steps": 241152, "joint_steps": 29184, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 48.44, "update": 20, "environment_steps": 242688, "joint_steps": 30720, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 50.75, "update": 21, "environment_steps": 244224, "joint_steps": 32256, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 52.35, "update": 22, "environment_steps": 245760, "joint_steps": 33792, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 54.32, "update": 23, "environment_steps": 247296, "joint_steps": 35328, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 55.97, "update": 24, "environment_steps": 248832, "joint_steps": 36864, "sampled_mean": 380.0}
+{"stage": "validation", "seconds": 59.27, "update": 24, "environment_steps": 248832, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 27.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.27027027027027023, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 60.88, "update": 25, "environment_steps": 250368, "joint_steps": 38400, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 62.76, "update": 26, "environment_steps": 251904, "joint_steps": 39936, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 64.22, "update": 27, "environment_steps": 253440, "joint_steps": 41472, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 66.23, "update": 28, "environment_steps": 254976, "joint_steps": 43008, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 67.77, "update": 29, "environment_steps": 256512, "joint_steps": 44544, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 69.5, "update": 30, "environment_steps": 258048, "joint_steps": 46080, "sampled_mean": null}
+{"stage": "validation", "seconds": 72.78, "update": 30, "environment_steps": 258048, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 74.46, "update": 31, "environment_steps": 259584, "joint_steps": 47616, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 76.07, "update": 32, "environment_steps": 261120, "joint_steps": 49152, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 78.32, "update": 33, "environment_steps": 262656, "joint_steps": 50688, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 79.98, "update": 34, "environment_steps": 264192, "joint_steps": 52224, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 82.22, "update": 35, "environment_steps": 265728, "joint_steps": 53760, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 84.0, "update": 36, "environment_steps": 267264, "joint_steps": 55296, "sampled_mean": 380.0}
+{"stage": "validation", "seconds": 87.56, "update": 36, "environment_steps": 267264, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 33.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.23255813953488372, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 89.29, "update": 37, "environment_steps": 268800, "joint_steps": 56832, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 91.02, "update": 38, "environment_steps": 270336, "joint_steps": 58368, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 92.61, "update": 39, "environment_steps": 271872, "joint_steps": 59904, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 94.55, "update": 40, "environment_steps": 273408, "joint_steps": 61440, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 95.92, "update": 41, "environment_steps": 274944, "joint_steps": 62976, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 97.82, "update": 42, "environment_steps": 276480, "joint_steps": 64512, "sampled_mean": null}
+{"stage": "validation", "seconds": 101.34, "update": 42, "environment_steps": 276480, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 103.17, "update": 43, "environment_steps": 278016, "joint_steps": 66048, "sampled_mean": 378.3333333333333}
+{"stage": "ppo_update", "seconds": 105.19, "update": 44, "environment_steps": 279552, "joint_steps": 67584, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 107.15, "update": 45, "environment_steps": 281088, "joint_steps": 69120, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 108.92, "update": 46, "environment_steps": 282624, "joint_steps": 70656, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 110.84, "update": 47, "environment_steps": 284160, "joint_steps": 72192, "sampled_mean": 350.0}
+{"stage": "ppo_update", "seconds": 112.21, "update": 48, "environment_steps": 285696, "joint_steps": 73728, "sampled_mean": null}
+{"stage": "validation", "seconds": 115.47, "update": 48, "environment_steps": 285696, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 117.32, "update": 49, "environment_steps": 287232, "joint_steps": 75264, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 118.75, "update": 50, "environment_steps": 288768, "joint_steps": 76800, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 120.5, "update": 51, "environment_steps": 290304, "joint_steps": 78336, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 122.3, "update": 52, "environment_steps": 291840, "joint_steps": 79872, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 123.88, "update": 53, "environment_steps": 293376, "joint_steps": 81408, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 126.02, "update": 54, "environment_steps": 294912, "joint_steps": 82944, "sampled_mean": 380.0}
+{"stage": "validation", "seconds": 129.65, "update": 54, "environment_steps": 294912, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 131.23, "update": 55, "environment_steps": 296448, "joint_steps": 84480, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 133.31, "update": 56, "environment_steps": 297984, "joint_steps": 86016, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 134.79, "update": 57, "environment_steps": 299520, "joint_steps": 87552, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 136.53, "update": 58, "environment_steps": 301056, "joint_steps": 89088, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 138.22, "update": 59, "environment_steps": 302592, "joint_steps": 90624, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 139.7, "update": 60, "environment_steps": 304128, "joint_steps": 92160, "sampled_mean": null}
+{"stage": "validation", "seconds": 142.97, "update": 60, "environment_steps": 304128, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 144.94, "update": 61, "environment_steps": 305664, "joint_steps": 93696, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 146.33, "update": 62, "environment_steps": 307200, "joint_steps": 95232, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 148.19, "update": 63, "environment_steps": 308736, "joint_steps": 96768, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 149.75, "update": 64, "environment_steps": 310272, "joint_steps": 98304, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 151.43, "update": 65, "environment_steps": 311808, "joint_steps": 99840, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 153.26, "update": 66, "environment_steps": 313344, "joint_steps": 101376, "sampled_mean": 360.0}
+{"stage": "validation", "seconds": 156.57, "update": 66, "environment_steps": 313344, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 158.11, "update": 67, "environment_steps": 314880, "joint_steps": 102912, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 160.23, "update": 68, "environment_steps": 316416, "joint_steps": 104448, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 161.59, "update": 69, "environment_steps": 317952, "joint_steps": 105984, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 163.6, "update": 70, "environment_steps": 319488, "joint_steps": 107520, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 165.23, "update": 71, "environment_steps": 321024, "joint_steps": 109056, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 166.98, "update": 72, "environment_steps": 322560, "joint_steps": 110592, "sampled_mean": null}
+{"stage": "validation", "seconds": 170.35, "update": 72, "environment_steps": 322560, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 172.27, "update": 73, "environment_steps": 324096, "joint_steps": 112128, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 173.83, "update": 74, "environment_steps": 325632, "joint_steps": 113664, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 175.94, "update": 75, "environment_steps": 327168, "joint_steps": 115200, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 177.35, "update": 76, "environment_steps": 328704, "joint_steps": 116736, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 179.19, "update": 77, "environment_steps": 330240, "joint_steps": 118272, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 180.78, "update": 78, "environment_steps": 331776, "joint_steps": 119808, "sampled_mean": 380.0}
+{"stage": "validation", "seconds": 184.07, "update": 78, "environment_steps": 331776, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "ppo_update", "seconds": 185.85, "update": 79, "environment_steps": 333312, "joint_steps": 121344, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 187.7, "update": 80, "environment_steps": 334848, "joint_steps": 122880, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 189.27, "update": 81, "environment_steps": 336384, "joint_steps": 124416, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 191.26, "update": 82, "environment_steps": 337920, "joint_steps": 125952, "sampled_mean": null}
+{"stage": "ppo_update", "seconds": 192.72, "update": 83, "environment_steps": 339456, "joint_steps": 127488, "sampled_mean": 380.0}
+{"stage": "ppo_update", "seconds": 194.62, "update": 84, "environment_steps": 340992, "joint_steps": 129024, "sampled_mean": null}
+{"stage": "validation", "seconds": 197.98, "update": 84, "environment_steps": 340992, "episodes": 12, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "selected", "seconds": 197.98, "update": 6, "source_steps": 211968, "joint_steps": 9216}
+{"stage": "best-evaluation", "seconds": 204.64, "update": 6, "environment_steps": 221184, "episodes": 24, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 36.0, "three_contributor_meals": 19.0, "movement_conflicts": 1.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.21739130434782608, "joint_wait_steps": 45.0, "mean_delivery_tick_sum": 2897.0}
+{"stage": "official-reference", "seconds": 209.86, "update": 0, "environment_steps": 0, "episodes": 24, "mean_score": 380.0, "min_score": 380.0, "normal_completed": 10.0, "joint_completed": 9.0, "joint_successes": 10.0, "unmatched_attempt_steps": 49.0, "three_contributor_meals": 19.0, "movement_conflicts": 0.0, "resource_conflicts": 0.0, "meals_per_100_steps": 6.333333333333333, "joint_attempt_success_rate": 0.1694915254237288, "joint_wait_steps": 49.0, "mean_delivery_tick_sum": 2968.0}

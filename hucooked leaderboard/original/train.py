@@ -15,6 +15,7 @@ from torch.distributions import Categorical
 from overcooked_ai_py.mdp.actions import Action, Direction
 from overcooked_ai_py.mdp.overcooked_mdp import OvercookedGridworld, PlayerState
 
+from haha.artifacts import portable_path
 from haha.goal_training import imitation, mlp, ppo_update, tensor
 from haha.subtasks import NAMES, UNKNOWN, held_name
 from .simulation import Episode
@@ -286,7 +287,7 @@ def main():
         return {LAYOUT: {"episodes": len(rows), "mean": float(np.mean([x["score"] for x in rows])),
                          "max": max(x["score"] for x in rows)}}
 
-    log("config", **(vars(args) | {"output": str(args.output), "layout": LAYOUT, "horizon": HORIZON,
+    log("config", **(vars(args) | {"output": portable_path(args.output), "layout": LAYOUT, "horizon": HORIZON,
          "starts": "seeded distinct floor tiles and orientations, plus separate standard-start evaluation",
          "team_rewards": "native sparse delivery rewards"}))
     host = Policy(len(new_trial().view()[0]))

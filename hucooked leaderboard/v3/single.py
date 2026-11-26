@@ -13,6 +13,7 @@ from torch.distributions import Categorical
 from overcooked_ai_py.cooperative.partition import PartitionConfig, TorchPartitionKitchen
 from overcooked_ai_py.cooperative.partition.model import RECIPE_NAMES, OFFSETS, STAY
 
+from haha.artifacts import portable_path
 from .team import ENVIRONMENT_COMMIT, LAYOUTS, advantages, mlp, report, train_update
 from .schedule import CELLS, COOK, FACILITIES, HELPER, LEFT, Dispatcher, path_table
 
@@ -204,8 +205,8 @@ def main():
         print(json.dumps(row), flush=True)
 
     log("config", commit=ENVIRONMENT_COMMIT, **(vars(args) | {
-        "output": str(args.output), "initialize": str(args.initialize) if args.initialize else None,
-        "reuse_worker": str(args.reuse_worker) if args.reuse_worker else None,
+        "output": portable_path(args.output), "initialize": portable_path(args.initialize),
+        "reuse_worker": portable_path(args.reuse_worker),
     }))
     paths = torch.as_tensor(path_table(), device=args.device)
     policy = None if args.mode == "rules" else ChefPolicy(args.prior_strength, handoff=args.control == "handoff").to(args.device)

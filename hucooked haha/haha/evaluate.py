@@ -165,7 +165,7 @@ def evaluate(args, device):
     model.policy.set_training_mode(False)
     out = args.run_dir / "evaluation" / f"{stage}_{time.time_ns()}"
     out.mkdir(parents=True, exist_ok=False)
-    payload = {"config": config, "checkpoint": str(path), "checkpoint_metadata": metadata,
+    payload = {"config": config, "checkpoint": path.name, "checkpoint_metadata": metadata,
                "policy_parameters": sum(p.numel() for p in model.policy.parameters()),
                "status": "running", "results": [],
                "note": ("MixedKitchen BC and expert_proxy use scripted demonstrations."

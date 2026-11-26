@@ -7,9 +7,9 @@ from torch.distributions import Categorical
 from torch.nn.functional import cross_entropy, mse_loss
 
 
-def mlp(input_dim, output_dim):
-    return nn.Sequential(nn.Linear(input_dim, 128), nn.Tanh(),
-                         nn.Linear(128, 128), nn.Tanh(), nn.Linear(128, output_dim))
+def mlp(input_dim, output_dim, *, width=128):
+    return nn.Sequential(nn.Linear(input_dim, width), nn.Tanh(),
+                         nn.Linear(width, width), nn.Tanh(), nn.Linear(width, output_dim))
 
 
 def tensor(value, device="cpu"):

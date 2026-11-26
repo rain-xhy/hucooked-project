@@ -8,6 +8,13 @@ from contextlib import contextmanager
 from pathlib import Path
 
 
+def portable_path(path):
+    """Label a file in shareable metadata without recording a local absolute path."""
+    if path is None:
+        return None
+    return path.name if path.is_absolute() else str(path)
+
+
 @contextmanager
 def atomic_path(path):
     path = Path(path)

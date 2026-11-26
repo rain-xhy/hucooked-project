@@ -13,6 +13,7 @@ from torch.nn.functional import cross_entropy, mse_loss
 
 from overcooked_ai_py.cooperative.partition import PartitionConfig, TorchPartitionKitchen
 from overcooked_ai_py.cooperative.partition.model import RECIPE_NAMES
+from haha.artifacts import portable_path
 from .schedule import Dispatcher, FACILITIES, LEGACY_GOALS, path_table
 
 
@@ -213,7 +214,7 @@ def main():
         print(json.dumps(entry), flush=True)
 
     log("config", commit=ENVIRONMENT_COMMIT, **vars(args) | {
-        "output": str(args.output), "initialize": str(args.initialize) if args.initialize else None,
+        "output": portable_path(args.output), "initialize": portable_path(args.initialize),
     })
     paths = torch.as_tensor(path_table(), device=args.device)
     action_count = (12 if args.gate_choice else 6) + int(args.deadline_aware)

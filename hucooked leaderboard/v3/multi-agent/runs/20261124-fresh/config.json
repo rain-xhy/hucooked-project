@@ -9,7 +9,7 @@
   "device": "cuda",
   "commands": [
     [
-      "/root/miniconda3/bin/python",
+      "python",
       "-m",
       "v3.team",
       "--output",
@@ -28,7 +28,7 @@
       "8"
     ],
     [
-      "/root/miniconda3/bin/python",
+      "python",
       "-m",
       "v3.team",
       "--output",
@@ -50,7 +50,7 @@
       "--reset-manager"
     ],
     [
-      "/root/miniconda3/bin/python",
+      "python",
       "-m",
       "v3.team",
       "--output",

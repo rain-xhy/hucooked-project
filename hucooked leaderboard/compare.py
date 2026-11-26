@@ -49,8 +49,14 @@ def main():
     args = parser.parse_args()
     if args.run_id != Path(args.run_id).name or args.run_id in (".", ".."):
         parser.error("Run ID must be a single directory name")
+    versions = args.version or [
+        version for version in REVISIONS
+        if any((LEADERBOARD / version / mode / "runs" / args.run_id).is_dir() for mode in MODES)
+    ]
+    if not versions:
+        parser.error(f"No runs found for {args.run_id}")
     report = {}
-    for version in args.version or REVISIONS:
+    for version in versions:
         directories = {mode: LEADERBOARD / version / mode / "runs" / args.run_id for mode in MODES}
         data = {mode: values(directory) for mode, directory in directories.items()}
         report[version] = {

@@ -15,6 +15,7 @@ from overcooked_ai_py.cooperative.shared import SharedKitchen, SharedKitchenConf
 from overcooked_ai_py.cooperative.shared.controller import ScriptedController
 from overcooked_ai_py.cooperative.shared.kitchen import STAY
 
+from haha.artifacts import portable_path
 from haha.goal_training import imitation, ppo_update, tensor
 from .commitment import CommitmentKitchen, ScatteredKitchen
 from .assignment import BENCHMARK_CONFIG, distance_choice, learned_choice, prefix_choice
@@ -25,13 +26,16 @@ from .policy import (
 )
 
 ENVIRONMENT_COMMIT = "10aba7415fb0ce8340b2cc99025ca1f0627a92e0"
+CONTINUOUS_ENVIRONMENT_COMMIT = "de37e0818c2e76311e105ab8689e5162bd84133f"
+FIXED_ORDERS = {"normal_orders": 4, "joint_orders": 4}
 PROFILES = {
-    "default": {},
+    "default": FIXED_ORDERS,
+    "continuous": {},
     "regular": {"normal_orders": 4, "joint_orders": 0},
     "cooperative": {"normal_orders": 0, "joint_orders": 4},
     "high_volume": {"normal_orders": 8, "joint_orders": 8},
-    "slow_stations": {"cook_steps": 8, "chop_steps": 4},
-    "one_active_order": {"active_limit": 1},
+    "slow_stations": {**FIXED_ORDERS, "cook_steps": 8, "chop_steps": 4},
+    "one_active_order": {**FIXED_ORDERS, "active_limit": 1},
     "commitment": BENCHMARK_CONFIG,
     "scattered": BENCHMARK_CONFIG,
 }
@@ -117,7 +121,7 @@ def act(trials, policy, obs, masks, learning, labels, *, sample=False, scripted_
     if policy is not None:
         dist = Categorical(logits=policy.logits(policy.manager, tensor(obs), tensor(masks)))
         proposals = dist.sample() if sample else dist.logits.argmax(-1)
-        goals = np.where(learning, proposals.numpy(), labels)
+        goals = proposals.numpy() if labels is None else np.where(learning, proposals.numpy(), labels)
         logp = dist.log_prob(tensor(goals)).numpy()
     else:
         goals, logp = labels, np.zeros(learning.shape, dtype=np.float32)
@@ -156,7 +160,8 @@ def evaluate(policy, mode, seeds, execution, *, scripted_worker=False, trace=Fal
             selected = [None] * len(batch)
         else:
             _, obs, masks, learning = encode(batch)
-            actions, selected, _ = act(batch, policy, obs, masks, learning, teacher_goals(batch),
+            labels = None if policy is not None and mode == "multi" else teacher_goals(batch)
+            actions, selected, _ = act(batch, policy, obs, masks, learning, labels,
                                        scripted_worker=scripted_worker)
         running = []
         for index, trial, action, goals in zip(pending, batch, actions, selected):
@@ -172,6 +177,7 @@ def evaluate(policy, mode, seeds, execution, *, scripted_worker=False, trace=Fal
                 seed, _ = seeds[index]
                 results[index] = {
                     "seed": seed, "learned_role": trial.learn_role if mode == "single" else None,
+                    "horizon": trial.env.config.horizon,
                     **info["metrics"], "orders": info["orders"],
                 }
                 if trace:
@@ -183,11 +189,9 @@ def evaluate(policy, mode, seeds, execution, *, scripted_worker=False, trace=Fal
 
 
 def summary(rows):
-    full = [r["ticks"] for r in rows if r["meals_completed"] == r["orders_total"]]
-    return {
+    report = {
         "episodes": len(rows), "mean_score": float(np.mean([r["team_score"] for r in rows])),
-        "min_score": min(r["team_score"] for r in rows), "full_rate": len(full) / len(rows),
-        "full_ticks": float(np.mean(full)) if full else None,
+        "min_score": min(r["team_score"] for r in rows),
         **{key: float(np.mean([r[key] for r in rows])) for key in (
             "normal_completed", "joint_completed", "joint_successes", "unmatched_attempt_steps",
             "three_contributor_meals", "movement_conflicts", "resource_conflicts",
@@ -195,9 +199,19 @@ def summary(rows):
         **{key: float(np.mean([r[key] for r in rows])) for key in ("joint_run_resets", "chopping_resets")
            if key in rows[0]},
     }
+    if "meals_per_100_steps" in rows[0]:
+        report.update({key: float(np.mean([r[key] for r in rows])) for key in (
+            "meals_per_100_steps", "joint_attempt_success_rate", "joint_wait_steps",
+        )})
+    else:
+        full = [r["ticks"] for r in rows if r["meals_completed"] == r["orders_total"]]
+        report.update(full_rate=len(full) / len(rows), full_ticks=float(np.mean(full)) if full else None)
+    return report
 
 
 def rank(report):
+    if "full_ticks" not in report:
+        return report["mean_score"], report["min_score"]
     ticks = report["full_ticks"]
     return report["mean_score"], report["min_score"], report["full_rate"], -(ticks if ticks is not None else 300)
 
@@ -319,6 +333,11 @@ def main():
         parser.error("--delay must be in [0, 1)")
     if args.validate_every < 1 or args.test_episodes < 1:
         parser.error("--validate-every and --test-episodes must be positive")
+    if args.profile == "continuous" or "continuous" in (args.training_profiles or ()):
+        if not getattr(SharedKitchenConfig(), "continuous_orders", False):
+            parser.error("The continuous profile requires the latest Shared environment")
+        if args.training_profiles:
+            parser.error("Continuous orders cannot be normalized against fixed order ceilings")
     if args.role_allocator == "learned" and args.role_weights is None:
         parser.error("--role-allocator learned requires --role-weights")
     role_policy = None
@@ -350,9 +369,10 @@ def main():
     def write_results(name, rows):
         (args.output / f"{name}.json").write_text(json.dumps(rows), encoding="utf-8")
 
-    record("config", environment=ENVIRONMENT_COMMIT, **vars(args) | {
-        "output": str(args.output), "initialize": str(args.initialize) if args.initialize else None,
-        "role_weights": str(args.role_weights) if args.role_weights else None,
+    revision = CONTINUOUS_ENVIRONMENT_COMMIT if args.profile == "continuous" else ENVIRONMENT_COMMIT
+    record("config", environment=revision, **vars(args) | {
+        "output": portable_path(args.output), "initialize": portable_path(args.initialize),
+        "role_weights": portable_path(args.role_weights),
     })
     if args.mode == "reference":
         rows = evaluate(None, "reference", test, execution, trace=True)
@@ -451,6 +471,10 @@ def main():
     rows = evaluate(cpu, args.mode, test, execution, trace=True)
     write_results("best-evaluation", rows)
     record("best-evaluation", selected_stage=best_stage, **summary(rows))
+    if args.profile == "continuous":
+        reference = evaluate(None, "reference", [(s, None) for s in sorted({seed for seed, _ in test})], execution)
+        write_results("official-reference", reference)
+        record("official-reference", **summary(reference))
     guided = evaluate(cpu, args.mode, test, execution, scripted_worker=True)
     write_results("scripted-worker-evaluation", guided)
     record("scripted-worker-evaluation", **summary(guided))

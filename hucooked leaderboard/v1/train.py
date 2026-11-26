@@ -17,6 +17,7 @@ from overcooked_ai_py.cooperative.kitchen import DIRECTIONS, MixedKitchen, STAY
 from overcooked_ai_py.cooperative.layouts import LAYOUTS
 from overcooked_ai_py.cooperative.model import KitchenConfig
 
+from haha.artifacts import portable_path
 from haha.goal_training import imitation, mlp, ppo_update, tensor
 from .schedule import GOAL_COUNT, ScheduledTeam, choices, goals, navigation, reserve, worker_mask
 
@@ -280,7 +281,7 @@ def main():
         (args.output / "evaluation.json").write_text(json.dumps(rows), encoding="utf-8")
         record("evaluation", results=summarize(rows))
 
-    cfg = vars(args) | {"output": str(args.output), "initialize": str(args.initialize) if args.initialize else None}
+    cfg = vars(args) | {"output": portable_path(args.output), "initialize": portable_path(args.initialize)}
     record("config", **cfg, environment=ENVIRONMENT_COMMIT, rules=asdict(KitchenConfig(horizon=args.horizon)))
     if args.mode in ("reference", "planner"):
         final(None)

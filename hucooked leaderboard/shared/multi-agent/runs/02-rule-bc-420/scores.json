@@ -1,0 +1,21 @@
+{
+  "shared": {
+    "episodes": 24,
+    "mean_score": 420.0,
+    "std_score": 0.0,
+    "min_score": 420.0,
+    "max_score": 420.0,
+    "mean_meals_completed": 21,
+    "joint_attempt_success_rate": 0.18032786885245902,
+    "joint_wait_steps": 50,
+    "orders_completed": {
+      "normal_completed": 264,
+      "joint_completed": 240
+    },
+    "meals_per_100_steps": 7.0,
+    "three_contributor_meals": 21,
+    "movement_conflicts": 0,
+    "resource_conflicts": 0,
+    "mean_finish_steps": 300
+  }
+}

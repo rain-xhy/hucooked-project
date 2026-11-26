@@ -178,7 +178,9 @@ def records(trajectory):
 
 def save(version, revision, source):
     episode = json.loads(source.read_text())
-    terrain, native, snapshot, step = {"original": original, "v1": mixed, "v2": shared, "v3": partition}[version](episode)
+    terrain, native, snapshot, step = {
+        "original": original, "v1": mixed, "v2": shared, "v3": partition, "shared": shared,
+    }[version](episode)
     episode_steps = list(records(episode["trajectory"]))
     state = snapshot()
     frames = [{"time": 0, "score": 0, "state": state}]

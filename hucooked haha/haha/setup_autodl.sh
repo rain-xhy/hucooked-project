@@ -3,11 +3,11 @@
 set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-storage="${HAHA_STORAGE_ROOT:-/root/autodl-tmp/haha}"
-case "$storage" in
-  /root/autodl-tmp/*) ;;
-  *) printf '%s\n' 'HAHA_STORAGE_ROOT must be a new task directory inside /root/autodl-tmp.' >&2; exit 1 ;;
-esac
+storage="${HAHA_STORAGE_ROOT:?Set HAHA_STORAGE_ROOT to a dedicated absolute experiment directory}"
+if [[ "$storage" != /* || "$storage" == / || "$storage" == *'/./'* || "$storage" == */. ]]; then
+  printf '%s\n' 'Choose an absolute experiment directory.' >&2
+  exit 1
+fi
 if [[ "$storage" == *'/../'* || "$storage" == */.. ]]; then
   printf '%s\n' 'Parent traversal is not supported in HAHA_STORAGE_ROOT.' >&2
   exit 1
@@ -16,20 +16,17 @@ if [[ "$(uname -s)" != Linux || "$(uname -m)" != x86_64 ]]; then
   printf '%s\n' 'This installer is for the AutoDL Linux x86_64 server only.' >&2
   exit 1
 fi
-if [[ ! -d /root/autodl-tmp ]]; then
-  printf '%s\n' 'Expected AutoDL data disk /root/autodl-tmp is absent.' >&2
-  exit 1
-fi
-free_kb="$(df -Pk /root/autodl-tmp | awk 'NR==2 {print $4}')"
+disk_parent="$storage"
+while [[ ! -e "$disk_parent" ]]; do
+  disk_parent="$(dirname -- "$disk_parent")"
+done
+free_kb="$(df -Pk "$disk_parent" | awk 'NR==2 {print $4}')"
 if (( free_kb < 15 * 1024 * 1024 )); then
   printf '%s\n' 'Less than 15 GiB free on data disk. Inspect disk usage before installing; nothing is removed.' >&2
   exit 1
 fi
-conda_exe="$(command -v conda || true)"
-if [[ -z "$conda_exe" && -x /root/miniconda3/bin/conda ]]; then
-  conda_exe=/root/miniconda3/bin/conda
-fi
-if [[ -z "$conda_exe" ]]; then
+conda_exe="${CONDA_EXE:-$(type -P conda || true)}"
+if [[ -z "$conda_exe" || ! -x "$conda_exe" ]]; then
   printf '%s\n' 'Conda was not found. Select its existing executable; this script does not install system software.' >&2
   exit 1
 fi

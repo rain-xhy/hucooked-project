@@ -24,7 +24,7 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
 
 from . import ENVIRONMENT_COMMIT, UPSTREAM_COMMIT
-from .artifacts import (check_loaded_policy, checkpoint_info, read_json, save_policy,
+from .artifacts import (check_loaded_policy, checkpoint_info, portable_path, read_json, save_policy,
                         write_json)
 from .bc import BCPartner, RandomPartner, prepare, train_bc
 from .env import CookingEnv
@@ -337,7 +337,7 @@ class TrainingProgress(BaseCallback):
 
 
 def settings(args, device):
-    values = {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}
+    values = {k: portable_path(v) if isinstance(v, Path) else v for k, v in vars(args).items()}
     inference_device = "cuda" if args.vec_env in {"tensor", "tensor-native"} else args.inference_device
     mixed = args.environment == "mixed"
     values.update(device_resolved=device, upstream_commit=UPSTREAM_COMMIT,
@@ -368,7 +368,8 @@ def settings(args, device):
         return values
     distribution = importlib.metadata.distribution("overcooked-ai")
     direct_url = json.loads(distribution.read_text("direct_url.json") or "{}")
-    values["environment_install_source"] = direct_url
+    values["environment_install_source"] = {"commit": ENVIRONMENT_COMMIT,
+                                            "method": "archive" if "archive_info" in direct_url else "vcs"}
     archive_name = f"overcooked_ai-{ENVIRONMENT_COMMIT}.tar.gz"
     pinned_archive = ("archive_info" in direct_url and
                       direct_url.get("url", "").endswith("/" + archive_name))
@@ -606,7 +607,7 @@ def train_rl(args, device):
             "interrupted": interrupted, "timesteps": model.num_timesteps,
             "time_limit_reached": time.monotonic() >= deadline,
             "base_env_steps_this_process": sum(vec.env_method("get_base_steps")),
-            "checkpoint": str(output / "last.zip"), "best_validation_score": progress.best_score,
+            "checkpoint": "last.zip", "best_validation_score": progress.best_score,
             "resume_note": "PPO optimizer/weights resume; live kitchens and partially collected rollouts restart.",
         }
         if args.mixed_training_pool:
