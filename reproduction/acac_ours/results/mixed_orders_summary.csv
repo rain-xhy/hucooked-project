@@ -1,0 +1,4 @@
+method,checkpoint_steps,scenario,episodes,mean_meals,mean_team_score,sync_success_percent,mean_wait_steps
+Ours with learned opening,13162308,continuous_mixed_orders,96,21.00,420.00,30.05,25.51
+Ours with learned opening,13162308,continuous_mixed_orders_start_position_perturbation,96,20.49,409.79,28.24,25.16
+ACAC baseline reference,12750000,continuous_mixed_orders_separate_seed_set,128,20.68,413.59,25.90,29.08
