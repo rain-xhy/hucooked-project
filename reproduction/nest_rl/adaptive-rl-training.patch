@@ -1,0 +1,186 @@
+diff --git a/train_.py b/train_.py
+index 5d27976..e68bd76 100644
+--- a/train_.py
++++ b/train_.py
+@@ -23,7 +23,7 @@ def interpolate_prob(dist, mean_prob, tot_phase, cur_phase):
+     return mean_prob + 2.0 * dt * ratio - dt
+ 
+ 
+-def train_embedding(args, train_pool, eval_pool):
++def train_embedding(args, train_pool, eval_pool, *, training_state=None):
+     # Supports multiple RL training instances in parallel, potentially with multiple agents in every instance
+     # There are num_train_opponents instances, with args.multi_agent agents and num_procs_per_opponent processes
+     # in each instance
+@@ -452,7 +452,18 @@ def train_embedding(args, train_pool, eval_pool):
+     else:
+         use_br = soft_imitation_cur_prob = None
+ 
+-    for j in range(num_updates):
++    defer_rollout_stats = getattr(envs, 'defer_rollout_stats', False)
++    if defer_rollout_stats:
++        assert num_train_opponents == args.multi_agent == 1
++        assert use_history and not (args.collect_next_obs or use_soft_imitation or use_policy_cls_reward)
++
++    first_update = 0
++    if training_state is not None:
++        first_update = training_state.restore(policy, agent, envs, rollouts)
++        last_reported_fps_steps = first_update * args.num_steps * args.num_processes
++        last_reported_fps_time = time.time()
++
++    for j in range(first_update, num_updates):
+         start = time.time()
+         if use_soft_imitation:
+             ratio = min(1.0, j * args.num_steps * args.num_processes / args.soft_imitation_decay_steps)
+@@ -565,68 +576,71 @@ def train_embedding(args, train_pool, eval_pool):
+                     reward = reward.reshape(num_procs_per_opponent, num_train_opponents, 1)
+                     reward = reward.repeat(1, args.multi_agent, 1).reshape(args.multi_agent * args.num_processes, 1)
+ 
+-                if args.collect_next_obs:
+-                    next_obs = obs.clone()
+-                    for i, info in enumerate(infos):
+-                        # For finished episodes, the next observation should be the terminal observation
+-                        if 'episode' in info.keys():
+-                            next_obs[i].copy_(torch.from_numpy(info['terminal_observation']).float())
++                if defer_rollout_stats:
++                    next_obs = masks = bad_masks = None
+                 else:
+-                    next_obs = None
+-
+-                for i, info in enumerate(infos):
++                    if args.collect_next_obs:
++                        next_obs = obs.clone()
++                        for i, info in enumerate(infos):
++                            # For finished episodes, the next observation should be the terminal observation
++                            if 'episode' in info.keys():
++                                next_obs[i].copy_(torch.from_numpy(info['terminal_observation']).float())
++                    else:
++                        next_obs = None
+ 
+-                    if args.visit_reward_coef is not None:
+-                        # Wrapper sanity check
+-                        assert ('episode' in info.keys()) == ('episode_stats' in info.keys())
+-                        assert ('interaction_stats' not in info.keys()) or ('episode_stats' in info.keys())
++                    for i, info in enumerate(infos):
+ 
+-                    if 'episode' in info.keys():
+-                        # Episode terminating
++                        if args.visit_reward_coef is not None:
++                            # Wrapper sanity check
++                            assert ('episode' in info.keys()) == ('episode_stats' in info.keys())
++                            assert ('interaction_stats' not in info.keys()) or ('episode_stats' in info.keys())
+ 
+-                        # Record episode results
+-                        if not (use_soft_imitation and use_br[i]):
+-                            train_stats_by_opponent['reward'][i % num_train_opponents].append(info['episode']['r'])
+-                            if args.env_name == 'Overcooked':
+-                                train_stats_by_opponent['success_rate'][i % num_train_opponents].append(
+-                                    info['termination_info'].endswith('completed')
++                        if 'episode' in info.keys():
++                            # Episode terminating
++
++                            # Record episode results
++                            if not (use_soft_imitation and use_br[i]):
++                                train_stats_by_opponent['reward'][i % num_train_opponents].append(info['episode']['r'])
++                                if args.env_name == 'Overcooked':
++                                    train_stats_by_opponent['success_rate'][i % num_train_opponents].append(
++                                        info['termination_info'].endswith('completed')
++                                    )
++
++                            # Record visit stats and exploration rewards
++                            if use_history:
++                                assert ('interaction_stats' in info) == (rollouts.history.current_episode[i] == args.history_size - 1)
++                            if use_policy_cls_reward:
++                                train_stats_by_opponent['expl_reward_per_step'][i % num_train_opponents].append(
++                                    info['expl_reward_per_step']
+                                 )
+-
+-                        # Record visit stats and exploration rewards
+-                        if use_history:
+-                            assert ('interaction_stats' in info) == (rollouts.history.current_episode[i] == args.history_size - 1)
+-                        if use_policy_cls_reward:
+-                            train_stats_by_opponent['expl_reward_per_step'][i % num_train_opponents].append(
+-                                info['expl_reward_per_step']
+-                            )
+-                            train_stats_by_opponent['expl_reward_per_episode'][i % num_train_opponents].append(
+-                                info['expl_reward_per_episode']
+-                            )
+-                        if 'interaction_stats' in info:
+-                            if args.visit_reward_coef is not None:
+-                                train_stats_by_opponent['visits_per_interaction'][i % num_train_opponents].append(
+-                                    info['interaction_stats']['visit_cnt']
++                                train_stats_by_opponent['expl_reward_per_episode'][i % num_train_opponents].append(
++                                    info['expl_reward_per_episode']
+                                 )
+-                            if use_policy_cls_reward:
+-                                train_stats_by_opponent['expl_reward_per_interaction'][i % num_train_opponents].append(
+-                                    info['expl_reward_per_interaction']
++                            if 'interaction_stats' in info:
++                                if args.visit_reward_coef is not None:
++                                    train_stats_by_opponent['visits_per_interaction'][i % num_train_opponents].append(
++                                        info['interaction_stats']['visit_cnt']
++                                    )
++                                if use_policy_cls_reward:
++                                    train_stats_by_opponent['expl_reward_per_interaction'][i % num_train_opponents].append(
++                                        info['expl_reward_per_interaction']
++                                    )
++
++                            if use_soft_imitation:
++                                # Decide if the next episode is going to use BR
++                                use_br[i] = np.random.rand() < interpolate_prob(
++                                    args.soft_imitation_prob_dist, soft_imitation_cur_prob,
++                                    args.history_size, (rollouts.history.current_episode[i] + 1) % args.history_size
+                                 )
+ 
+-                        if use_soft_imitation:
+-                            # Decide if the next episode is going to use BR
+-                            use_br[i] = np.random.rand() < interpolate_prob(
+-                                args.soft_imitation_prob_dist, soft_imitation_cur_prob,
+-                                args.history_size, (rollouts.history.current_episode[i] + 1) % args.history_size
+-                            )
+-
+-                # If done then clean the history of observations.
+-                masks = torch.FloatTensor([[0.0] if done_ else [1.0] for done_ in done])
+-                bad_masks = torch.FloatTensor([[0.0] if 'bad_transition' in info.keys() else [1.0] for info in infos])
+-                if args.multi_agent > 1:
+-                    masks = masks.reshape(num_procs_per_opponent, num_train_opponents, 1)
+-                    masks = masks.repeat(1, args.multi_agent, 1).reshape(args.multi_agent * args.num_processes, 1)
+-                    bad_masks = bad_masks.reshape(num_procs_per_opponent, num_train_opponents, 1)
+-                    bad_masks = bad_masks.repeat(1, args.multi_agent, 1).reshape(args.multi_agent * args.num_processes, 1)
++                    # If done then clean the history of observations.
++                    masks = torch.FloatTensor([[0.0] if done_ else [1.0] for done_ in done])
++                    bad_masks = torch.FloatTensor([[0.0] if 'bad_transition' in info.keys() else [1.0] for info in infos])
++                    if args.multi_agent > 1:
++                        masks = masks.reshape(num_procs_per_opponent, num_train_opponents, 1)
++                        masks = masks.repeat(1, args.multi_agent, 1).reshape(args.multi_agent * args.num_processes, 1)
++                        bad_masks = bad_masks.reshape(num_procs_per_opponent, num_train_opponents, 1)
++                        bad_masks = bad_masks.repeat(1, args.multi_agent, 1).reshape(args.multi_agent * args.num_processes, 1)
+ 
+                 if args.shuffle_agents:
+                     next_agent_perm_all = torch.stack(envs.env_method('get_callback_state', 'agent_shuffler'))
+@@ -636,6 +650,17 @@ def train_embedding(args, train_pool, eval_pool):
+                 rollouts.insert(obs, next_obs, rnn_states, action, action_log_prob, value, reward, masks, bad_masks, infos,
+                                 all_period_idx, all_episode_idx, all_length_idx, imp_ratio, next_agent_perm_all)
+ 
++        if defer_rollout_stats:
++            batches = envs.finish_rollout()
++            rollouts.history.current_episode += len(batches)
++            rollouts.history.current_episode %= args.history_size
++            for _, rewards, successes in batches:
++                train_stats_by_opponent['reward'][0].extend(rewards)
++                train_stats_by_opponent['success_rate'][0].extend(successes)
++            if run is not None:
++                run.log_rollout_samples(batches, j * args.num_steps * args.num_processes,
++                                        args.num_steps, args.num_processes)
++
+         if args.algo == 'ppo':
+             # Get value estimates at the end of the rollout
+             with torch.no_grad():
+@@ -799,6 +824,8 @@ def train_embedding(args, train_pool, eval_pool):
+             for i in range(num_train_opponents):
+                 train_stats_by_opponent[k][i].clear()
+         rollouts.after_update()
++        if training_state is not None:
++            training_state.save(j + 1, policy, agent, envs, rollouts)
+ 
+     # Finish training
+     if args.wandb_user_name is not None:

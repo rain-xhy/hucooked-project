@@ -1,0 +1,139 @@
+strict digraph "Author Overcooked PACE policy" {
+	graph [bgcolor=white dpi=160 fontname=Arial ordering=in rankdir=TB size="12.0,12.0"]
+	node [align=left fontname=Arial fontsize=10 height=0.2 margin=0 ranksep=0.1 shape=plaintext style=filled]
+	edge [fontsize=10]
+	0 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Current observation</TD><TD>(1, 73)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	1 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>History observations</TD><TD>(1, 5, 40, 73)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	2 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Partner action IDs</TD><TD>(1, 5, 40)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	3 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Episode mask</TD><TD>(1, 5)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	4 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Step mask</TD><TD>(1, 5, 40)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	5 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">History features<BR/>One-hot action + observation</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 5, 40, 73), (1, 5, 40) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 5, 40, 79) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	6 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Episode encoder<BR/>MLP 79 → 128 → 128<BR/>Masked mean across steps</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 5, 40, 79), (1, 5, 40) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 5, 128) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	7 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Period encoder<BR/>Masked mean across episodes<BR/>MLP 128 → 128 → 128</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 5, 128), (1, 5) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 128) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	8 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Actor<BR/>Concat → MLP 201 → 128 → 128<BR/>Categorical head → 6</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 73), (1, 128) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 6) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	9 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Action log-probabilities</TD><TD>(1, 6)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	10 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Critic<BR/>Concat → MLP 201 → 128 → 128<BR/>Value head → 1</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 73), (1, 128) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 1) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	11 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>State value</TD><TD>(1, 1)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	12 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Auxiliary partner classifier<BR/>Linear 128 → 2</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 128) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 2) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	13 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Partner-class logits</TD><TD>(1, 2)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	0 -> 8
+	0 -> 10
+	1 -> 5
+	2 -> 5
+	3 -> 7
+	4 -> 6
+	5 -> 6
+	7 -> 8
+	7 -> 10
+	7 -> 12
+	8 -> 9
+	10 -> 11
+	12 -> 13
+	6 -> 7
+	fontsize=22 label="Author Overcooked PACE policy  |  ppo_pace_two_ing_1_seed1" labelloc=t
+	graph [nodesep=0.22 pad=0.2 ranksep=0.32]
+}

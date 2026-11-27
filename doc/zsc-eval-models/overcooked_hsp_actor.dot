@@ -1,0 +1,90 @@
+strict digraph model {
+	graph [nodesep=0.23 ordering=in pad=0.2 rankdir=TB ranksep=0.4 size="12.0,12.0"]
+	node [align=left fontname=Arial fontsize=11 height=0.2 margin=0 ranksep=0.1 shape=plaintext style=filled]
+	edge [fontsize=10]
+	0 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Observation</TD><TD>(1, 5, 5, 20)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	1 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Previous GRU state</TD><TD>(1, 1, 64)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	2 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Episode mask</TD><TD>(1, 1)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	3 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Available actions</TD><TD>(1, 6)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	8 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Grid encoder<BR/>3× Conv2d + ReLU → Flatten<BR/>MLP 800 → 64 → 64 → 64</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 5, 5, 20) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 64) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	9 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Recurrent state<BR/>GRU 64 → 64 + LayerNorm</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 64), (1, 1, 64), (1, 1) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 64), (1, 1, 64) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	10 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Next GRU state</TD><TD>(1, 1, 64)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	11 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Categorical action head<BR/>Linear 64 → 6 → mask + distribution</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 64), (1, 6) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">2 x (1, 1) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	12 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Selected action</TD><TD>(1, 1)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	13 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Action log probability</TD><TD>(1, 1)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	0 -> 8
+	1 -> 9
+	2 -> 9
+	3 -> 11
+	8 -> 9
+	9 -> 10
+	9 -> 11
+	11 -> 12
+	11 -> 13
+	dpi=144 fontname=Arial fontsize=20 label="Overcooked random1 | HSP stage 2
+Official R_Actor · 128,198 registered parameters" labelloc=t
+}

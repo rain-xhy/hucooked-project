@@ -96,15 +96,17 @@ git submodule update --init --recursive
 | :--- | :--- |
 | 环境安装 | [厨房环境说明](overcooked_env/README.md) |
 | 查看回放 | [回放前端说明](replay_frontend/README.md) |
-| 项目训练与评估 | 依赖配置、训练入口、模型加载与评估命令待补充 |
+| 项目训练与评估 | [NestRL 训练配置、复现命令与 L1–L4 评测](reproduction/nest_rl/README.md)；L5 已废弃，不采用 |
 
 <details>
 <summary>项目目录</summary>
 
 ```text
 .
-├── overcooked_env/   # 厨房环境子模块
+├── overcooked_env/   # 当前共享厨房环境（hy）
+├── hucooked/         # 历史复现使用的 GPU 环境（gpu-dev）
 ├── replay_frontend/  # 回放前端子模块
+├── reproduction/     # NestRL 复现、训练与评测
 ├── src/             # 策略、算法与训练实现
 ├── scripts/         # 运行与实验脚本
 ├── tests/           # 测试
