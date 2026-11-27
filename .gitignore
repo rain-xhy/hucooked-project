@@ -26,6 +26,7 @@ trackio/
 *.tmp
 
 # Local settings and system files
+/.superpowers/sdd/
 .env
 .env.*
 !.env.example
