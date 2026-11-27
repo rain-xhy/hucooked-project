@@ -1,0 +1,61 @@
+{
+  "state": "completed",
+  "total_train_env_steps": 16000000,
+  "demonstration_env_steps": 9600,
+  "rl_env_steps": 15990400,
+  "total_env_steps": 16000000,
+  "requested_budget_jointenvsteps": 16000000,
+  "budget_jointenvsteps": 16000000,
+  "cursor": {
+    "policy_index": 8,
+    "round_index": 0,
+    "policy_steps": 0,
+    "xp_combo_cursor": 0,
+    "xp_role_cursor": 0,
+    "bc_warmstarted_policies": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "cbr_round_index": 128,
+    "cbr_steps": 1599040,
+    "cbr_teacher_cursor": 0,
+    "cbr_bc_warmstarted": true,
+    "selected_prior": null
+  },
+  "best_validation": {
+    "episodes": 1,
+    "mean_team_score": 380.0,
+    "mean_meals_completed": 19.0,
+    "mean_normal_completed": 10.0,
+    "mean_joint_completed": 9.0,
+    "mean_joint_successes": 10.0,
+    "mean_joint_attempt_success_rate": 0.1694915254237288,
+    "mean_joint_wait_steps": 49.0,
+    "mean_three_contributor_meals": 19.0,
+    "mean_resource_conflicts": 0.0,
+    "mean_movement_conflicts": 0.0,
+    "mean_ticks": 300.0,
+    "mean_meals_per_100_steps": 6.333333333333333,
+    "mean_training_reward": 380.0,
+    "mean_training_shaping": 0.0,
+    "env_steps": 300,
+    "complete": true,
+    "event": "cbr_demonstration_validation",
+    "policy": "convention_aware_bc_initial",
+    "train_env_steps": 14400960,
+    "wallclock_seconds": 19182.474122693005,
+    "step_counts": {
+      "demonstration_env_steps": 9600,
+      "rl_env_steps": 14391360,
+      "total_env_steps": 14400960
+    }
+  },
+  "wallclock_seconds": 22634.908908580954,
+  "updated_at_unix": 1795623525.4482157
+}

@@ -1,0 +1,14 @@
+{
+  "state": "complete",
+  "stage": "complete",
+  "population_env_steps": 1996800,
+  "hierarchical_env_steps": 6000000,
+  "demonstration_env_steps": 0,
+  "total_env_steps": 7996800,
+  "wall_seconds": 35058.37751866598,
+  "pid": 1198243,
+  "physical_gpu": 1,
+  "device": "cuda:0",
+  "update": 1250,
+  "best_team_score": 0.0
+}

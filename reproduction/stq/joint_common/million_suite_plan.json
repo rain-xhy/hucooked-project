@@ -1,0 +1,107 @@
+{
+  "execution": "parallel",
+  "max_hours": 0,
+  "step_definition": "one native joint environment transition; evaluations excluded; no demonstrations",
+  "new_experiment_count": 3,
+  "learned_policy_count": 3,
+  "preserved_existing_configuration_count": 23,
+  "preserved_configuration_sources": [
+    "joint_common/suite_plan.json",
+    "joint_common/long_suite_plan.json"
+  ],
+  "budget_per_job": {
+    "requested_environment_steps": 100000000,
+    "rollout_batch_environment_steps": 4800,
+    "complete_rollouts": 20833,
+    "planned_update_count_ceiling": 20834,
+    "final_partial_rollout_vector_steps": 100
+  },
+  "training_defaults": {
+    "gamma": 0.9985,
+    "gae_lambda": 0.95,
+    "clip": 0.2
+  },
+  "jobs": [
+    {
+      "name": "ppo_mlp_million_100m",
+      "module": "joint_ppo.train",
+      "mode": "rl",
+      "physical_gpu": 1,
+      "memory_fraction": 0.035,
+      "output": "joint_ppo/mlp/million_rl_100m/seed_1/results",
+      "steps": 100000000,
+      "max_seconds": 0,
+      "learned_policies": 1,
+      "arguments": [
+        "--backbone", "mlp",
+        "--model-size", "million",
+        "--reward-profile", "ppo_task",
+        "--num-envs", "16",
+        "--rollout", "300",
+        "--workers", "2",
+        "--epochs", "2",
+        "--minibatches", "32",
+        "--lr", "0.0001",
+        "--checkpoint-interval", "1000000",
+        "--eval-interval", "100000",
+        "--eval-episodes", "12",
+        "--seed", "1",
+        "--device", "cuda:0"
+      ]
+    },
+    {
+      "name": "ppo_cnn_million_100m",
+      "module": "joint_ppo.train",
+      "mode": "rl",
+      "physical_gpu": 1,
+      "memory_fraction": 0.035,
+      "output": "joint_ppo/cnn/million_rl_100m/seed_1/results",
+      "steps": 100000000,
+      "max_seconds": 0,
+      "learned_policies": 1,
+      "arguments": [
+        "--backbone", "cnn",
+        "--model-size", "million",
+        "--reward-profile", "ppo_task",
+        "--num-envs", "16",
+        "--rollout", "300",
+        "--workers", "2",
+        "--epochs", "2",
+        "--minibatches", "32",
+        "--lr", "0.0001",
+        "--checkpoint-interval", "1000000",
+        "--eval-interval", "100000",
+        "--eval-episodes", "12",
+        "--seed", "1",
+        "--device", "cuda:0"
+      ]
+    },
+    {
+      "name": "ppo_transformer_million_100m",
+      "module": "joint_ppo.train",
+      "mode": "rl",
+      "physical_gpu": 1,
+      "memory_fraction": 0.035,
+      "output": "joint_ppo/transformer/million_rl_100m/seed_1/results",
+      "steps": 100000000,
+      "max_seconds": 0,
+      "learned_policies": 1,
+      "arguments": [
+        "--backbone", "transformer",
+        "--model-size", "million",
+        "--reward-profile", "ppo_task",
+        "--num-envs", "16",
+        "--rollout", "300",
+        "--workers", "2",
+        "--epochs", "2",
+        "--minibatches", "32",
+        "--lr", "0.0001",
+        "--checkpoint-interval", "1000000",
+        "--eval-interval", "100000",
+        "--eval-episodes", "12",
+        "--seed", "1",
+        "--device", "cuda:0"
+      ]
+    }
+  ]
+}

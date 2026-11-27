@@ -1,0 +1,8 @@
+{
+  "state": "exited",
+  "returncode": 0,
+  "trainer_state": "completed",
+  "started_utc": "2026-11-25T15:05:53.800242+00:00",
+  "ended_utc": "2026-11-25T16:07:44.825980+00:00",
+  "physical_gpu": 2
+}

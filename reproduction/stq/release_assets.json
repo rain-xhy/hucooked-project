@@ -1,0 +1,19 @@
+{
+  "repository": "rain-xhy/hucooked-project",
+  "release_tag": "stq-shared-final-20261127",
+  "extraction_directory": "reproduction/stq",
+  "assets": [
+    {
+      "name": "stq-shared-final-checkpoints.tar.gz",
+      "bytes": 372159139,
+      "sha256": "26d86135d535eb93e20bf29ca0556044870fd7942ee05ab70fb497fb5766fa6a",
+      "url": "https://github.com/rain-xhy/hucooked-project/releases/download/stq-shared-final-20261127/stq-shared-final-checkpoints.tar.gz"
+    },
+    {
+      "name": "stq-shared-training-records.tar.gz",
+      "bytes": 171469830,
+      "sha256": "b7f28e75651d252e0a7c51f2eb07f3c8c5ec88f0caeae1bb00bacdaa3cb99754",
+      "url": "https://github.com/rain-xhy/hucooked-project/releases/download/stq-shared-final-20261127/stq-shared-training-records.tar.gz"
+    }
+  ]
+}

@@ -36,3 +36,7 @@ Thumbs.db
 
 # Evaluation outputs
 checkpoint-eval/
+
+# STQ full training records and final checkpoint release assets
+/artifacts/
+**/metrics.jsonl
