@@ -1,0 +1,32 @@
+{
+  "version": "v1",
+  "revision": "671c17bf4ba48ecb11e056dbf1e077b0bd434b2d",
+  "mode": "multi-agent",
+  "run_id": "20261124-fresh",
+  "train_seed": 488,
+  "test_seed": 84031,
+  "test_episodes_per_map_and_seat": 24,
+  "device": "cuda",
+  "commands": [
+    [
+      "python",
+      "-m",
+      "v1.train",
+      "--output",
+      "train",
+      "--device",
+      "cuda",
+      "--seed",
+      "488",
+      "--updates",
+      "12",
+      "--test-episodes",
+      "24",
+      "--test-seed-base",
+      "84031",
+      "--mode",
+      "multi",
+      "--route-progress"
+    ]
+  ]
+}

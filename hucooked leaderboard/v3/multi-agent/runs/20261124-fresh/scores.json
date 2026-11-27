@@ -1,0 +1,26 @@
+{
+  "sync": {
+    "episodes": 80,
+    "mean_score": 189.5,
+    "std_score": 21.441781642391568,
+    "min_score": 140.0,
+    "max_score": 240.0,
+    "orders_completed": {
+      "tomato_egg": 258,
+      "potato": 404,
+      "potato_tomato_beef": 96
+    }
+  },
+  "counter": {
+    "episodes": 80,
+    "mean_score": 170.75,
+    "std_score": 23.86288959870535,
+    "min_score": 120.0,
+    "max_score": 240.0,
+    "orders_completed": {
+      "tomato_egg": 207,
+      "potato": 379,
+      "potato_tomato_beef": 97
+    }
+  }
+}

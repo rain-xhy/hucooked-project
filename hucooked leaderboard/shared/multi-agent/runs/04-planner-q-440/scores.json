@@ -1,0 +1,28 @@
+{
+  "shared": {
+    "episodes": 24,
+    "mean_score": 440.0,
+    "std_score": 0.0,
+    "min_score": 440.0,
+    "max_score": 440.0,
+    "mean_meals_completed": 22,
+    "joint_attempt_success_rate": 1.0,
+    "joint_wait_steps": 11,
+    "orders_completed": {
+      "normal_completed": 264,
+      "joint_completed": 264
+    },
+    "meals_per_100_steps": 7.333333333333333,
+    "three_contributor_meals": 22,
+    "movement_conflicts": 0,
+    "resource_conflicts": 0,
+    "mean_finish_steps": 300,
+    "order_metrics": {
+      "released_orders": 552,
+      "served_orders": 528,
+      "total_delivery_steps": 14064,
+      "order_completion_rate": 0.9565217391304348,
+      "mean_delivery_steps": 26.636363636363637
+    }
+  }
+}

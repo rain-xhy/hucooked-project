@@ -1,0 +1,33 @@
+{
+  "version": "v3",
+  "revision": "2d0ef3716706206eaecdc61296beccbdd23c31e5",
+  "mode": "single-agent",
+  "run_id": "20261124-fresh",
+  "train_seed": 488,
+  "test_seed": 84031,
+  "test_episodes_per_map_and_seat": 80,
+  "device": "cuda",
+  "commands": [
+    [
+      "python",
+      "-m",
+      "v3.single",
+      "--output",
+      "train",
+      "--device",
+      "cuda",
+      "--seed",
+      "488",
+      "--updates",
+      "12",
+      "--test-episodes",
+      "80",
+      "--test-seed",
+      "84031",
+      "--navigation",
+      "shortest",
+      "--lanes",
+      "112"
+    ]
+  ]
+}

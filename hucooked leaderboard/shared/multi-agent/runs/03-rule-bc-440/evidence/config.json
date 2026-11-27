@@ -1,0 +1,23 @@
+{
+  "version": "shared",
+  "revision": "de37e0818c2e76311e105ab8689e5162bd84133f",
+  "mode": "multi-agent",
+  "run_id": "20261125-periodic-bc-ppo",
+  "train_seed": 488,
+  "test_seed": 84031,
+  "test_episodes_per_map_and_seat": 24,
+  "device": "cpu",
+  "command": [
+    "python",
+    "-m",
+    "shared.train_schedule",
+    "--plan",
+    "plan.json",
+    "--output",
+    "train"
+  ],
+  "solver": "ortools==9.12.4544",
+  "phase_available": true,
+  "synchronize": false,
+  "goal_lock": false
+}

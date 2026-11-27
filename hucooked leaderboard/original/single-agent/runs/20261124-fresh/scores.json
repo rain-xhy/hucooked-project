@@ -1,0 +1,34 @@
+{
+  "counter_circuit_o_1order": {
+    "episodes": 48,
+    "mean_score": 150.83333333333334,
+    "std_score": 79.78704294697368,
+    "min_score": 0.0,
+    "max_score": 200.0,
+    "orders_completed": {
+      "normal_completed": 362
+    },
+    "by_seat": {
+      "0": {
+        "episodes": 24,
+        "mean_score": 150.83333333333334,
+        "std_score": 79.78704294697368,
+        "min_score": 0.0,
+        "max_score": 200.0,
+        "orders_completed": {
+          "normal_completed": 181
+        }
+      },
+      "1": {
+        "episodes": 24,
+        "mean_score": 150.83333333333334,
+        "std_score": 79.78704294697368,
+        "min_score": 0.0,
+        "max_score": 200.0,
+        "orders_completed": {
+          "normal_completed": 181
+        }
+      }
+    }
+  }
+}

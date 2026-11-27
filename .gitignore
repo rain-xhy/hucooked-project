@@ -36,3 +36,7 @@ Thumbs.db
 
 # Evaluation outputs
 checkpoint-eval/
+
+# Branch-specific exclusions
+/.environment/
+/hucooked haha/haha/cache/

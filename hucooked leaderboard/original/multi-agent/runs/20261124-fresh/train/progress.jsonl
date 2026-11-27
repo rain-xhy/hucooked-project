@@ -1,0 +1,38 @@
+{"stage": "config", "seconds": 0.0, "mode": "multi", "output": "train", "device": "cuda", "seed": 488, "test_seed_base": 84031, "test_episodes": 24, "updates": 24, "lanes": 16, "layout": "counter_circuit_o_1order", "horizon": 400, "starts": "seeded distinct floor tiles and orientations, plus separate standard-start evaluation", "team_rewards": "native sparse delivery rewards"}
+{"stage": "imitation", "seconds": 7.31, "manager": {"samples": 22400, "accuracy": 1.0}, "worker": {"samples": 33737, "accuracy": 1.0}}
+{"stage": "after_imitation", "seconds": 8.39, "update": 0, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 151.66666666666666, "max": 200.0}}}
+{"stage": "update", "seconds": 9.42, "update": 1, "env_steps": 2560, "sampled_mean": null}
+{"stage": "update", "seconds": 10.15, "update": 2, "env_steps": 5120, "sampled_mean": null}
+{"stage": "update", "seconds": 10.9, "update": 3, "env_steps": 7680, "sampled_mean": 151.25}
+{"stage": "validation", "seconds": 11.88, "update": 3, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 105.0, "max": 200.0}}}
+{"stage": "update", "seconds": 12.59, "update": 4, "env_steps": 10240, "sampled_mean": null}
+{"stage": "update", "seconds": 13.32, "update": 5, "env_steps": 12800, "sampled_mean": 106.25}
+{"stage": "update", "seconds": 14.04, "update": 6, "env_steps": 15360, "sampled_mean": null}
+{"stage": "validation", "seconds": 15.07, "update": 6, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 151.66666666666666, "max": 200.0}}}
+{"stage": "update", "seconds": 15.79, "update": 7, "env_steps": 17920, "sampled_mean": null}
+{"stage": "update", "seconds": 16.52, "update": 8, "env_steps": 20480, "sampled_mean": 115.0}
+{"stage": "update", "seconds": 17.2, "update": 9, "env_steps": 23040, "sampled_mean": null}
+{"stage": "validation", "seconds": 18.23, "update": 9, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 151.66666666666666, "max": 200.0}}}
+{"stage": "update", "seconds": 18.95, "update": 10, "env_steps": 25600, "sampled_mean": 127.5}
+{"stage": "update", "seconds": 19.6, "update": 11, "env_steps": 28160, "sampled_mean": null}
+{"stage": "update", "seconds": 20.27, "update": 12, "env_steps": 30720, "sampled_mean": null}
+{"stage": "validation", "seconds": 21.26, "update": 12, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 151.66666666666666, "max": 200.0}}}
+{"stage": "update", "seconds": 21.91, "update": 13, "env_steps": 33280, "sampled_mean": 150.0}
+{"stage": "update", "seconds": 22.62, "update": 14, "env_steps": 35840, "sampled_mean": null}
+{"stage": "update", "seconds": 23.29, "update": 15, "env_steps": 38400, "sampled_mean": 161.25}
+{"stage": "validation", "seconds": 24.29, "update": 15, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 151.66666666666666, "max": 200.0}}}
+{"stage": "update", "seconds": 25.07, "update": 16, "env_steps": 40960, "sampled_mean": null}
+{"stage": "update", "seconds": 25.84, "update": 17, "env_steps": 43520, "sampled_mean": null}
+{"stage": "update", "seconds": 26.57, "update": 18, "env_steps": 46080, "sampled_mean": 146.25}
+{"stage": "validation", "seconds": 27.55, "update": 18, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 151.66666666666666, "max": 200.0}}}
+{"stage": "update", "seconds": 28.23, "update": 19, "env_steps": 48640, "sampled_mean": null}
+{"stage": "update", "seconds": 28.95, "update": 20, "env_steps": 51200, "sampled_mean": 167.5}
+{"stage": "update", "seconds": 29.66, "update": 21, "env_steps": 53760, "sampled_mean": null}
+{"stage": "validation", "seconds": 30.65, "update": 21, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 151.66666666666666, "max": 200.0}}}
+{"stage": "update", "seconds": 31.31, "update": 22, "env_steps": 56320, "sampled_mean": null}
+{"stage": "update", "seconds": 31.98, "update": 23, "env_steps": 58880, "sampled_mean": 140.0}
+{"stage": "update", "seconds": 32.62, "update": 24, "env_steps": 61440, "sampled_mean": null}
+{"stage": "validation", "seconds": 33.61, "update": 24, "results": {"counter_circuit_o_1order": {"episodes": 12, "mean": 151.66666666666666, "max": 200.0}}}
+{"stage": "evaluation", "seconds": 35.47, "results": {"counter_circuit_o_1order": {"episodes": 24, "mean": 150.83333333333334, "max": 200.0}}}
+{"stage": "standard-start", "seconds": 36.85, "results": {"counter_circuit_o_1order": {"episodes": 1, "mean": 200.0, "max": 200.0}}}
+{"stage": "rules-comparison", "seconds": 36.85, "results": {"counter_circuit_o_1order": {"episodes": 24, "mean": 150.83333333333334, "max": 200.0}}}
