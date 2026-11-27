@@ -1,0 +1,6291 @@
+{
+  "scene_commit": "de37e0818c2e76311e105ab8689e5162bd84133f",
+  "scene_fingerprint": "675c139d2478d5ea790931989baba22e0bc36758a037a4a5f482caadbd4ccbc0",
+  "checkpoint_sha256": "c975a7b777b1dcd6de7f516fea368bef508f26a5a6d68b90cae67a19a1c96313",
+  "checkpoint_stage": "continuous-mat-ppo",
+  "seed": 200000,
+  "spawns": [
+    [
+      4,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      5,
+      2
+    ]
+  ],
+  "action_names": [
+    "north",
+    "south",
+    "east",
+    "west",
+    "stay",
+    "interact"
+  ],
+  "transitions": [
+    {
+      "tick": 1,
+      "actions": [
+        0,
+        1,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 2,
+      "actions": [
+        5,
+        1,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 2,
+          "units": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 3,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 3,
+          "units": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 4,
+      "actions": [
+        3,
+        5,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 4,
+          "units": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 5,
+      "actions": [
+        5,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 5,
+          "order_id": 0
+        }
+      ]
+    },
+    {
+      "tick": 6,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 6
+        }
+      ]
+    },
+    {
+      "tick": 7,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 7,
+          "units": [
+            1
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 8,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 8,
+          "units": [
+            1
+          ],
+          "progress": 2
+        },
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 8,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 9,
+      "actions": [
+        4,
+        4,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 9
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 0,
+          "actors": [],
+          "tick": 9
+        }
+      ]
+    },
+    {
+      "tick": 10,
+      "actions": [
+        5,
+        4,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 10,
+          "order_id": 0,
+          "units": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 11,
+      "actions": [
+        0,
+        4,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 12,
+      "actions": [
+        5,
+        4,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 12,
+          "slot": "side"
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 12,
+          "units": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 13,
+      "actions": [
+        1,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 13,
+          "order_id": 0,
+          "units": [
+            0,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 14,
+      "actions": [
+        3,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 14,
+          "order_id": 0
+        }
+      ]
+    },
+    {
+      "tick": 15,
+      "actions": [
+        5,
+        3,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 15,
+          "order_id": 1
+        }
+      ]
+    },
+    {
+      "tick": 16,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 16,
+          "order_id": 0,
+          "units": [
+            0,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 17,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 17,
+          "units": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 18,
+      "actions": [
+        4,
+        2,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 19,
+      "actions": [
+        4,
+        4,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "main_cooked",
+          "order_id": 1,
+          "actors": [],
+          "tick": 19
+        }
+      ]
+    },
+    {
+      "tick": 20,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 20
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 20,
+          "order_id": 1,
+          "units": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 21,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 21,
+          "units": [
+            4
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 22,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 22,
+          "units": [
+            4
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 22,
+          "units": [
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 23,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 23
+        }
+      ]
+    },
+    {
+      "tick": 24,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 25,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 25,
+          "order_id": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 25,
+          "units": [
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 26,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 26,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 27,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 28,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 29,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 29,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 2,
+          "actors": [],
+          "tick": 29
+        }
+      ]
+    },
+    {
+      "tick": 30,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 30,
+          "order_id": 1,
+          "units": [
+            3,
+            4,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 31,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 31,
+          "order_id": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 31,
+          "units": [
+            7
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 31,
+          "order_id": 2,
+          "units": [
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 32,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 33,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 33,
+          "order_id": 1,
+          "units": [
+            3,
+            4,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 34,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 34
+        }
+      ]
+    },
+    {
+      "tick": 35,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 35,
+          "units": [
+            7
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 35,
+          "units": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 36,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 36,
+          "units": [
+            7
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 37,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 37
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 37,
+          "units": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 38,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 38,
+          "order_id": 3
+        }
+      ]
+    },
+    {
+      "tick": 39,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 40,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 40,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 41,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 41,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 42,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 42,
+          "order_id": 2,
+          "units": [
+            5,
+            7,
+            9
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 3,
+          "actors": [],
+          "tick": 42
+        }
+      ]
+    },
+    {
+      "tick": 43,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 43,
+          "order_id": 2
+        }
+      ]
+    },
+    {
+      "tick": 44,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 45,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 45,
+          "order_id": 2,
+          "units": [
+            5,
+            7,
+            9
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 45,
+          "units": [
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 46,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 47,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 48,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 48
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 48,
+          "order_id": 3,
+          "units": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 49,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 49,
+          "units": [
+            10
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 50,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 50,
+          "units": [
+            10
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 50,
+          "units": [
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 51,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 51
+        }
+      ]
+    },
+    {
+      "tick": 52,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 53,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 53,
+          "order_id": 4
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 53,
+          "units": [
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 54,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 54,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 55,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 56,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 57,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 57,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 4,
+          "actors": [],
+          "tick": 57
+        }
+      ]
+    },
+    {
+      "tick": 58,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 58,
+          "order_id": 3,
+          "units": [
+            8,
+            10,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 59,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 59,
+          "order_id": 3
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 59,
+          "units": [
+            13
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 59,
+          "order_id": 4,
+          "units": [
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 60,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 61,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 61,
+          "order_id": 3,
+          "units": [
+            8,
+            10,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 62,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 62
+        }
+      ]
+    },
+    {
+      "tick": 63,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 63,
+          "units": [
+            13
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 63,
+          "units": [
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 64,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 64,
+          "units": [
+            13
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 65,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 65
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 65,
+          "units": [
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 66,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 66,
+          "order_id": 5
+        }
+      ]
+    },
+    {
+      "tick": 67,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 68,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 68,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 69,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 69,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 70,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 70,
+          "order_id": 4,
+          "units": [
+            11,
+            13,
+            15
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 5,
+          "actors": [],
+          "tick": 70
+        }
+      ]
+    },
+    {
+      "tick": 71,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 71,
+          "order_id": 4
+        }
+      ]
+    },
+    {
+      "tick": 72,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 73,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 73,
+          "order_id": 4,
+          "units": [
+            11,
+            13,
+            15
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 73,
+          "units": [
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 74,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 75,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 76,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 76
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 76,
+          "order_id": 5,
+          "units": [
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 77,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 77,
+          "units": [
+            16
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 78,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 78,
+          "units": [
+            16
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 78,
+          "units": [
+            17
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 79,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 79
+        }
+      ]
+    },
+    {
+      "tick": 80,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 81,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 81,
+          "order_id": 6
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 81,
+          "units": [
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 82,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 82,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 83,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 84,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 85,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 85,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 6,
+          "actors": [],
+          "tick": 85
+        }
+      ]
+    },
+    {
+      "tick": 86,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 86,
+          "order_id": 5,
+          "units": [
+            14,
+            16,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 87,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 87,
+          "order_id": 5
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 87,
+          "units": [
+            19
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 87,
+          "order_id": 6,
+          "units": [
+            17
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 88,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 89,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 89,
+          "order_id": 5,
+          "units": [
+            14,
+            16,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 90,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 90
+        }
+      ]
+    },
+    {
+      "tick": 91,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 91,
+          "units": [
+            19
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 91,
+          "units": [
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 92,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 92,
+          "units": [
+            19
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 93,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 93
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 93,
+          "units": [
+            21
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 94,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 94,
+          "order_id": 7
+        }
+      ]
+    },
+    {
+      "tick": 95,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 96,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 96,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 97,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 97,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 98,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 98,
+          "order_id": 6,
+          "units": [
+            17,
+            19,
+            21
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 7,
+          "actors": [],
+          "tick": 98
+        }
+      ]
+    },
+    {
+      "tick": 99,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 99,
+          "order_id": 6
+        }
+      ]
+    },
+    {
+      "tick": 100,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 101,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 101,
+          "order_id": 6,
+          "units": [
+            17,
+            19,
+            21
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 101,
+          "units": [
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 102,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 103,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 104,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 104
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 104,
+          "order_id": 7,
+          "units": [
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 105,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 105,
+          "units": [
+            22
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 106,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 106,
+          "units": [
+            22
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 106,
+          "units": [
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 107,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 107
+        }
+      ]
+    },
+    {
+      "tick": 108,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 109,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 109,
+          "order_id": 8
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 109,
+          "units": [
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 110,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 110,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 111,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 112,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 113,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 113,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 8,
+          "actors": [],
+          "tick": 113
+        }
+      ]
+    },
+    {
+      "tick": 114,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 114,
+          "order_id": 7,
+          "units": [
+            20,
+            22,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 115,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 115,
+          "order_id": 7
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 115,
+          "units": [
+            25
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 115,
+          "order_id": 8,
+          "units": [
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 116,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 117,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 117,
+          "order_id": 7,
+          "units": [
+            20,
+            22,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 118,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 118
+        }
+      ]
+    },
+    {
+      "tick": 119,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 119,
+          "units": [
+            25
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 119,
+          "units": [
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 120,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 120,
+          "units": [
+            25
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 121,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 121
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 121,
+          "units": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 122,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 122,
+          "order_id": 9
+        }
+      ]
+    },
+    {
+      "tick": 123,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 124,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 124,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 125,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 125,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 126,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 126,
+          "order_id": 8,
+          "units": [
+            23,
+            25,
+            27
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 9,
+          "actors": [],
+          "tick": 126
+        }
+      ]
+    },
+    {
+      "tick": 127,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 127,
+          "order_id": 8
+        }
+      ]
+    },
+    {
+      "tick": 128,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 129,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 129,
+          "order_id": 8,
+          "units": [
+            23,
+            25,
+            27
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 129,
+          "units": [
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 130,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 131,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 132,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 132
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 132,
+          "order_id": 9,
+          "units": [
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 133,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 133,
+          "units": [
+            28
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 134,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 134,
+          "units": [
+            28
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 134,
+          "units": [
+            29
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 135,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 135
+        }
+      ]
+    },
+    {
+      "tick": 136,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 137,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 137,
+          "order_id": 10
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 137,
+          "units": [
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 138,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 138,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 139,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 140,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 141,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 141,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 10,
+          "actors": [],
+          "tick": 141
+        }
+      ]
+    },
+    {
+      "tick": 142,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 142,
+          "order_id": 9,
+          "units": [
+            26,
+            28,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 143,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 143,
+          "order_id": 9
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 143,
+          "units": [
+            31
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 143,
+          "order_id": 10,
+          "units": [
+            29
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 144,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 145,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 145,
+          "order_id": 9,
+          "units": [
+            26,
+            28,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 146,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 146
+        }
+      ]
+    },
+    {
+      "tick": 147,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 147,
+          "units": [
+            31
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 147,
+          "units": [
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 148,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 148,
+          "units": [
+            31
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 149,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 149
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 149,
+          "units": [
+            33
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 150,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 150,
+          "order_id": 11
+        }
+      ]
+    },
+    {
+      "tick": 151,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 152,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 152,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 153,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 153,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 154,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 154,
+          "order_id": 10,
+          "units": [
+            29,
+            31,
+            33
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 11,
+          "actors": [],
+          "tick": 154
+        }
+      ]
+    },
+    {
+      "tick": 155,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 155,
+          "order_id": 10
+        }
+      ]
+    },
+    {
+      "tick": 156,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 157,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 157,
+          "order_id": 10,
+          "units": [
+            29,
+            31,
+            33
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 157,
+          "units": [
+            34
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 158,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 159,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 160,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 160
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 160,
+          "order_id": 11,
+          "units": [
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 161,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 161,
+          "units": [
+            34
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 162,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 162,
+          "units": [
+            34
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 162,
+          "units": [
+            35
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 163,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 163
+        }
+      ]
+    },
+    {
+      "tick": 164,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 165,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 165,
+          "order_id": 12
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 165,
+          "units": [
+            36
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 166,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 166,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 167,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 168,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 169,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 169,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 12,
+          "actors": [],
+          "tick": 169
+        }
+      ]
+    },
+    {
+      "tick": 170,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 170,
+          "order_id": 11,
+          "units": [
+            32,
+            34,
+            36
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 171,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 171,
+          "order_id": 11
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 171,
+          "units": [
+            37
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 171,
+          "order_id": 12,
+          "units": [
+            35
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 172,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 173,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 173,
+          "order_id": 11,
+          "units": [
+            32,
+            34,
+            36
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 174,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 174
+        }
+      ]
+    },
+    {
+      "tick": 175,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 175,
+          "units": [
+            37
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 175,
+          "units": [
+            38
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 176,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 176,
+          "units": [
+            37
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 177,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 177
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 177,
+          "units": [
+            39
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 178,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 178,
+          "order_id": 13
+        }
+      ]
+    },
+    {
+      "tick": 179,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 180,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 180,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 181,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 181,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 182,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 182,
+          "order_id": 12,
+          "units": [
+            35,
+            37,
+            39
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 13,
+          "actors": [],
+          "tick": 182
+        }
+      ]
+    },
+    {
+      "tick": 183,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 183,
+          "order_id": 12
+        }
+      ]
+    },
+    {
+      "tick": 184,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 185,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 185,
+          "order_id": 12,
+          "units": [
+            35,
+            37,
+            39
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 185,
+          "units": [
+            40
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 186,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 187,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 188,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 188
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 188,
+          "order_id": 13,
+          "units": [
+            38
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 189,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 189,
+          "units": [
+            40
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 190,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 190,
+          "units": [
+            40
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 190,
+          "units": [
+            41
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 191,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 191
+        }
+      ]
+    },
+    {
+      "tick": 192,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 193,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 193,
+          "order_id": 14
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 193,
+          "units": [
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 194,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 194,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 195,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 196,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 197,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 197,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 14,
+          "actors": [],
+          "tick": 197
+        }
+      ]
+    },
+    {
+      "tick": 198,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 198,
+          "order_id": 13,
+          "units": [
+            38,
+            40,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 199,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 199,
+          "order_id": 13
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 199,
+          "units": [
+            43
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 199,
+          "order_id": 14,
+          "units": [
+            41
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 200,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 201,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 201,
+          "order_id": 13,
+          "units": [
+            38,
+            40,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 202,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 202
+        }
+      ]
+    },
+    {
+      "tick": 203,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 203,
+          "units": [
+            43
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 203,
+          "units": [
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 204,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 204,
+          "units": [
+            43
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 205,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 205
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 205,
+          "units": [
+            45
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 206,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 206,
+          "order_id": 15
+        }
+      ]
+    },
+    {
+      "tick": 207,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 208,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 208,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 209,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 209,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 210,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 210,
+          "order_id": 14,
+          "units": [
+            41,
+            43,
+            45
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 15,
+          "actors": [],
+          "tick": 210
+        }
+      ]
+    },
+    {
+      "tick": 211,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 211,
+          "order_id": 14
+        }
+      ]
+    },
+    {
+      "tick": 212,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 213,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 213,
+          "order_id": 14,
+          "units": [
+            41,
+            43,
+            45
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 213,
+          "units": [
+            46
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 214,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 215,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 216,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 216
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 216,
+          "order_id": 15,
+          "units": [
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 217,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 217,
+          "units": [
+            46
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 218,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 218,
+          "units": [
+            46
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 218,
+          "units": [
+            47
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 219,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 219
+        }
+      ]
+    },
+    {
+      "tick": 220,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 221,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 221,
+          "order_id": 16
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 221,
+          "units": [
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 222,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 222,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 223,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 224,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 225,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 225,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 16,
+          "actors": [],
+          "tick": 225
+        }
+      ]
+    },
+    {
+      "tick": 226,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 226,
+          "order_id": 15,
+          "units": [
+            44,
+            46,
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 227,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 227,
+          "order_id": 15
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 227,
+          "units": [
+            49
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 227,
+          "order_id": 16,
+          "units": [
+            47
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 228,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 229,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 229,
+          "order_id": 15,
+          "units": [
+            44,
+            46,
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 230,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 230
+        }
+      ]
+    },
+    {
+      "tick": 231,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 231,
+          "units": [
+            49
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 231,
+          "units": [
+            50
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 232,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 232,
+          "units": [
+            49
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 233,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 233
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 233,
+          "units": [
+            51
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 234,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 234,
+          "order_id": 17
+        }
+      ]
+    },
+    {
+      "tick": 235,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 236,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 236,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 237,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 237,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 238,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 238,
+          "order_id": 16,
+          "units": [
+            47,
+            49,
+            51
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 17,
+          "actors": [],
+          "tick": 238
+        }
+      ]
+    },
+    {
+      "tick": 239,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 239,
+          "order_id": 16
+        }
+      ]
+    },
+    {
+      "tick": 240,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 241,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 241,
+          "order_id": 16,
+          "units": [
+            47,
+            49,
+            51
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 241,
+          "units": [
+            52
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 242,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 243,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 244,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 244
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 244,
+          "order_id": 17,
+          "units": [
+            50
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 245,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 245,
+          "units": [
+            52
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 246,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 246,
+          "units": [
+            52
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 246,
+          "units": [
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 247,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 247
+        }
+      ]
+    },
+    {
+      "tick": 248,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 249,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 249,
+          "order_id": 18
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 249,
+          "units": [
+            54
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 250,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 250,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 251,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 252,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 253,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 253,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 18,
+          "actors": [],
+          "tick": 253
+        }
+      ]
+    },
+    {
+      "tick": 254,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 254,
+          "order_id": 17,
+          "units": [
+            50,
+            52,
+            54
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 255,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 255,
+          "order_id": 17
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 255,
+          "units": [
+            55
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 255,
+          "order_id": 18,
+          "units": [
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 256,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 257,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 257,
+          "order_id": 17,
+          "units": [
+            50,
+            52,
+            54
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 258,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 258
+        }
+      ]
+    },
+    {
+      "tick": 259,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 259,
+          "units": [
+            55
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 259,
+          "units": [
+            56
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 260,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 260,
+          "units": [
+            55
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 261,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 261
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 261,
+          "units": [
+            57
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 262,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 262,
+          "order_id": 19
+        }
+      ]
+    },
+    {
+      "tick": 263,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 264,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 264,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 265,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 265,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 266,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 266,
+          "order_id": 18,
+          "units": [
+            53,
+            55,
+            57
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 19,
+          "actors": [],
+          "tick": 266
+        }
+      ]
+    },
+    {
+      "tick": 267,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 267,
+          "order_id": 18
+        }
+      ]
+    },
+    {
+      "tick": 268,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 269,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 269,
+          "order_id": 18,
+          "units": [
+            53,
+            55,
+            57
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 269,
+          "units": [
+            58
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 270,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 271,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 272,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 272
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 272,
+          "order_id": 19,
+          "units": [
+            56
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 273,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 273,
+          "units": [
+            58
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 274,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 274,
+          "units": [
+            58
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 274,
+          "units": [
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 275,
+      "actions": [
+        1,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 275
+        }
+      ]
+    },
+    {
+      "tick": 276,
+      "actions": [
+        3,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 277,
+      "actions": [
+        5,
+        5,
+        3
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 277,
+          "order_id": 20
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 277,
+          "units": [
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 278,
+      "actions": [
+        4,
+        0,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 278,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 279,
+      "actions": [
+        4,
+        0,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 280,
+      "actions": [
+        4,
+        2,
+        0
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 281,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 281,
+          "slot": "plate"
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 20,
+          "actors": [],
+          "tick": 281
+        }
+      ]
+    },
+    {
+      "tick": 282,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 282,
+          "order_id": 19,
+          "units": [
+            56,
+            58,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 283,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 283,
+          "order_id": 19
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 283,
+          "units": [
+            61
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0
+          ],
+          "tick": 283,
+          "order_id": 20,
+          "units": [
+            59
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 284,
+      "actions": [
+        4,
+        3,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 285,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 285,
+          "order_id": 19,
+          "units": [
+            56,
+            58,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 286,
+      "actions": [
+        0,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 286
+        }
+      ]
+    },
+    {
+      "tick": 287,
+      "actions": [
+        5,
+        1,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 287,
+          "units": [
+            61
+          ],
+          "progress": 1
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 287,
+          "units": [
+            62
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 288,
+      "actions": [
+        1,
+        3,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 288,
+          "units": [
+            61
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 289,
+      "actions": [
+        3,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 289
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 289,
+          "units": [
+            63
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 290,
+      "actions": [
+        5,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            0
+          ],
+          "tick": 290,
+          "order_id": 21
+        }
+      ]
+    },
+    {
+      "tick": 291,
+      "actions": [
+        4,
+        0,
+        3
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 292,
+      "actions": [
+        4,
+        2,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 292,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 293,
+      "actions": [
+        4,
+        5,
+        2
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 293,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 294,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            1
+          ],
+          "tick": 294,
+          "order_id": 20,
+          "units": [
+            59,
+            61,
+            63
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 21,
+          "actors": [],
+          "tick": 294
+        }
+      ]
+    },
+    {
+      "tick": 295,
+      "actions": [
+        4,
+        5,
+        0
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            1
+          ],
+          "tick": 295,
+          "order_id": 20
+        }
+      ]
+    },
+    {
+      "tick": 296,
+      "actions": [
+        4,
+        3,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 297,
+      "actions": [
+        4,
+        5,
+        5
+      ],
+      "reward": 20.0,
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            1
+          ],
+          "tick": 297,
+          "order_id": 20,
+          "units": [
+            59,
+            61,
+            63
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 297,
+          "units": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 298,
+      "actions": [
+        4,
+        0,
+        1
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 299,
+      "actions": [
+        4,
+        2,
+        2
+      ],
+      "reward": 0.0,
+      "events": []
+    },
+    {
+      "tick": 300,
+      "actions": [
+        5,
+        5,
+        5
+      ],
+      "reward": 0.0,
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 300
+        },
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 300,
+          "order_id": 21,
+          "units": [
+            62
+          ]
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "normal_completed": 11,
+    "joint_completed": 10,
+    "joint_ready_steps": 61,
+    "joint_attempt_steps": 11,
+    "joint_successes": 11,
+    "unmatched_attempt_steps": 0,
+    "resource_conflicts": 0,
+    "movement_conflicts": 0,
+    "team_score": 420.0,
+    "meals_completed": 21,
+    "ticks": 300,
+    "joint_attempt_success_rate": 1.0,
+    "joint_wait_steps": 50,
+    "three_contributor_meals": 21,
+    "meals_per_100_steps": 7.0
+  },
+  "terminated": false,
+  "truncated": true
+}

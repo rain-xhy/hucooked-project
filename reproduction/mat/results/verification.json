@@ -1,0 +1,44 @@
+{
+  "environment_commit": "de37e0818c2e76311e105ab8689e5162bd84133f",
+  "environment_files_verified": 44,
+  "checkpoint_sha256": "c975a7b777b1dcd6de7f516fea368bef508f26a5a6d68b90cae67a19a1c96313",
+  "checkpoint_update": 12,
+  "torch": "2.6.0+cpu",
+  "seed_range": [
+    200000,
+    200127
+  ],
+  "evaluation_summary": {
+    "episodes": 128,
+    "mean_team_score": 420.0,
+    "mean_meals_completed": 21,
+    "mean_joint_attempt_success_rate": 1.0,
+    "mean_joint_wait_steps": 50,
+    "min_team_score": 420.0,
+    "max_team_score": 420.0,
+    "score_counts": {
+      "420.0": 128
+    },
+    "spawn_assignments": 6
+  },
+  "episodes_matching_archive": 128,
+  "replay_seed": 200000,
+  "replay_steps_verified": 300,
+  "replay_terminal_metrics": {
+    "normal_completed": 11,
+    "joint_completed": 10,
+    "joint_ready_steps": 61,
+    "joint_attempt_steps": 11,
+    "joint_successes": 11,
+    "unmatched_attempt_steps": 0,
+    "resource_conflicts": 0,
+    "movement_conflicts": 0,
+    "team_score": 420.0,
+    "meals_completed": 21,
+    "ticks": 300,
+    "joint_attempt_success_rate": 1.0,
+    "joint_wait_steps": 50,
+    "three_contributor_meals": 21,
+    "meals_per_100_steps": 7.0
+  }
+}
