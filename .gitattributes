@@ -7,3 +7,6 @@
 *.npz binary
 *.pt binary
 *.tar.gz binary
+
+# Preserve the exact bytes of imported legacy training records.
+"hucooked leaderboard/**/training-curve.csv" -text
