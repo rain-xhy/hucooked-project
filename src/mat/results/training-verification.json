@@ -1,0 +1,31 @@
+{
+  "torch": "2.6.0+cpu",
+  "training_seed": 0,
+  "imitation": {
+    "matched_tensors": 52,
+    "training_records_matched": 3,
+    "selected_update": 32,
+    "selected_steps": 1800
+  },
+  "ppo": {
+    "matched_tensors": 52,
+    "training_records_matched": 26,
+    "selected_update": 12,
+    "selected_steps": 10800,
+    "total_environment_steps": 18000
+  },
+  "replay": {
+    "frames": 301,
+    "size": [
+      560,
+      640
+    ],
+    "frames_reproduced": true,
+    "gif_sha256": "a72dfa152015e0ac714bf4b6b612ee741ea28b5b298dd88c97e9dbf6b5d3d461"
+  },
+  "evaluation_episodes_matched": {
+    "fixed": 128,
+    "imitation": 128,
+    "ppo": 128
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "summary": {
+    "episodes": 6,
+    "mean_team_score": 420.0,
+    "mean_meals_completed": 21,
+    "mean_joint_attempt_success_rate": 1.0,
+    "mean_joint_wait_steps": 50,
+    "min_team_score": 420.0,
+    "max_team_score": 420.0,
+    "score_counts": {
+      "420.0": 6
+    },
+    "spawn_assignments": 6
+  },
+  "episodes": [
+    {
+      "normal_completed": 11,
+      "joint_completed": 10,
+      "joint_ready_steps": 61,
+      "joint_attempt_steps": 11,
+      "joint_successes": 11,
+      "unmatched_attempt_steps": 0,
+      "resource_conflicts": 0,
+      "movement_conflicts": 0,
+      "team_score": 420.0,
+      "meals_completed": 21,
+      "ticks": 300,
+      "joint_attempt_success_rate": 1.0,
+      "joint_wait_steps": 50,
+      "three_contributor_meals": 21,
+      "meals_per_100_steps": 7.0,
+      "seed": 0,
+      "spawns": [
+        [
+          5,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "terminated": false,
+      "truncated": true
+    },
+    {
+      "normal_completed": 11,
+      "joint_completed": 10,
+      "joint_ready_steps": 61,
+      "joint_attempt_steps": 11,
+      "joint_successes": 11,
+      "unmatched_attempt_steps": 0,
+      "resource_conflicts": 0,
+      "movement_conflicts": 0,
+      "team_score": 420.0,
+      "meals_completed": 21,
+      "ticks": 300,
+      "joint_attempt_success_rate": 1.0,
+      "joint_wait_steps": 50,
+      "three_contributor_meals": 21,
+      "meals_per_100_steps": 7.0,
+      "seed": 1,
+      "spawns": [
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ]
+      ],
+      "terminated": false,
+      "truncated": true
+    },
+    {
+      "normal_completed": 11,
+      "joint_completed": 10,
+      "joint_ready_steps": 61,
+      "joint_attempt_steps": 11,
+      "joint_successes": 11,
+      "unmatched_attempt_steps": 0,
+      "resource_conflicts": 0,
+      "movement_conflicts": 0,
+      "team_score": 420.0,
+      "meals_completed": 21,
+      "ticks": 300,
+      "joint_attempt_success_rate": 1.0,
+      "joint_wait_steps": 50,
+      "three_contributor_meals": 21,
+      "meals_per_100_steps": 7.0,
+      "seed": 3,
+      "spawns": [
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "terminated": false,
+      "truncated": true
+    },
+    {
+      "normal_completed": 11,
+      "joint_completed": 10,
+      "joint_ready_steps": 61,
+      "joint_attempt_steps": 11,
+      "joint_successes": 11,
+      "unmatched_attempt_steps": 0,
+      "resource_conflicts": 0,
+      "movement_conflicts": 0,
+      "team_score": 420.0,
+      "meals_completed": 21,
+      "ticks": 300,
+      "joint_attempt_success_rate": 1.0,
+      "joint_wait_steps": 50,
+      "three_contributor_meals": 21,
+      "meals_per_100_steps": 7.0,
+      "seed": 5,
+      "spawns": [
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "terminated": false,
+      "truncated": true
+    },
+    {
+      "normal_completed": 11,
+      "joint_completed": 10,
+      "joint_ready_steps": 61,
+      "joint_attempt_steps": 11,
+      "joint_successes": 11,
+      "unmatched_attempt_steps": 0,
+      "resource_conflicts": 0,
+      "movement_conflicts": 0,
+      "team_score": 420.0,
+      "meals_completed": 21,
+      "ticks": 300,
+      "joint_attempt_success_rate": 1.0,
+      "joint_wait_steps": 50,
+      "three_contributor_meals": 21,
+      "meals_per_100_steps": 7.0,
+      "seed": 7,
+      "spawns": [
+        [
+          2,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "terminated": false,
+      "truncated": true
+    },
+    {
+      "normal_completed": 11,
+      "joint_completed": 10,
+      "joint_ready_steps": 61,
+      "joint_attempt_steps": 11,
+      "joint_successes": 11,
+      "unmatched_attempt_steps": 0,
+      "resource_conflicts": 0,
+      "movement_conflicts": 0,
+      "team_score": 420.0,
+      "meals_completed": 21,
+      "ticks": 300,
+      "joint_attempt_success_rate": 1.0,
+      "joint_wait_steps": 50,
+      "three_contributor_meals": 21,
+      "meals_per_100_steps": 7.0,
+      "seed": 11,
+      "spawns": [
+        [
+          4,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          5,
+          2
+        ]
+      ],
+      "terminated": false,
+      "truncated": true
+    }
+  ]
+}

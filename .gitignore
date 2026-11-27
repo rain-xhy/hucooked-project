@@ -83,3 +83,8 @@ checkpoint-eval/
 !/runs/nest_rl/l2/policy_000200.pt
 !/runs/nest_rl/l3/policy_000025.pt
 !/runs/nest_rl/l4/best.pt
+
+# TZW MAT archived policies
+!/runs/mat/fixed-8.pt
+!/runs/mat/shared-imitation.pt
+!/runs/mat/shared-ppo-best.pt
