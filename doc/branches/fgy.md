@@ -4,7 +4,7 @@
 
 本分支研究三名厨师如何在有限步数内完成更多订单。项目从 HAHA（HA²）的分层策略出发：Manager 选择下一项工作，Worker 决定厨师如何走位和交互。在 Shared 厨房上，我们比较了从随机初始化训练、模仿规则教师、规划器辅助的价值学习，以及从原有技能中重新学习团队分工四条路线。
 
-**看结果**可直接打开 [Shared 五版榜单](../../hucooked%20leaderboard/shared/README.md)。表中每个版本都有权重、训练设置、24 局逐步评估和 Unity 回放。**复评最新的分段高层 PPO** 可按下方命令在 CPU 上加载已提交的权重。**复训**则使用后面的独立入口。
+**看结果**可直接打开 [Shared 五版榜单](../../src/haha/leaderboard/shared/README.md)。表中每个版本都有权重、训练设置、24 局逐步评估和 Unity 回放。**复评最新的分段高层 PPO** 可按下方命令在 CPU 上加载已提交的权重。**复训**则使用后面的独立入口。
 
 ## Shared 榜单怎样读
 
@@ -12,13 +12,13 @@
 
 | 方法 | 执行时控制三名厨师的模型 | 平均出餐 | 平均得分 | 同步成功率 | 每局等待步数 | 订单完成率¹ | 平均交付步数¹ |
 |---|---|---:|---:|---:|---:|---:|---:|
-| [随机初始化纯 PPO](../../hucooked%20leaderboard/shared/multi-agent/runs/01-pure-ppo-380/README.md) | 分层 Manager 和 Worker，执行参数 69,394 | 19 | 380 | 21.74% | 45 | 90.48% | 29.47 |
-| [420 规则策略 + BC](../../hucooked%20leaderboard/shared/multi-agent/runs/02-rule-bc-420/README.md) | 模仿规则分工与动作的 Manager 和 Worker，执行参数 69,394 | 21 | 420 | 18.03% | 50 | 91.30% | 27.71 |
-| [440 周期规则策略 + BC](../../hucooked%20leaderboard/shared/multi-agent/runs/03-rule-bc-440/README.md) | 可观测周期相位的 Manager 和 Worker，执行参数 85,007 | 22 | 440 | 100% | 11 | 91.67% | 26.59 |
-| [420 BC + 规划器引导的 Q 网络](../../hucooked%20leaderboard/shared/multi-agent/runs/04-planner-q-440/README.md) | 集中式联合动作网络，59,992 个参数，每步从 216 个动作组合中选一个 | 22 | 440 | 100% | 11 | 95.65% | 26.64 |
-| [420 BC + 分段高层 PPO](../../hucooked%20leaderboard/shared/multi-agent/runs/05-segment-ppo-440/README.md) | 78 个可学习高层参数，配合 13 个工作片段和导航程序 | 22 | 440 | 50% | 12 | 91.67% | 25.73 |
+| [随机初始化纯 PPO](../../src/haha/leaderboard/shared/multi-agent/runs/01-pure-ppo-380/README.md) | 分层 Manager 和 Worker，执行参数 69,394 | 19 | 380 | 21.74% | 45 | 90.48% | 29.47 |
+| [420 规则策略 + BC](../../src/haha/leaderboard/shared/multi-agent/runs/02-rule-bc-420/README.md) | 模仿规则分工与动作的 Manager 和 Worker，执行参数 69,394 | 21 | 420 | 18.03% | 50 | 91.30% | 27.71 |
+| [440 周期规则策略 + BC](../../src/haha/leaderboard/shared/multi-agent/runs/03-rule-bc-440/README.md) | 可观测周期相位的 Manager 和 Worker，执行参数 85,007 | 22 | 440 | 100% | 11 | 91.67% | 26.59 |
+| [420 BC + 规划器引导的 Q 网络](../../src/haha/leaderboard/shared/multi-agent/runs/04-planner-q-440/README.md) | 集中式联合动作网络，59,992 个参数，每步从 216 个动作组合中选一个 | 22 | 440 | 100% | 11 | 95.65% | 26.64 |
+| [420 BC + 分段高层 PPO](../../src/haha/leaderboard/shared/multi-agent/runs/05-segment-ppo-440/README.md) | 78 个可学习高层参数，配合 13 个工作片段和导航程序 | 22 | 440 | 50% | 12 | 91.67% | 25.73 |
 
-¹ 两项均汇总全部 24 局。订单完成率 = 已交付订单总数 ÷ 已发布订单总数。平均交付步数 = 已交付订单从发布到送达的总步数 ÷ 已交付订单总数。[查看公式与逐版计数](../../hucooked%20leaderboard/shared/README.md#订单指标的计算口径)
+¹ 两项均汇总全部 24 局。订单完成率 = 已交付订单总数 ÷ 已发布订单总数。平均交付步数 = 已交付订单从发布到送达的总步数 ÷ 已交付订单总数。[查看公式与逐版计数](../../src/haha/leaderboard/shared/README.md#订单指标的计算口径)
 
 **同步成功率**的分母是有效的协作出锅尝试步数。**等待步数**是协作菜具备出锅条件的步数减去成功出锅步数。最后一版每局 22 次尝试、11 次成功，共交付 22 单。两个指标分别反映交互时机和等待成本。
 
@@ -28,14 +28,14 @@
 
 | 目录或入口 | 内容 |
 |---|---|
-| [hucooked haha/haha](../../hucooked%20haha/haha/) | HAHA 分层训练、子任务与观测编码、张量化厨房、并行采样及 PPO 的可复用实现 |
-| [hucooked leaderboard](../../hucooked%20leaderboard/) | 按 original、v1、v2、v3、shared 组织的环境适配、训练入口与运行产物 |
-| [run.py](../../hucooked%20leaderboard/run.py) | 通用实验启动器。记录训练命令、环境修订和种子，调用对应版本的训练、统计与回放入口 |
-| [v2/pure_rl.py](../../hucooked%20leaderboard/v2/pure_rl.py)、[v2/train.py](../../hucooked%20leaderboard/v2/train.py) | Shared 的纯 PPO 与规则 BC 复用的训练器。Shared 选择连续订单配置 |
-| [shared](../../hucooked%20leaderboard/shared/) | 周期排程与走位、离线 Q、分段高层 PPO、CUDA 采样内核，以及分工和时序的历史对照代码 |
-| [results.py](../../hucooked%20leaderboard/results.py)、[render_replay.py](../../hucooked%20leaderboard/render_replay.py) | 汇总原生评估，逐步验证回报后导出 Unity 回放 |
-| [历史配对比较](../../hucooked%20leaderboard/comparisons/20261124-fresh.json) | original 至 v3 的多智能体与单智能体配规则队友实验结果 |
-| `hucooked/`、`replay_frontend/` | 环境与回放器的 Git 子模块。榜单按环境提交号导出源码到本地 `.environment/` |
+| [src/haha](../../src/haha/) | HAHA 分层训练、子任务与观测编码、张量化厨房、并行采样及 PPO 的可复用实现 |
+| [src/haha/leaderboard](../../src/haha/leaderboard/) | 按 original、v1、v2、v3、shared 组织的环境适配、训练入口与运行产物 |
+| [run.py](../../src/haha/leaderboard/run.py) | 通用实验启动器。记录训练命令、环境修订和种子，调用对应版本的训练、统计与回放入口 |
+| [v2/pure_rl.py](../../src/haha/leaderboard/v2/pure_rl.py)、[v2/train.py](../../src/haha/leaderboard/v2/train.py) | Shared 的纯 PPO 与规则 BC 复用的训练器。Shared 选择连续订单配置 |
+| [shared](../../src/haha/leaderboard/shared/) | 周期排程与走位、离线 Q、分段高层 PPO、CUDA 采样内核，以及分工和时序的历史对照代码 |
+| [results.py](../../src/haha/leaderboard/results.py)、[render_replay.py](../../src/haha/leaderboard/render_replay.py) | 汇总原生评估，逐步验证回报后导出 Unity 回放 |
+| [历史配对比较](../../src/haha/leaderboard/comparisons/20261124-fresh.json) | original 至 v3 的多智能体与单智能体配规则队友实验结果 |
+| `overcooked_env/`、`replay_frontend/` | 环境与回放器的 Git 子模块。旧版榜单环境按提交号导出到本地 `.environment/` |
 
 五个入榜目录使用相同结构：
 
@@ -47,28 +47,27 @@
 
 ## 准备 Shared 环境
 
-从 `fgy` 分支克隆，在仓库根目录执行。以下示例使用 Bash 或 Zsh、Python 3.11 和独立虚拟环境。CUDA 训练还需要可用的 NVIDIA 驱动及与其匹配的 PyTorch；编译分段采样内核需要 CUDA Toolkit 和 `nvcc`。
+以下命令从 `main` 的仓库根目录执行，使用 Bash 或 Zsh 和 Python 3.11。CUDA 训练需要 NVIDIA 驱动和匹配的 PyTorch，编译分段采样内核还需要 CUDA Toolkit 和 `nvcc`。
 
 ```bash
-git clone --branch fgy --recurse-submodules git@github.com:rain-xhy/hucooked-project.git
-cd hucooked-project
-python3.11 -m venv ../hucooked-venv
-source ../hucooked-venv/bin/activate
-python -m pip install -r "hucooked leaderboard/requirements.txt"
-python "hucooked leaderboard/prepare_environments.py" shared
+git submodule update --init overcooked_env
+conda create --prefix ./src/haha/.conda python=3.11 pip
+conda activate ./src/haha/.conda
+python -m pip install -r src/haha/leaderboard/requirements.txt
+python src/haha/leaderboard/prepare_environments.py shared
 
 repo_root="$PWD"
-board="$repo_root/hucooked leaderboard"
+board="$repo_root/src/haha/leaderboard"
 runs="$board/shared/multi-agent/runs"
-export PYTHONPATH="$repo_root/.environment/shared/src:$repo_root/hucooked haha:$board${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONPATH="$repo_root/overcooked_env/src:$repo_root/src:$board${PYTHONPATH:+:$PYTHONPATH}"
 work_dir="$(mktemp -d)"
 ```
 
-Shared 固定使用环境提交 `de37e0818c2e76311e105ab8689e5162bd84133f`。准备脚本优先读取本地子模块已有对象，必要时从环境仓库获取对应提交。其他榜单环境可将准备命令中的 `shared` 换为 `original`、`v1`、`v2` 或 `v3`。各版本的提交号在 [run.py](../../hucooked%20leaderboard/run.py) 中维护。上面的 `work_dir` 是本次新输出目录，可自行换成持久保存实验的路径。
+Shared 直接使用 `overcooked_env@508bcbf`，其环境源码与归档结果所用的 `de37e081` 一致。要复现旧版榜单，可将准备命令中的 `shared` 换为 `original`、`v1`、`v2` 或 `v3`，并将 `PYTHONPATH` 的第一项换成对应的 `.environment/<版本>/src`。各版本的提交号见 [run.py](../../src/haha/leaderboard/run.py)。如需持久保存这次输出，可以把 `work_dir` 换为自己的新目录。
 
 ## 复评权重与查看回放
 
-直接观看已归档结果时，在队友的 Unity 回放器中选择对应的 `shared.ocrep.json`。[最新分段高层 PPO 的回放](../../hucooked%20leaderboard/shared/multi-agent/runs/05-segment-ppo-440/replay/shared.ocrep.json)
+直接观看已归档结果时，在队友的 Unity 回放器中选择对应的 `shared.ocrep.json`。[最新分段高层 PPO 的回放](../../src/haha/leaderboard/shared/multi-agent/runs/05-segment-ppo-440/replay/shared.ocrep.json)
 
 下面的命令使用 CPU 加载分段高层 PPO 权重，在原生 Shared 环境运行 24 局，并将其中一局导出为新的 Unity 回放。依赖和环境变量沿用上一节。
 
@@ -77,7 +76,7 @@ python "$board/shared/autonomous_options.py" \
   --evaluate-policy "$runs/05-segment-ppo-440/train/best.pt" \
   --output "$work_dir/segment-eval"
 python "$board/render_replay.py" shared \
-  de37e0818c2e76311e105ab8689e5162bd84133f "$work_dir/segment-eval"
+  508bcbf066216acb7bb66bdd2ecf9148bf73c7c1 "$work_dir/segment-eval"
 ```
 
 输出目录中的 `official-evaluation.json.gz` 用于逐局复核，`shared.ocrep.json` 用于播放。Unity 项目和已发布的播放器由队友维护。[回放器仓库](https://github.com/LynxPeng/Better-replay-frontend-of-overcook-ai)

@@ -88,26 +88,33 @@ cd hucooked-project
 git submodule update --init --recursive
 ```
 
+Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule update --init --recursive`。
+
 </details>
 
 ### 安装、训练与评估
 
 | 步骤 | 入口 |
 | :--- | :--- |
-| 环境安装 | [厨房环境说明](overcooked_env/README.md) |
+| 环境安装 | [厨房环境说明](overcooked_env/README.md)，当前共享厨房固定为 `overcooked_env@508bcbf` |
 | 查看回放 | [回放前端说明](replay_frontend/README.md) |
-| 项目训练与评估 | [NestRL 训练配置、复现命令与 L1–L4 评测](reproduction/nest_rl/README.md)；L5 已废弃，不采用 |
+| ACAC 协作 | [方法组件与评估结果](doc/branches/hy.md) |
+| NestRL | [训练配置、复现命令与 L1–L4 评测](src/nest_rl/README.md)，L5 已废弃 |
+| STQ 基线 | [LIPO、CoMeDi、HiPT 与 PPO 训练和评测](src/stq/README.md) |
+| HAHA 与分段 PPO | [训练入口、共享厨房榜单与权重复评](doc/branches/fgy.md) |
 
 <details>
 <summary>项目目录</summary>
 
 ```text
 .
-├── overcooked_env/   # 当前共享厨房环境（hy）
-├── hucooked/         # 历史复现使用的 GPU 环境（gpu-dev）
+├── overcooked_env/   # 共享厨房环境（508bcbf）
 ├── replay_frontend/  # 回放前端子模块
-├── reproduction/     # NestRL 复现、训练与评测
-├── src/             # 策略、算法与训练实现
+├── src/
+│   ├── acac_ours/   # ACAC 协作方法
+│   ├── nest_rl/     # NestRL 复现与训练
+│   ├── stq/         # 基线复现与 PPO 实验
+│   └── haha/        # HAHA、分段 PPO 与榜单
 ├── scripts/         # 运行与实验脚本
 ├── tests/           # 测试
 ├── runs/            # 本地实验输出
