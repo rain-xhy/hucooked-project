@@ -1,7 +1,7 @@
 """Train a NestRL-style MLP with GPU rule chefs on a native kitchen."""
 
 import argparse
-from functools import wraps
+from functools import partial, wraps
 import sys
 from pathlib import Path
 
@@ -10,7 +10,9 @@ from standard_setup import ROOT, activate
 
 def main():
     layout_parser = argparse.ArgumentParser(add_help=False, allow_abbrev=False)
-    layout_parser.add_argument("--layout", choices=("cramped_room", "three_player_handoff"), default="cramped_room")
+    layout_parser.add_argument("--layout", choices=("cramped_room", "three_player_handoff",
+                                                   "three_player_sync_handoff", "MixedKitchen-v1"),
+                               default="cramped_room")
     options, training_args = layout_parser.parse_known_args()
     if "--help" in training_args or "-h" in training_args:
         layout_parser.print_help()
@@ -94,15 +96,13 @@ def main():
     vec_class = SoupVecEnv
     recipes = ("three-onion-prep",)
     project = "mlp-standard-l1-cramped-room"
-    if options.layout == "three_player_handoff":
-        from gym.spaces import Discrete
+    if options.layout in ("three_player_handoff", "three_player_sync_handoff"):
         from handoff_kitchen import COOK, HandoffKitchen, HandoffRuleTeam
         from handoff_kitchen import OBSERVATION_SIZE as HANDOFF_OBSERVATION_SIZE
-        from learning.model import Encoder
 
         class HandoffVecEnv(SoupVecEnv):
-            layout_name = "three_player_handoff"
-            kitchen_type = HandoffKitchen
+            layout_name = options.layout
+            kitchen_type = staticmethod(partial(HandoffKitchen, layout=options.layout))
             observation_size = HANDOFF_OBSERVATION_SIZE
             learner_player = COOK
 
@@ -113,6 +113,22 @@ def main():
                 supply, serve = partners.unbind(dim=1)
                 return torch.stack((supply, learner, serve), dim=1), supply * self.action_space.n + serve
 
+        vec_class = HandoffVecEnv
+        recipes = ("onion-supply-and-serve",)
+        project = ("mlp-standard-l1-three-player-handoff" if options.layout == "three_player_handoff"
+                   else "mlp-standard-l2-sync-handoff")
+
+    if options.layout == "MixedKitchen-v1":
+        from mixed_kitchen import MixedVecEnv, ROLES
+
+        vec_class = MixedVecEnv
+        recipes = ROLES
+        project = "mlp-standard-l1-mixed-kitchen-v1"
+
+    if options.layout != "cramped_room":
+        from gym.spaces import Discrete
+        from learning.model import Encoder
+
         # Represent both teammates as one opponent team in NestRL's history.
         # The actor keeps six actions, while the encoder receives 6 x 6 joint actions.
         encoder_init = Encoder.__init__
@@ -122,20 +138,20 @@ def main():
             return encoder_init(encoder, num_policies, obs_shape, Discrete(action_space.n ** 2), *args, **kwargs)
 
         Encoder.__init__ = init_encoder
-        vec_class = HandoffVecEnv
-        recipes = ("onion-supply-and-serve",)
-        project = "mlp-standard-l1-three-player-handoff"
 
     sys.argv[1:] = [
         "l1", "--player", "1", "--device", "cuda", "--env-mode", "gpu", "--history-storage", "gpu",
         "--processes", "64", "--rollout-steps", "1024", "--updates", "1",
         "--ppo-mini-batch-size", "1024", "--learning-rate", "0.001", "--lr-warmup-fraction", "0.02",
-        "--trackio-project", project, "--trackio-sample-every", "40", "--profile", *training_args,
+        "--trackio-project", project, "--trackio-sample-every", "40", "--profile",
+        *(["--processes", "63", "--rollout-steps", "600", "--ppo-mini-batch-size", "900"]
+          if options.layout == "MixedKitchen-v1" else []),
+        *training_args,
     ]
     try:
         train(output_root=ROOT, recipes=recipes, gpu_vec_class=vec_class, invocation_dir=invocation_dir)
     finally:
-        if options.layout == "three_player_handoff":
+        if options.layout != "cramped_room":
             Encoder.__init__ = encoder_init
 
 

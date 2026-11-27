@@ -1,0 +1,119 @@
+strict digraph "V3 policy" {
+	graph [ordering=in rankdir=TB size="12.0,12.0"]
+	node [align=left fontname=Arial fontsize=10 height=0.2 margin=0 ranksep=0.1 shape=plaintext style=filled]
+	edge [fontsize=10]
+	0 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Current self-centric observation</TD><TD>(1, 153)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	1 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Historical observations</TD><TD>(1, 5, 300, 153)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	2 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Joint partner action IDs</TD><TD>(1, 5, 300)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	3 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Episode padding mask</TD><TD>(1, 5)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	4 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Step padding mask</TD><TD>(1, 5, 300)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	5 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">History features<BR/>Observation + 36 joint-action indicators</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 5, 300, 153), (1, 5, 300) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 5, 300, 189) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	6 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Episode encoder<BR/>MLP 189 → 128 → 128<BR/>Masked mean over steps</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 5, 300, 189), (1, 5, 300) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 5, 128) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	7 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Period encoder<BR/>Masked mean over valid episodes<BR/>MLP 128 → 128 → 128</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 5, 128), (1, 5), (1, 5, 300) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 128) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	8 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Actor<BR/>Concat → MLP 281 → 128 → 128<BR/>6 actions + log-softmax</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 153), (1, 128) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 6) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	9 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>Action log-probabilities</TD><TD>(1, 6)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	10 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                    <TR>
+                        <TD ROWSPAN="2">Critic<BR/>Concat → MLP 281 → 128 → 128<BR/>Value head → 1</TD>
+                        <TD COLSPAN="2">input:</TD>
+                        <TD COLSPAN="2">(1, 153), (1, 128) </TD>
+                    </TR>
+                    <TR>
+                        <TD COLSPAN="2">output: </TD>
+                        <TD COLSPAN="2">(1, 1) </TD>
+                    </TR>
+                    </TABLE>> fillcolor=darkseagreen1]
+	11 [label=<
+                    <TABLE BORDER="0" CELLBORDER="1"
+                    CELLSPACING="0" CELLPADDING="4">
+                        <TR><TD>State value</TD><TD>(1, 1)</TD></TR>
+                    </TABLE>> fillcolor=lightyellow]
+	0 -> 8
+	0 -> 10
+	1 -> 5
+	2 -> 5
+	3 -> 7
+	4 -> 6
+	4 -> 7
+	5 -> 6
+	6 -> 7
+	7 -> 8
+	7 -> 10
+	8 -> 9
+	10 -> 11
+	bgcolor=white dpi=145 fontname=Arial fontsize=22 label="V3 partition kitchen  |  history-conditioned actor–critic" labelloc=t pad=0.2
+}

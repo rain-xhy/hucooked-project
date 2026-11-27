@@ -62,3 +62,29 @@ $env:TRACKIO_DIR = (Resolve-Path .\runs\trackio).Path
 $env:TRACKIO_STORAGE_MODE = 'sqlite'
 ..\orgin\.conda\python.exe -c "import trackio; trackio.show(project='mlp-standard-l1-three-player-handoff', server_port=7863)"
 ```
+
+## 三人同步交换台微调
+
+`--layout three_player_sync_handoff` 使用原生同步交接规则。左侧厨师持洋葱面对交换台时，80 维观测中的台面物品特征表示该洋葱可交接。中间厨师空手面对交换台，双方在同一步交互即可交接。左右规则厨师在 GPU 上选动作。
+
+`--init-policy` 从普通台面训练的策略文件加载 Actor、Critic 和历史编码器的权重，从零开始记录新地图的环境步数，并创建新的 Adam 优化器。项目名是 `mlp-standard-l2-sync-handoff`。
+
+```powershell
+..\orgin\.conda\python.exe check_handoff.py --layout three_player_sync_handoff
+..\orgin\.conda\python.exe train_mlp.py --layout three_player_sync_handoff `
+  --init-policy .\runs\handoff-l1-3m\ppo\2400000.pt --run-name sync-handoff-l2 `
+  --learning-rate 0.0003 --updates 25 --processes 64 --rollout-steps 625 `
+  --ppo-mini-batch-size 1000 --checkpoint-every-steps 200000 --eval-every-updates 5 --defer-rollout-stats
+```
+
+## MixedKitchen-v1 三角色训练
+
+`--layout MixedKitchen-v1` 使用 compact 厨房。默认 63 个 GPU 厨房各有一个学习者，联合订单厨师、普通订单厨师、协助厨师各占 21 个厨房，另外两位由 GPU 规则队友控制。三个位置共享一个策略。输入包含原生 187 维观测和 3 维角色标记。训练启用原生势函数奖励，系数为 2。
+
+每局至少交付一份普通订单和一份联合订单才计为成功。`sample/mean_delivery_steps` 和 `eval/mean_delivery_steps` 按成功交付的订单统计从生成到上菜的平均环境步数。评估还记录各角色的成功率，每个角色 5 局。
+
+```powershell
+..\orgin\.conda\python.exe check_mixed.py
+..\orgin\.conda\python.exe train_mlp.py --layout MixedKitchen-v1 --run-name mixed-v1-l1-3roles `
+  --updates 25 --save-every-updates 5 --eval-every-updates 5
+```

@@ -19,7 +19,10 @@ def training_options(options, train_size, eval_size, processes):
     steps = rollout_size * options.updates
     mini_batches = 18 if options.ppo_mini_batch_size is None else rollout_size // options.ppo_mini_batch_size
     eval_interval = steps if options.eval_every_updates is None else rollout_size * options.eval_every_updates
-    save_interval = getattr(options, "checkpoint_every_steps", None) or 5_000_000
+    save_updates = getattr(options, "save_every_updates", None)
+    save_interval = getattr(options, "save_every_steps", None) or getattr(options, "checkpoint_every_steps", None) or (
+        rollout_size * save_updates if save_updates else 5_000_000
+    )
     return [
         "--env-name", "Overcooked", "--env_config", CONFIG,
         "--player-id", str(options.player), "--recipe-type", "cross",
@@ -48,7 +51,7 @@ def training_options(options, train_size, eval_size, processes):
     ]
 
 
-def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_dir=None):
+def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_dir=None, trackio_dir=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("level", choices=("l1", "l2"))
     parser.add_argument("--run-name", required=True)
@@ -73,6 +76,14 @@ def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_di
     parser.add_argument("--trackio-project", help="record metrics to a local Trackio project")
     if gpu_vec_class is not None:
         parser.add_argument("--checkpoint-every-steps", type=int)
+        parser.add_argument("--save-every-steps", type=int, default=argparse.SUPPRESS,
+                            help="save policy at the first PPO boundary at or above each step threshold")
+        parser.add_argument("--step-offset", type=int, default=argparse.SUPPRESS,
+                            help="add prior environment steps to the Trackio horizontal axis")
+        parser.add_argument("--save-every-updates", type=int, default=argparse.SUPPRESS,
+                            help="save policy weights every N PPO updates")
+        parser.add_argument("--init-policy", type=Path, default=argparse.SUPPRESS,
+                            help="initialize weights from a trusted policy checkpoint")
         parser.add_argument("--resume", type=Path, help="resume from a trusted training state into a new run")
         parser.add_argument("--defer-rollout-stats", action="store_true")
         parser.add_argument("--profile-cuda-stages", action="store_true")
@@ -91,6 +102,10 @@ def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_di
     options = parser.parse_args()
     if getattr(options, "resume", None) is not None:
         options.resume = ((invocation_dir or Path.cwd()) / options.resume).resolve()
+    if getattr(options, "init_policy", None) is not None:
+        options.init_policy = ((invocation_dir or Path.cwd()) / options.init_policy).resolve()
+        if not options.init_policy.is_file():
+            parser.error(f"initial policy does not exist: {options.init_policy}")
     needs_training_patch = (
         getattr(options, "checkpoint_every_steps", None) is not None
         or getattr(options, "defer_rollout_stats", False)
@@ -105,16 +120,20 @@ def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_di
         parser.error("--run-name must contain only ASCII letters, digits, hyphens and underscores")
     if options.rollout_steps < 40 or options.updates < 1:
         parser.error("use at least 40 rollout steps and one PPO update")
+    if getattr(options, "step_offset", 0) < 0:
+        parser.error("--step-offset must be nonnegative")
+    if getattr(options, "save_every_steps", 1) < 1:
+        parser.error("--save-every-steps must be positive")
+    if getattr(options, "save_every_updates", 1) < 1:
+        parser.error("--save-every-updates must be positive")
     if not isfinite(options.learning_rate) or options.learning_rate <= 0:
         parser.error("--learning-rate must be finite and positive")
     if not 0 <= options.lr_warmup_updates <= options.updates:
         parser.error("--lr-warmup-updates must be between zero and --updates")
     if options.lr_warmup_fraction is not None and not 0 < options.lr_warmup_fraction <= 1:
         parser.error("--lr-warmup-fraction must be greater than zero and at most one")
-    if options.eval_every_updates is not None and (
-        options.eval_every_updates < 1 or options.updates % options.eval_every_updates
-    ):
-        parser.error("--eval-every-updates must divide --updates so the final policy is evaluated")
+    if options.eval_every_updates is not None and options.eval_every_updates < 1:
+        parser.error("--eval-every-updates must be positive")
     if options.eval_rounds < 1 or (options.eval_rounds != 1 and not options.trackio_project):
         parser.error("--eval-rounds must be positive and requires --trackio-project when greater than one")
     if options.trackio_sample_every < 0 or (options.trackio_sample_every and not options.trackio_project):
@@ -155,6 +174,17 @@ def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_di
     from learning.arguments import get_args
     from learning import envs
     import train_
+
+    if getattr(options, "init_policy", None) is not None and options.resume is None:
+        initial = torch.load(options.init_policy, map_location="cpu", weights_only=False).state_dict()
+        init_ppo = train_.algo.PPO_.__init__
+
+        def init_from_policy(agent, actor_critic, *args, **kwargs):
+            actor_critic.load_state_dict(initial)
+            print(f"Initialized PPO policy from {options.init_policy}", flush=True)
+            return init_ppo(agent, actor_critic, *args, **kwargs)
+
+        train_.algo.PPO_.__init__ = init_from_policy
 
     if needs_training_patch:
         from inspect import signature
@@ -209,8 +239,8 @@ def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_di
     rollout_size = processes * options.rollout_steps
     checkpoint_interval = getattr(options, "checkpoint_every_steps", None)
     resume = getattr(options, "resume", None)
-    if checkpoint_interval is not None and (checkpoint_interval < 1 or checkpoint_interval % rollout_size):
-        parser.error("--checkpoint-every-steps must be a positive multiple of one rollout")
+    if checkpoint_interval is not None and checkpoint_interval < 1:
+        parser.error("--checkpoint-every-steps must be positive")
     if resume is not None and checkpoint_interval is None:
         parser.error("--resume requires --checkpoint-every-steps")
     batch_size = options.ppo_mini_batch_size or rollout_size // args.num_mini_batch
@@ -272,7 +302,8 @@ def main(*, output_root=ROOT, recipes=RECIPES, gpu_vec_class=None, invocation_di
     if options.trackio_project:
         from trackio_training import TrackioTraining
 
-        tracker = TrackioTraining(options, output, train_pool, eval_pool, completed_updates * rollout_size)
+        tracker = TrackioTraining(options, output, train_pool, eval_pool, completed_updates * rollout_size,
+                                  trackio_dir=trackio_dir)
         tracker.install(train_, args, defer_rollout_stats=getattr(options, "defer_rollout_stats", False))
         if options.profile:
             tracker.log_rollout_samples = profile.timed(tracker.log_rollout_samples, "rollout_logging")

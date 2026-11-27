@@ -1,4 +1,4 @@
-"""Native CUDA kitchen and rule chefs for the ordinary three-player handoff."""
+"""Native CUDA kitchens and rule chefs for the three-player handoff layouts."""
 
 from functools import lru_cache
 
@@ -15,6 +15,7 @@ from rule_chefs import RuleChef
 
 
 LAYOUT = "three_player_handoff"
+SYNC_LAYOUT = "three_player_sync_handoff"
 HORIZON = 400
 OBSERVATION_SIZE = 80
 SUPPLY, COOK, SERVE = range(3)
@@ -23,8 +24,9 @@ PARKING = (9, 4)
 
 
 class HandoffKitchen:
-    def __init__(self, num_envs, device, seed=0):
-        mdp = OvercookedGridworld.from_layout_name(LAYOUT)
+    def __init__(self, num_envs, device, seed=0, *, layout=LAYOUT):
+        mdp = OvercookedGridworld.from_layout_name(layout)
+        self.synchronous = bool(mdp.get_sync_handoff_locations())
         self.env = TorchOvercookedEnv(mdp, HORIZON, device=device, num_envs=num_envs)
         self.device = self.env.device
         self.fixtures = torch.tensor([
@@ -36,6 +38,8 @@ class HandoffKitchen:
         ], device=device)
         self.pot = self.cell(mdp.get_pot_locations()[0])
         self.handoff = self.cell(HANDOFF)
+        self.observation_tiles = self.env._tiles.clone()
+        self.observation_tiles[self.handoff] = COUNTER
         self.cook_time = Recipe(["onion"] * 3).time
         self.native_actions = torch.tensor([
             Action.ACTION_TO_INDEX[hucooked_action(i)] for i in range(Action.NUM_ACTIONS)
@@ -96,8 +100,17 @@ class HandoffKitchen:
         facing = orientations[..., None] == self.native_actions[1:5]
         items = self._item_ids(held)[..., None] == self.item_types
         fixtures = self.relative[positions[..., None], self.fixtures].flatten(2)
-        counters = self.env._tiles == COUNTER
+        counters = self.observation_tiles == COUNTER
+        # Preserve the pretrained feature's meaning: an onion is available at
+        # the station only while the supply chef is holding one and facing it.
         kinds = objects[..., KIND]
+        handoff_item = self._item_ids(objects[:, self.handoff])
+        if self.synchronous:
+            supply_front = self.env._neighbors[positions[:, SUPPLY], orientations[:, SUPPLY]]
+            available = (supply_front == self.handoff) & (held[:, SUPPLY, KIND] == ONION)
+            handoff_item = available.long()
+            kinds = kinds.clone()
+            kinds[:, self.handoff] = handoff_item
         loose_mask = counters & (kinds[:, None, :] == self.loose_types[:, None])
         distances = self.distance[positions][:, :, None, :].masked_fill(
             ~loose_mask[:, None], self.env.width * self.env.height,
@@ -107,13 +120,15 @@ class HandoffKitchen:
         loose = torch.cat((self.relative[positions[..., None], closest] * present, present), dim=-1)
 
         front = self.env._neighbors[positions, orientations]
-        front_tiles = self.env._tiles[front]
+        front_tiles = self.observation_tiles[front]
         front_items = self._item_ids(objects[self.rows[:, None], front]).masked_fill(front_tiles != COUNTER, EMPTY)
+        if self.synchronous:
+            front_items = torch.where(front == self.handoff, handoff_item[:, None], front_items)
         blocked = self.env._tiles[self.env._neighbors[positions][..., self.native_actions[1:5]]] != FLOOR
         pot = objects[:, self.pot]
         progress = torch.stack(((pot[:, INGREDIENTS:] != EMPTY).sum(dim=-1) / 3,
                                 pot[:, COOK_TICK].float() / self.cook_time, self.ticks / HORIZON), dim=-1)
-        handoff = self._item_ids(objects[:, self.handoff])[:, None] == self.item_types
+        handoff = handoff_item[:, None] == self.item_types
         return torch.cat((
             self.xy[positions], teammate, facing[:, self.view_order].flatten(2), items[:, self.view_order].flatten(2),
             fixtures, loose.flatten(2), front_tiles[..., None] == self.tile_types,
@@ -153,7 +168,7 @@ def route_table():
 
 
 class HandoffRuleTeam:
-    """Stage onions on the shared counter and plate and deliver the cooked soup."""
+    """Supply onions via the handoff station, then plate and deliver cooked soup."""
 
     def __init__(self, kitchen):
         self.kitchen = kitchen
@@ -167,6 +182,10 @@ class HandoffRuleTeam:
         supply_routes = self.routes[positions[:, SUPPLY], facing[:, SUPPLY], positions[:, COOK]]
         supply = torch.where(held_kind[:, SUPPLY] == EMPTY, supply_routes[:, ROUTE_ONION],
                              torch.where(counter_free, supply_routes[:, ROUTE_HANDOFF], 0))
+        if k.synchronous:
+            cook_front = k.env._neighbors[positions[:, COOK], facing[:, COOK]]
+            ready_to_receive = (cook_front == k.handoff) & (held_kind[:, COOK] == EMPTY)
+            supply = supply.masked_fill((supply == 5) & (held_kind[:, SUPPLY] == ONION) & ~ready_to_receive, 0)
 
         serve_routes = self.routes[positions[:, SERVE], facing[:, SERVE], positions[:, COOK]]
         ready = objects[:, k.pot, COOK_TICK] >= k.cook_time

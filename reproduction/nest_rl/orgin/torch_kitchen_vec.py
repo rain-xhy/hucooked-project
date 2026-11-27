@@ -151,7 +151,10 @@ class TorchKitchenVecEnv:
                     )
                     for path, indices in groups.items()
                 ]
-        return self.obs[:, self.player]
+        return self.learner_view(self.obs)
+
+    def learner_view(self, obs):
+        return obs[:, self.player]
 
     def make_rule_partner(self):
         from cuda_l0 import CudaRulePartner
@@ -216,7 +219,8 @@ class TorchKitchenVecEnv:
         ).cpu().numpy()
         done_cpu = flags[:, 0].astype(bool)
         finished = np.flatnonzero(done_cpu)
-        infos = KitchenInfos(self.num_envs, history_actions, terminal[:, self.player], done, finished)
+        terminal_view = self.learner_view(terminal)
+        infos = KitchenInfos(self.num_envs, history_actions, terminal_view, done, finished)
         self.obs = terminal
         if finished.size:
             start_reset = self.mark()
@@ -224,7 +228,7 @@ class TorchKitchenVecEnv:
             self.obs = torch.where(done[:, None, None], reset_obs, terminal)
             if self.profile:
                 self.spans.append(("reset", start_reset, self.mark()))
-            terminal_obs = terminal[:, self.player].cpu().numpy()
+            terminal_obs = terminal_view.cpu().numpy()
             returns = self.returns.cpu().numpy()
             ends_period = int(np.count_nonzero(flags[finished, 4] == HISTORY_SIZE - 1))
             self.episodes += finished.size
@@ -254,7 +258,7 @@ class TorchKitchenVecEnv:
                 ("kitchen", after_partner, after_kitchen),
                 ("opponent_history", after_kitchen, after_history),
             ))
-        return self.obs[:, self.player], reward[:, None], done_cpu, infos
+        return self.learner_view(self.obs), reward[:, None], done_cpu, infos
 
     def rollout_stats(self):
         times = defaultdict(float)
@@ -291,6 +295,7 @@ def evaluate_cuda_rules(_args, pool, episodes, envs, _history, policy, _log_step
     counts = np.zeros(envs.num_envs, dtype=np.int64)
     rewards = np.zeros(envs.num_envs)
     successes = np.zeros(envs.num_envs)
+    delivery_steps = delivery_count = 0
     while (counts < episodes).any():
         context = (history, (rows, *history.get_all_current_indices()))
         _, action, _, _ = policy.act(obs, None, masks, rows, context)
@@ -304,9 +309,15 @@ def evaluate_cuda_rules(_args, pool, episodes, envs, _history, policy, _log_step
                 counts[index] += 1
                 rewards[index] += info["episode"]["r"]
                 successes[index] += info["termination_info"].endswith("completed")
+                delivery_steps += info.get("delivery_steps", 0)
+                delivery_count += info.get("delivery_count", 0)
     rates = successes / episodes
     print(f"All success rates, by opponent policy: {tuple(map(float, rates))}")
-    return {"reward": float(rewards.mean() / episodes), "success_rate": float(rates.mean())}, None
+    result = {"reward": float(rewards.mean() / episodes), "success_rate": float(rates.mean())}
+    if getattr(envs, "reports_deliveries", False):
+        result.update(delivery_steps=delivery_steps, delivery_count=delivery_count)
+        result.update({f"success_rate/{name}": float(rate) for name, rate in zip(pool, rates, strict=True)})
+    return result, None
 
 
 def install_cuda_kitchen_history(storage_class):

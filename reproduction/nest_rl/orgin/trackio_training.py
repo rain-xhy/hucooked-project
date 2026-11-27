@@ -9,12 +9,14 @@ from time import perf_counter
 
 
 class TrackioTraining:
-    def __init__(self, options, output, train_pool, eval_pool, initial_env_steps=0):
+    def __init__(self, options, output, train_pool, eval_pool, initial_env_steps=0, *, trackio_dir=None):
         self.project = options.trackio_project
         self.rounds = options.eval_rounds
         self.sample_every = options.trackio_sample_every
         self.output = output
+        self.trackio_dir = trackio_dir or output.parent / "trackio"
         self.initial_env_steps = initial_env_steps
+        self.step_offset = getattr(options, "step_offset", 0)
         self.config = json.loads(json.dumps({
             **vars(options), "train_pool": train_pool, "eval_pool": eval_pool,
         }, default=str))
@@ -24,7 +26,7 @@ class TrackioTraining:
         self.pending_sample = {}
 
     def init(self, *, config, name, **kwargs):
-        os.environ["TRACKIO_DIR"] = str(self.output.parent / "trackio")
+        os.environ["TRACKIO_DIR"] = str(self.trackio_dir)
         os.environ["TRACKIO_STORAGE_MODE"] = "sqlite"
         for key in ("TRACKIO_SPACE_ID", "TRACKIO_SERVER_URL", "TRACKIO_DATASET_ID", "TRACKIO_BUCKET_ID"):
             os.environ.pop(key, None)
@@ -36,7 +38,7 @@ class TrackioTraining:
         self.run = trackio.init(
             project=self.project, name=name, config={
                 **self.config, "samples_per_update": self.samples_per_update,
-                "env_step_budget": config.num_env_steps,
+                "env_step_budget": config.num_env_steps + self.step_offset,
             },
             embed=False, auto_log_gpu=False, auto_log_cpu=False,
         )
@@ -62,7 +64,7 @@ class TrackioTraining:
 
     def flush(self):
         if "env_steps" in self.metrics:
-            env_steps = int(self.metrics["env_steps"])
+            env_steps = int(self.metrics["env_steps"]) + self.step_offset
             self.run.log({
                 **self.pending_sample, **self.metrics, "env_steps": env_steps,
                 "wall_seconds": self.logged_at - self.started,
@@ -105,12 +107,20 @@ class TrackioTraining:
                 random.setstate(random_state)
             count = len(pool) * episodes * self.rounds
             success_rate = float(np.mean([r["success_rate"] for r in results]))
-            self.log({
+            metrics = {
                 "eval/reward": np.mean([r["reward"] for r in results]),
                 "eval/success_rate": success_rate,
                 "eval/success_count": round(count * success_rate),
                 "eval/episode_count": count,
-            }, step=log_steps)
+            }
+            if "delivery_count" in results[0]:
+                deliveries = sum(r["delivery_count"] for r in results)
+                metrics["eval/delivery_count"] = deliveries
+                if deliveries:
+                    metrics["eval/mean_delivery_steps"] = sum(r["delivery_steps"] for r in results) / deliveries
+                metrics.update({f"eval/{key}": np.mean([r[key] for r in results])
+                                for key in results[0] if key.startswith("success_rate/")})
+            self.log(metrics, step=log_steps)
 
         trainer.evaluate = repeat
         if self.sample_every and not defer_rollout_stats:
@@ -138,7 +148,7 @@ class TrackioTraining:
             if end == rollout_steps:
                 self.pending_sample = metrics
             else:
-                env_steps = start_step + end * num_envs
+                env_steps = self.step_offset + start_step + end * num_envs
                 self.run.log({**metrics, "env_steps": env_steps, "wall_seconds": perf_counter() - self.started},
                              step=env_steps)
 
@@ -146,12 +156,13 @@ class TrackioTraining:
         insert = trainer.RolloutStorage.insert
         vector_steps = self.initial_env_steps // num_envs
         episodes = successes = 0
-        env_steps = self.initial_env_steps
+        env_steps = self.initial_env_steps + self.step_offset
         total_reward = 0.0
+        delivery_count = delivery_steps = 0
 
         def record(storage, obs, next_obs, recurrent_hidden_states, actions, action_log_probs,
                    value_preds, rewards, masks, bad_masks, infos, *args, **kwargs):
-            nonlocal vector_steps, env_steps, episodes, successes, total_reward
+            nonlocal vector_steps, env_steps, episodes, successes, total_reward, delivery_count, delivery_steps
             result = insert(storage, obs, next_obs, recurrent_hidden_states, actions, action_log_probs,
                             value_preds, rewards, masks, bad_masks, infos, *args, **kwargs)
             vector_steps += 1
@@ -161,6 +172,8 @@ class TrackioTraining:
                     episodes += 1
                     total_reward += float(info["episode"]["r"])
                     successes += info["termination_info"].endswith("completed")
+                    delivery_count += info.get("delivery_count", 0)
+                    delivery_steps += info.get("delivery_steps", 0)
             end_of_rollout = vector_steps % rollout_steps == 0
             if not end_of_rollout and vector_steps % self.sample_every != 0:
                 return result
@@ -170,6 +183,9 @@ class TrackioTraining:
                     "sample/reward": total_reward / episodes,
                     "sample/success_rate": successes / episodes,
                 })
+            if delivery_count:
+                metrics.update({"sample/delivery_count": delivery_count,
+                                "sample/mean_delivery_steps": delivery_steps / delivery_count})
             if end_of_rollout:
                 self.pending_sample = metrics
             else:
@@ -179,6 +195,7 @@ class TrackioTraining:
                 }, step=env_steps)
             episodes = successes = 0
             total_reward = 0.0
+            delivery_count = delivery_steps = 0
             return result
 
         trainer.RolloutStorage.insert = record

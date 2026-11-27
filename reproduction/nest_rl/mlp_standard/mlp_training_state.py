@@ -76,7 +76,8 @@ class TrainingState:
 
     def save(self, completed_updates, policy, agent, env, rollouts):
         steps = completed_updates * self.rollout_size
-        if steps % self.interval and completed_updates != self.total_updates:
+        previous_steps = steps - self.rollout_size
+        if steps // self.interval == previous_steps // self.interval and completed_updates != self.total_updates:
             return
         if rollouts.step != 0:
             raise RuntimeError("A training checkpoint must be written at a rollout boundary.")

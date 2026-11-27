@@ -8,6 +8,8 @@ from standard_setup import activate
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", default="cuda", choices=("cpu", "cuda"))
+    parser.add_argument("--layout", default="three_player_handoff",
+                        choices=("three_player_handoff", "three_player_sync_handoff"))
     args = parser.parse_args()
     activate()
 
@@ -19,16 +21,19 @@ def main():
     from rule_chefs import RuleChef
 
     torch.set_num_threads(1)
-    mdp = OvercookedGridworld.from_layout_name("three_player_handoff")
+    mdp = OvercookedGridworld.from_layout_name(args.layout)
     state = mdp.get_standard_start_state()
-    kitchen = HandoffKitchen(2, args.device)
+    kitchen = HandoffKitchen(2, args.device, layout=args.layout)
     team = HandoffRuleTeam(kitchen)
     route_planner = RuleChef()
     route_planner.set_mdp(mdp)
     counter, pot, clear_of_pot = (5, 3), (8, 0), (6, 3)
-    assert mdp.terrain_mtx[3][5] == "X" and not mdp.get_sync_handoff_locations()
+    sync = args.layout == "three_player_sync_handoff"
+    assert mdp.get_sync_handoff_locations() == ([counter] if sync else [])
+    route_planner.fixtures.add(counter)
 
     deliveries = 0
+    handoffs = 0
     obs = kitchen.reset()
     for step in range(HORIZON):
         _, cook, _ = state.players
@@ -40,7 +45,7 @@ def main():
         elif cook.has_object() or (soup is not None and len(soup.ingredients) == 3):
             cook_action = targets[pot][1]
         else:
-            cook_action = targets[counter][1] if counter in state.objects else Action.STAY
+            cook_action = targets[counter][1] if sync or counter in state.objects else Action.STAY
 
         peers = team.act()
         assert peers.device.type == args.device and peers.shape == (2, 2)
@@ -53,15 +58,17 @@ def main():
             snapshot["objects"].sort(key=lambda obj: obj["position"])
         assert actual == expected, (step, actual, expected)
         sparse = sum(info["sparse_reward_by_agent"])
+        handoffs += sum(event["success"] for event in info["sync_handoffs"])
         assert reward[0].item() == sparse + sum(info["shaped_reward_by_agent"])
         assert obs.shape == (2, 3, OBSERVATION_SIZE) and obs.dtype == torch.float32 and obs.isfinite().all()
         assert done.tolist() == timeout.tolist() == [step + 1 == HORIZON] * 2
         deliveries += sparse > 0
 
     assert deliveries > 0 and success.tolist() == [0, -1]
+    assert handoffs >= 3 * deliveries if sync else handoffs == 0
     kitchen.reset(mask=torch.tensor([True, False], device=args.device))
     assert kitchen.ticks.tolist() == [0, HORIZON]
-    print(f"Matched {HORIZON} native transitions and {deliveries} positive deliveries on {args.device}.")
+    print(f"Matched {HORIZON} native transitions, {deliveries} deliveries and {handoffs} sync transfers on {args.device}.")
 
 
 if __name__ == "__main__":
