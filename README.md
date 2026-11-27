@@ -3,12 +3,12 @@
 </p>
 
 <p align="center">
-  <a href="#演示">演示</a> ·
-  <a href="#方法">方法</a> ·
-  <a href="#实验成绩">实验成绩</a> ·
-  <a href="#运行说明">运行说明</a> ·
-  <a href="#参考仓库">参考仓库</a> ·
-  <a href="#贡献者">贡献者</a>
+  <a href="#演示"><img src="assets/readme/nav-demo.svg" width="104" height="40" alt="演示"></a>
+  <a href="#方法"><img src="assets/readme/nav-method.svg" width="104" height="40" alt="方法"></a>
+  <a href="#实验成绩"><img src="assets/readme/nav-results.svg" width="132" height="40" alt="实验成绩"></a>
+  <a href="#运行说明"><img src="assets/readme/nav-usage.svg" width="132" height="40" alt="运行说明"></a>
+  <a href="#参考仓库"><img src="assets/readme/nav-references.svg" width="132" height="40" alt="参考仓库"></a>
+  <a href="#贡献者"><img src="assets/readme/nav-contributors.svg" width="116" height="40" alt="贡献者"></a>
 </p>
 
 HuCooked 以《胡闹厨房》式协作任务为载体，探索多智能体深度强化学习在复杂地图中的分工与配合。研究关注取料、加工、交接和上菜之间的任务衔接，以及空间约束与共享资源下的协同决策。
@@ -138,6 +138,22 @@ git submodule update --init --recursive
       </a>
     </td>
     <td align="center">
+      <a href="https://github.com/HighsunYvY">
+        <img src="https://avatars.githubusercontent.com/u/353759548?v=4&amp;size=160" width="72" height="72" alt="HighsunYvY 的头像">
+        <br>
+        <strong>HighsunYvY</strong>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/yanghongwei98">
+        <img src="https://github.com/yanghongwei98.png?size=160" width="72" height="72" alt="yanghongwei98 的头像">
+        <br>
+        <strong>yanghongwei98</strong>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
       <a href="https://github.com/LynxPeng">
         <img src="https://github.com/LynxPeng.png?size=160" width="72" height="72" alt="LynxPeng 的头像">
         <br>
@@ -145,19 +161,10 @@ git submodule update --init --recursive
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/HighsunYvY">
-        <img src="https://avatars.githubusercontent.com/u/353759548?v=4&amp;size=160" width="72" height="72" alt="HighsunYvY 的头像">
+      <a href="https://github.com/stq1234">
+        <img src="https://github.com/stq1234.png?size=160" width="72" height="72" alt="stq1234 的头像">
         <br>
-        <strong>HighsunYvY</strong>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/yanghongwei98">
-        <img src="https://github.com/yanghongwei98.png?size=160" width="72" height="72" alt="yanghongwei98 的头像">
-        <br>
-        <strong>yanghongwei98</strong>
+        <strong>stq1234</strong>
       </a>
     </td>
     <td align="center">
@@ -169,8 +176,6 @@ git submodule update --init --recursive
     </td>
   </tr>
 </table>
-
-<sub>其他成员后续补充。</sub>
 
 ---
 

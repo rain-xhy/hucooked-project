@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="208" height="80" viewBox="0 0 208 80" role="img" aria-labelledby="title">
+  <title id="title">演示</title>
+  <rect x="1" y="1" width="206" height="78" rx="18" fill="#66d0b6" stroke="#66d0b6" stroke-width="2"/>
+  <g transform="translate(48 22) scale(1.5)" fill="none" stroke="#102e36" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="3"/>
+    <path d="m10 8 6 4-6 4Z"/>
+  </g>
+  <text x="100" y="51" fill="#102e36" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="600">演示</text>
+</svg>
