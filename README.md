@@ -13,6 +13,8 @@
 
 HuCooked 以《胡闹厨房》式协作任务为载体，探索多智能体深度强化学习在复杂地图中的分工与配合。研究关注取料、加工、交接和上菜之间的任务衔接，以及空间约束与共享资源下的协同决策。
 
+当前实验以 **三人 SharedKitchen、连续混合订单、每局 300 步** 为核心，汇集 ACAC、NestRL、HAHA、E3T、MAT 与多组基线实现。可以先看真实回放，再用仓库内的模型在 CPU 上完成一次评测。
+
 ## 演示
 
 <p align="center">
@@ -43,46 +45,87 @@ HuCooked 以《胡闹厨房》式协作任务为载体，探索多智能体深�
 
 ## 方法
 
-研究聚焦任务分工、空间协调和场景适应，观察智能体如何衔接工序、利用交接工位，并在不同地图中形成配合。具体算法、网络结构与训练配置待补充。
+一份餐需要经过取料、烹饪、切配、装盘和送餐。普通订单可由一名厨师出锅，协作订单要求两名厨师在锅的两侧**同一步交互**；第三名厨师可以并行准备配菜、餐盘或送餐。各方法围绕这个共同任务，探索不同的分工与协调方式。
+
+| 方法与实现 | 协作思路 |
+| :--- | :--- |
+| [**ACAC / Ours**](docs/branches/hy.md) | 预测队友到位情况，结合宏动作评分与学习式开局分工 |
+| [**NestRL · 历史编码与 L1–L4**](src/nest_rl/README.md) | 以分层历史编码建模队友行为，结合多阶段训练探索协作适应；当前 L1–L4 使用无历史 Ego-MLP，逐步加入多样队友、自博弈和出生／动作扰动 |
+| [**HAHA / 分段 PPO**](docs/branches/fgy.md) | 分层 Manager–Worker；比较规则模仿、规划器辅助和高层技能分配 |
+| [**E3T**](src/e3t_20m/README.md) | 用历史预测队友动作，为工作站选择策略提供条件信息；从随机初始化在线训练 |
+| [**MAT**](src/mat/README.md) | Transformer 读取团队观测，依次生成三名厨师的动作；示范微调后继续 PPO |
+| [**LIPO / CoMeDi / HiPT / PPO**](src/stq/README.md) | 26 组实验对比分开与联合动作、BC→RL 与纯 RL，以及 MLP、CNN、Transformer 骨干 |
+
+共享环境统一固定为 **`overcooked_env@508bcbf`**。方法各自保留训练时的观测编码和动作接口：原始动作策略直接输出移动、等待或交互，高层策略通过自己的执行器转换成环境动作。训练奖励按方法分别配置；下面的结果使用环境输出指标。
 
 <details>
-<summary>方法与实现的内容框架</summary>
+<summary>NestRL 的历史编码器如何建模队友？</summary>
 
-- **环境与任务**包括地图配置、智能体数量、观测、动作与任务规则。
-- **策略学习**包括算法、网络结构、训练方式与队友配置。
-- **协作机制**包括任务分工、信息利用与交接策略。
-- **奖励设计**包括团队奖励、辅助奖励与对应目标。
-- **评估设置**包括基线、测试地图、随机种子与评估轮次。
+本项目的 NestRL 历史编码版本将**自身观测与另外两名厨师的联合动作**组成交互记录，通过两级 MLP 编码器提取队友行为特征：`EpisodeEncoder` 先聚合局内记录，`PeriodEncoder` 再聚合多局经验。历史窗口最多保留 **5 局、每局 40 步**，生成的 256 维隐表示与当前观测一起输入 Actor 和 Critic，并通过辅助队友分类头学习区分队友类型。[策略结构](src/nest_rl/mlp_shared/policy.py) · [在线历史维护](src/nest_rl/mlp_shared/history.py)
+
+当前发布的 **L1–L4 检查点关闭历史编码器**（`use_history=False`），采用 376 维当前观测与以自身为中心的厨师特征重排，由 Ego-MLP 直接输出六个基础动作。下方 L3、L4 成绩对应这一无历史版本；历史编码版本的实现与实验仍保留在方法目录中。
 
 </details>
 
-<!-- 后续在此补充整体方法图、策略结构与关键实现入口。 -->
-
 ## 实验成绩
 
-训练曲线、地图性能对比图与完整结果待补充。
+### SharedKitchen · 代表性结果
 
-<!-- 图表就绪后补充统计口径、训练步数、随机种子、误差范围和原始数据位置。 -->
+以下为各方法已归档的默认连续订单评测，每局 300 步，三名厨师由对应策略控制。每行方法名链接到结果和协议说明；不同方法的种子、训练预算与选模方式分别记录在各自文档中。
 
-| 地图 / 场景 | 方法 | 团队得分 ↑ | 订单完成率 ↑ | 平均交付步数 ↓ |
-| :--- | :--- | :---: | :---: | :---: |
-| 待补充 | 待补充 | — | — | — |
+| 方法 / 检查点 | 局数 | 得分 ↑ | 出餐 ↑ | 同步成功率 ↑ | 等待步数 ↓ |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| [ACAC / Ours · 学习开局分工](docs/branches/hy.md) | 96 | 420.00 | 21.00 | 30.05%¹ | 25.51 |
+| [NestRL L3 · U25](src/nest_rl/README.md) | 96 | 420.00 | 21.00 | 34.41% | 42.85 |
+| [NestRL L4 · U165](src/nest_rl/README.md) | 96 | 420.00 | 21.00 | 26.22% | 43.03 |
+| [HAHA · 周期规则 BC](src/haha/leaderboard/shared/README.md) | 24 | **440.00** | **22.00** | 100.00%¹ | 11.00 |
+| [HAHA · 分段高层 PPO](src/haha/leaderboard/shared/README.md) | 24 | **440.00** | **22.00** | 50.00%¹ | 12.00 |
+| [E3T · 开发集入选模型](src/e3t_20m/README.md) | 100 | 400.00 | 20.00 | 14.86% | 66.46 |
+| [MAT · PPO U12](src/mat/README.md) | 128 | 420.00 | 21.00 | 100.00% | 50.00 |
+| [PPO–MLP · small，20M 步，纯 RL](src/stq/RESULTS.md) | 12 | 400.00 | 20.00 | 71.43% | 58.25 |
 
-<sub>指标统计口径、基线与评估配置将随实验结果一并补充。</sub>
+<sub>得分、出餐与等待步数均为每局均值。同步成功率默认先按局计算再平均；标记 ¹ 的行按总成功次数 / 总尝试步数汇总。此表摘录不同实验协议的结果，统一种子下的跨方法评测尚未完成。</sub>
+
+<details>
+<summary>指标含义、完整基线与核验记录</summary>
+
+- **团队得分**：`team_score`；默认每份普通餐或协作餐均得 20 分。
+- **出餐数**：`meals_completed`，包括普通餐与协作餐。
+- **同步成功率**：`joint_attempt_success_rate`，成功协作出锅次数除以有效尝试步数，不是协作餐占全部餐数的比例。
+- **等待步数**：`joint_wait_steps = joint_ready_steps − joint_successes`。高同步成功率也可能伴随较长等待，应结合产量一起观察。
+- **完整实验**：[HAHA 五版榜单](src/haha/leaderboard/shared/README.md) · [STQ 全部 26 组结果](src/stq/RESULTS.md) · [NestRL 阶段与队友对照](src/nest_rl/README.md)。
+- **MAT 合并核验**：在当前环境上复跑 128 局，逐局指标与归档一致；同时核对全部 300 步回放动作、事件与奖励。可用 `python -m src.mat.verify_shared` 重跑核验。
+
+</details>
+
+### NestRL L4 · 随机出生与队友扰动
+
+L4 从 L3 U25 出发，以 **100% 全图随机出生 + 5% 队友动作扰动**训练，只使用稀疏送餐奖励。以下使用原生 SharedKitchen、相同新种子，每配置 96 局，比较三名同模型策略的团队得分。
+
+| 评测场景 | L3 U25 | L4 U165 |
+| :--- | ---: | ---: |
+| 默认出生，无扰动 | 420.00 | **420.00** |
+| 同地图全图随机出生 | 183.54 | **413.54** |
+| 默认出生 + 5% 队友动作扰动 | 324.58 | **386.25** |
+
+“全图随机”指同一张 7×7 地图内随机选择三个不同的地板格，并非随机生成地图。出生位置与队友动作扰动由补充评测协议施加，指标仍取自环境输出。[完整配置、跨队友结果与分析](src/nest_rl/README.md)
+
+<sub>L5 曾尝试加入同步失败与等待惩罚，但未达到保留已有成绩的目标，已废弃；当前采用 L4。</sub>
 
 ## 运行说明
 
 ### 获取项目
 
-递归克隆仓库，同时获取厨房环境与回放前端。
+先获取代码和厨房环境。模型评测无需下载 Unity 回放器及历史复现子模块。
 
 ```bash
-git clone --recurse-submodules https://github.com/rain-xhy/hucooked-project.git
+git clone https://github.com/rain-xhy/hucooked-project.git
 cd hucooked-project
+git submodule update --init overcooked_env
 ```
 
 <details>
-<summary>已有本地仓库？初始化子模块</summary>
+<summary>需要 Unity 回放器或完整历史复现代码？</summary>
 
 ```bash
 git submodule update --init --recursive
@@ -92,7 +135,20 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 
 </details>
 
-### 安装、训练与评估
+### 第一次评测 · 用 CPU 跑 MAT
+
+MAT 的 3 个归档权重已随仓库提供，总计约 1.67 MB。以下命令在仓库根目录执行，使用独立的项目 Conda 环境；已有适用的项目环境时可直接复用。
+
+```bash
+conda create --prefix ./.conda python=3.12 -y
+conda activate ./.conda
+python -m pip install -r src/mat/requirements.txt
+python -m src.mat.evaluate_shared --episodes 1 --seed 200000 --output runs/mat/evaluation.json
+```
+
+默认加载 `runs/mat/shared-ppo-best.pt`，结果写入 `runs/mat/evaluation.json`。该种子的归档结果为 **420 分、21 份餐、同步成功率 100%、等待 50 步**。将 `--episodes` 改为 `128` 可运行完整评测；各方法依赖分别维护，其他方法的安装和训练步骤见下表。
+
+### 选择方法与权重
 
 | 步骤 | 入口 |
 | :--- | :--- |
@@ -102,7 +158,18 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 | NestRL | [训练配置、复现命令与 L1–L4 评测](src/nest_rl/README.md)，L5 已废弃 |
 | STQ 基线 | [LIPO、CoMeDi、HiPT 与 PPO 训练和评测](src/stq/README.md) |
 | HAHA 与分段 PPO | [训练入口、共享厨房榜单与权重复评](docs/branches/fgy.md) |
+| E3T | [在线训练、开发集选型与留出评测](src/e3t_20m/README.md) |
 | MAT（tzw） | [训练、128 局评测与原生回放](src/mat/README.md) |
+
+| 权重 | 获取位置 |
+| :--- | :--- |
+| NestRL L1–L4 | [`runs/nest_rl/`](runs/nest_rl/)：L1 四个队友池权重、L2 U200、L3 U25、L4 U165 |
+| HAHA | [`runs/haha/`](runs/haha/)：SharedKitchen 五版及历史环境权重 |
+| MAT | [`runs/mat/`](runs/mat/)：固定订单、示范微调与 PPO 三个检查点 |
+| STQ 基线 | [Release 下载与解压说明](src/stq/README.md#下载权重和训练记录)；准确文件列表见 [实验清单](src/stq/experiments.json) |
+| ACAC / E3T | ACAC 需补齐外部 ACAC 依赖与模型权重；E3T 权重由训练生成，仓库提供已完成实验的结果记录 |
+
+已入库模型的文件大小、来源和 SHA-256 见 [`runs/checkpoints.json`](runs/checkpoints.json)。完整续训状态与未入选快照留在本地，不随 Git 分发。
 
 <details>
 <summary>项目目录</summary>
@@ -116,6 +183,7 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 │   ├── nest_rl/     # NestRL 复现与训练
 │   ├── stq/         # 基线复现与 PPO 实验
 │   ├── haha/        # HAHA、分段 PPO 与榜单
+│   ├── e3t_20m/     # E3T 队友预测与在线训练
 │   └── mat/         # TZW Multi-Agent Transformer
 ├── scripts/         # 运行与实验脚本
 ├── tests/           # 测试
@@ -134,59 +202,24 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 | [HumanCompatibleAI / overcooked_ai](https://github.com/HumanCompatibleAI/overcooked_ai) | Overcooked-AI 上游协作环境 |
 | [rain-xhy / hucooked](https://github.com/rain-xhy/hucooked) | 本项目使用的厨房环境子模块 |
 | [LynxPeng / Better-replay-frontend-of-overcook-ai](https://github.com/LynxPeng/Better-replay-frontend-of-overcook-ai) | 本项目使用的回放前端子模块 |
+| [upasana27 / adaptive-RL](https://github.com/upasana27/adaptive-RL) | NestRL 历史复现依赖，位于 `src/nest_rl/adaptive-RL` 子模块 |
 
-<!-- 后续在此追加实际参考或使用的算法仓库，并注明对应模块。 -->
+算法论文与各方法的参考来源见对应方法文档。
 
 ## 贡献者
 
-<table align="center">
-  <tr>
-    <td align="center">
-      <a href="https://github.com/rain-xhy">
-        <img src="https://github.com/rain-xhy.png?size=160" width="72" height="72" alt="rain-xhy 的头像">
-        <br>
-        <strong>rain-xhy</strong>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/HighsunYvY">
-        <img src="https://avatars.githubusercontent.com/u/353759548?v=4&amp;size=160" width="72" height="72" alt="HighsunYvY 的头像">
-        <br>
-        <strong>HighsunYvY</strong>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/yanghongwei98">
-        <img src="https://github.com/yanghongwei98.png?size=160" width="72" height="72" alt="yanghongwei98 的头像">
-        <br>
-        <strong>yanghongwei98</strong>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/LynxPeng">
-        <img src="https://github.com/LynxPeng.png?size=160" width="72" height="72" alt="LynxPeng 的头像">
-        <br>
-        <strong>LynxPeng</strong>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/stq1234">
-        <img src="https://github.com/stq1234.png?size=160" width="72" height="72" alt="stq1234 的头像">
-        <br>
-        <strong>stq1234</strong>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/DavidTian2003">
-        <img src="https://github.com/DavidTian2003.png?size=160" width="72" height="72" alt="DavidTian2003 的头像">
-        <br>
-        <strong>DavidTian2003</strong>
-      </a>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="docs/images/contributors.png" width="100%" alt="贡献者头像墙，依次为 rain-xhy、DavidTian2003、HighsunYvY、LynxPeng、stq1234、yanghongwei98">
+</p>
+
+<p align="center">
+  <a href="https://github.com/rain-xhy">rain-xhy</a> ·
+  <a href="https://github.com/DavidTian2003">DavidTian2003</a> ·
+  <a href="https://github.com/HighsunYvY">HighsunYvY</a> ·
+  <a href="https://github.com/LynxPeng">LynxPeng</a> ·
+  <a href="https://github.com/stq1234">stq1234</a> ·
+  <a href="https://github.com/yanghongwei98">yanghongwei98</a>
+</p>
 
 ---
 
