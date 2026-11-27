@@ -1,4 +1,4 @@
-"""Twenty-million-parameter E3T on de37e08. Model selection uses development games only."""
+"""Twenty-million-parameter E3T on SharedKitchen. Model selection uses development games only."""
 
 import argparse
 import json

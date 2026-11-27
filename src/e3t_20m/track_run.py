@@ -11,6 +11,9 @@ from collections import defaultdict
 from contextlib import redirect_stdout
 from pathlib import Path
 
+from . import DEFAULT_OUT
+
+
 PROJECT = "hucooked-e3t-20m-a100"
 RUN = "pure-seed42"
 
@@ -93,7 +96,7 @@ def main():
     parser.add_argument(
         "--out",
         type=Path,
-        default=Path("reproduction/e3t_20m/runs/seed42"),
+        default=DEFAULT_OUT,
         help="training output directory",
     )
     parser.add_argument(
