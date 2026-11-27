@@ -102,6 +102,7 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 | NestRL | [训练配置、复现命令与 L1–L4 评测](src/nest_rl/README.md)，L5 已废弃 |
 | STQ 基线 | [LIPO、CoMeDi、HiPT 与 PPO 训练和评测](src/stq/README.md) |
 | HAHA 与分段 PPO | [训练入口、共享厨房榜单与权重复评](docs/branches/fgy.md) |
+| MAT（tzw） | [训练、128 局评测与原生回放](src/mat/README.md) |
 
 <details>
 <summary>项目目录</summary>
@@ -114,7 +115,8 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 │   ├── acac_ours/   # ACAC 协作方法
 │   ├── nest_rl/     # NestRL 复现与训练
 │   ├── stq/         # 基线复现与 PPO 实验
-│   └── haha/        # HAHA、分段 PPO 与榜单
+│   ├── haha/        # HAHA、分段 PPO 与榜单
+│   └── mat/         # TZW Multi-Agent Transformer
 ├── scripts/         # 运行与实验脚本
 ├── tests/           # 测试
 ├── runs/            # 按方法归档的权重与本地实验输出

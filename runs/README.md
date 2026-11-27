@@ -8,6 +8,7 @@
 | NestRL L2 | `nest_rl/l2/policy_000200.pt` | L2 末期权重，也是 L3 初始化权重 |
 | NestRL L3 | `nest_rl/l3/policy_000025.pt` | L3 入选权重，也是 L4 初始化权重 |
 | NestRL L4 | `nest_rl/l4/best.pt` | L4 U165 入选权重 |
+| MAT（tzw） | `mat/fixed-8.pt`、`mat/shared-imitation.pt`、`mat/shared-ppo-best.pt` | 固定订单旧权重、连续订单示范微调、PPO U12 入选权重 |
 | HAHA SharedKitchen | `haha/shared/multi-agent/runs/<实验名>/train/best.pt` | 五个 SharedKitchen 榜单版本 |
 | HAHA 历史版本 | `haha/{original,v1,v2,v3}/{multi-agent,single-agent}/runs/20261124-fresh/` | 保留原有 `train/` 和 `worker-pretrain/` 权重；需使用各自匹配的环境版本 |
 

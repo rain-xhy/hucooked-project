@@ -247,6 +247,30 @@
       "sha256": "e56377930aa8f68abd857a3a7ce5ed130b9c4fd4edd00acfd083736551be1582",
       "bytes": 1311825,
       "publish": true
+    },
+    {
+      "method": "mat",
+      "source": "reproduction/mat/checkpoints/fixed-8.pt",
+      "path": "runs/mat/fixed-8.pt",
+      "sha256": "164b41f3ddcedf3c4f842450b919db9754628bb4d951b98e39a2d8ff99ce1178",
+      "bytes": 554682,
+      "publish": true
+    },
+    {
+      "method": "mat",
+      "source": "reproduction/mat/checkpoints/shared-imitation.pt",
+      "path": "runs/mat/shared-imitation.pt",
+      "sha256": "e02936551f377013bc26ba6e068f115f684904655667ce30041d79dd27f4a8c0",
+      "bytes": 555706,
+      "publish": true
+    },
+    {
+      "method": "mat",
+      "source": "reproduction/mat/checkpoints/shared-ppo-best.pt",
+      "path": "runs/mat/shared-ppo-best.pt",
+      "sha256": "c975a7b777b1dcd6de7f516fea368bef508f26a5a6d68b90cae67a19a1c96313",
+      "bytes": 555834,
+      "publish": true
     }
   ]
 }
