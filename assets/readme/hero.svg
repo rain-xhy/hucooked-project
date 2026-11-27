@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+  <title id="title">HuCooked · 多智能体强化学习协作厨房</title>
+  <desc id="desc">在复杂厨房中学习分工、交接与协同决策。右侧依据 Shared Kitchen 的七乘七原生地图绘制工位与三位厨师示意。</desc>
+  <defs>
+    <rect id="wall" width="26" height="26" rx="4" fill="#36545a"/>
+    <rect id="floor" width="26" height="26" rx="4" fill="#1b4148"/>
+    <g id="station">
+      <rect width="26" height="26" rx="4" fill="#eca45e"/>
+      <path d="M5 21h16" stroke="#102e36" stroke-width="2" opacity=".3"/>
+    </g>
+    <g id="chef-hat">
+      <path d="M-7-5v-5c-5-1-5-8 0-9 2-5 7-5 9-1 5-1 8 6 3 9v6Z" fill="#f5f1e8"/>
+      <path d="M-6-6h10" stroke="#102e36" stroke-width="1.5" opacity=".3"/>
+    </g>
+  </defs>
+
+  <rect width="1200" height="320" rx="24" fill="#102e36"/>
+
+  <g id="project-title" font-family="Segoe UI, -apple-system, BlinkMacSystemFont, Microsoft YaHei, sans-serif">
+    <text x="56" y="66" fill="#66d0b6" font-size="19" font-weight="600" letter-spacing="2">MULTI-AGENT REINFORCEMENT LEARNING</text>
+    <text x="50" y="165" fill="#f5f1e8" font-size="96" font-weight="750" letter-spacing="-4">HuCooked</text>
+    <text x="56" y="222" fill="#f5f1e8" font-size="32" font-weight="500">复杂厨房中的协同决策</text>
+    <text x="58" y="268" fill="#a7bebd" font-size="22">学习分工、交接与团队配合</text>
+  </g>
+
+  <!-- The tile positions follow the native Shared Kitchen terrain. -->
+  <g id="shared-kitchen" transform="translate(848 38)">
+    <g id="terrain">
+      <use href="#wall" x="0" y="0"/><use href="#wall" x="30" y="0"/><use href="#wall" x="60" y="0"/><use href="#wall" x="90" y="0"/><use href="#station" x="120" y="0"/><use href="#wall" x="150" y="0"/><use href="#wall" x="180" y="0"/>
+      <use href="#wall" x="0" y="30"/><use href="#floor" x="30" y="30"/><use href="#floor" x="60" y="30"/><use href="#floor" x="90" y="30"/><use href="#floor" x="120" y="30"/><use href="#floor" x="150" y="30"/><use href="#station" x="180" y="30"/>
+      <use href="#wall" x="0" y="60"/><use href="#floor" x="30" y="60"/><use href="#floor" x="60" y="60"/><use href="#station" x="90" y="60"/><use href="#floor" x="120" y="60"/><use href="#floor" x="150" y="60"/><use href="#station" x="180" y="60"/>
+      <use href="#station" x="0" y="90"/><use href="#floor" x="30" y="90"/><use href="#floor" x="60" y="90"/><use href="#station" x="90" y="90"/><use href="#floor" x="120" y="90"/><use href="#floor" x="150" y="90"/><use href="#wall" x="180" y="90"/>
+      <use href="#wall" x="0" y="120"/><use href="#floor" x="30" y="120"/><use href="#floor" x="60" y="120"/><use href="#station" x="90" y="120"/><use href="#floor" x="120" y="120"/><use href="#floor" x="150" y="120"/><use href="#wall" x="180" y="120"/>
+      <use href="#station" x="0" y="150"/><use href="#floor" x="30" y="150"/><use href="#floor" x="60" y="150"/><use href="#floor" x="90" y="150"/><use href="#floor" x="120" y="150"/><use href="#floor" x="150" y="150"/><use href="#wall" x="180" y="150"/>
+      <use href="#wall" x="0" y="180"/><use href="#wall" x="30" y="180"/><use href="#wall" x="60" y="180"/><use href="#wall" x="90" y="180"/><use href="#wall" x="120" y="180"/><use href="#wall" x="150" y="180"/><use href="#wall" x="180" y="180"/>
+    </g>
+    <g id="workstations" fill="none" stroke="#102e36" stroke-width="2">
+      <circle cx="103" cy="73" r="7"/><path d="M94 73h-4m22 0h4"/>
+      <circle cx="103" cy="103" r="8"/><circle cx="103" cy="103" r="4"/>
+      <path d="M5 103h16m-3-4 4 4-4 4M188 66l10 11m-11-3 9-9"/>
+      <circle cx="9" cy="163" r="6"/><path d="M13 157a6 6 0 1 1 0 12"/>
+      <path d="M128 9h10m-10 5h10m50 28 3 8 5-9m-95 91h12"/>
+    </g>
+    <g id="chefs">
+      <g transform="translate(73 103)"><circle r="12" fill="#80adf5"/><use href="#chef-hat"/></g>
+      <g transform="translate(133 73)"><circle r="12" fill="#eca45e"/><use href="#chef-hat"/></g>
+      <g transform="translate(163 73)"><circle r="12" fill="#66d0b6"/><use href="#chef-hat"/></g>
+    </g>
+    <text x="103" y="248" fill="#a7bebd" font-family="Segoe UI, sans-serif" font-size="20" text-anchor="middle">Shared Kitchen · 7 × 7</text>
+  </g>
+</svg>
