@@ -92,30 +92,15 @@ HuCooked 以《胡闹厨房》式协作任务为载体，探索多智能体深�
 </details>
 
 <details>
-<summary>指标含义、完整基线与核验记录</summary>
+<summary>指标含义与完整实验</summary>
 
 - **团队得分**：`team_score`；默认每份普通餐或协作餐均得 20 分。
 - **出餐数**：`meals_completed`，包括普通餐与协作餐。
 - **同步成功率**：`joint_attempt_success_rate`，成功协作出锅次数除以有效尝试步数，不是协作餐占全部餐数的比例。
 - **等待步数**：`joint_wait_steps = joint_ready_steps − joint_successes`。高同步成功率也可能伴随较长等待，应结合产量一起观察。
 - **完整实验**：[HAHA 五版榜单](src/haha/leaderboard/shared/README.md) · [STQ 全部 26 组结果](src/stq/RESULTS.md) · [NestRL 阶段与队友对照](src/nest_rl/README.md)。
-- **MAT 合并核验**：在当前环境上复跑 128 局，逐局指标与归档一致；同时核对全部 300 步回放动作、事件与奖励。可用 `python -m src.mat.verify_shared` 重跑核验。
 
 </details>
-
-### NestRL L4 · 随机出生与队友扰动
-
-L4 从 L3 U25 出发，以 **100% 全图随机出生 + 5% 队友动作扰动**训练，只使用稀疏送餐奖励。以下使用原生 SharedKitchen、相同新种子，每配置 96 局，比较三名同模型策略的团队得分。
-
-| 评测场景 | L3 U25 | L4 U165 |
-| :--- | ---: | ---: |
-| 默认出生，无扰动 | 420.00 | **420.00** |
-| 同地图全图随机出生 | 183.54 | **413.54** |
-| 默认出生 + 5% 队友动作扰动 | 324.58 | **386.25** |
-
-“全图随机”指同一张 7×7 地图内随机选择三个不同的地板格，并非随机生成地图。出生位置与队友动作扰动由补充评测协议施加，指标仍取自环境输出。[完整配置、跨队友结果与分析](src/nest_rl/README.md)
-
-<sub>L5 曾尝试加入同步失败与等待惩罚，但未达到保留已有成绩的目标，已废弃；当前采用 L4。</sub>
 
 ## 运行说明
 
@@ -140,27 +125,16 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 
 </details>
 
-### 第一次评测 · 用 CPU 跑 MAT
-
-MAT 的 3 个归档权重已随仓库提供，总计约 1.67 MB。以下命令在仓库根目录执行，使用独立的项目 Conda 环境；已有适用的项目环境时可直接复用。
-
-```bash
-conda create --prefix ./.conda python=3.12 -y
-conda activate ./.conda
-python -m pip install -r src/mat/requirements.txt
-python -m src.mat.evaluate_shared --episodes 1 --seed 200000 --output runs/mat/evaluation.json
-```
-
-默认加载 `runs/mat/shared-ppo-best.pt`，结果写入 `runs/mat/evaluation.json`。该种子的归档结果为 **420 分、21 份餐、同步成功率 100%、等待 50 步**。将 `--episodes` 改为 `128` 可运行完整评测；各方法依赖分别维护，其他方法的安装和训练步骤见下表。
-
 ### 选择方法与权重
+
+各方法独立维护依赖、观测编码和模型加载方式。请从下表进入对应文档，复用已有项目 Conda 环境，或按该方法的 Python 版本和依赖要求创建环境，再加载相应权重运行评测。
 
 | 步骤 | 入口 |
 | :--- | :--- |
 | 环境安装 | [厨房环境说明](overcooked_env/README.md)，当前共享厨房固定为 `overcooked_env@508bcbf` |
 | 查看回放 | [回放前端说明](replay_frontend/README.md) |
 | ACAC 协作 | [方法组件与评估结果](docs/branches/hy.md) |
-| NestRL | [训练配置、复现命令与 L1–L4 评测](src/nest_rl/README.md)，L5 已废弃 |
+| NestRL | [训练配置、复现命令与 L1–L4 评测](src/nest_rl/README.md) |
 | STQ 基线 | [LIPO、CoMeDi、HiPT 与 PPO 训练和评测](src/stq/README.md) |
 | HAHA 与分段 PPO | [训练入口、共享厨房榜单与权重复评](docs/branches/fgy.md) |
 | E3T | [在线训练、开发集选型与留出评测](src/e3t_20m/README.md) |
