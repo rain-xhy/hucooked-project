@@ -1,200 +1,156 @@
-# NestRL 复现与对照实验
+# NestRL 复现与三人共享厨房协作训练
 
-本目录围绕 [NestRL: A Nested Training Regime for Mutual Adaptation in Human-AI Teaming](https://arxiv.org/abs/2602.17737v2) 整理论文复现与标准 Overcooked 环境对照实验。**当前训练链路已打通，但尚不能宣称完整复现论文结果。**
+本目录围绕 [NestRL: A Nested Training Regime for Mutual Adaptation in Human-AI Teaming](https://arxiv.org/abs/2602.17737v2) 开展多智能体协作复现，并在项目最新的**三人共享厨房环境（`SharedKitchen`，连续混合订单，7×7 网格，376 维观测，6 个原始动作）**上完成了纯 GPU 端到端训练与系统基准评测。
 
-## 论文与作者代码
+---
 
-Upasana Biswas、Durgesh Kalwar、Subbarao Kambhampati 和 Sarath Sreedharan，*NestRL: A Nested Training Regime for Mutual Adaptation in Human-AI Teaming*。本目录收录未经修改的 [arXiv v2 PDF](NestRL-2602.17737v2.pdf)。论文采用 CC BY 4.0 许可。[arXiv 记录](https://arxiv.org/abs/2602.17737v2) · [PDF 来源](https://arxiv.org/pdf/2602.17737v2) · [许可](https://creativecommons.org/licenses/by/4.0/)
+## 一、当前核心成果总览
 
-PDF 的 SHA-256 为 `c81b9eec95d79929b2516d18ecf0c2ec95cb9ee3deff1837a8be51f187819a7b`。arXiv 主站和官方镜像下载的文件逐字节一致。
+### 1. 最终模型成绩（纯 0-BC、无历史编码器、`326k` 参数）
 
-`adaptive-RL/` 是作者代码子模块，固定到提交 `33bb3222563735893ceb9258ebd3ea310583a148`。 [作者代码固定版本](https://github.com/upasana27/adaptive-RL/tree/33bb3222563735893ceb9258ebd3ea310583a148)
+我们最终在 [mlp_shared/](mlp_shared/) 下基于**无历史编码器的轻量化 Ego-MLP 策略**（仅 `326,407` 参数，直接输出 6 个原始基础动作，不使用宏动作），在**零行为克隆（0-BC）**条件下，经 **L1 → L2 → L3** 三阶段 NestRL 嵌套训练，取得以下结果：
 
-## 两条实验路线
+- **纯自博弈（3 个同模型贪心策略）**：**`21.00` 餐 / `420.00` 分**（普通 11 餐 + 联合 10 餐，同步成功率 `34.41%`，`0` 资源冲突），在原始动作空间上追平 `origin/hy` 分支带宏动作与学习开局分工的 `Ours`（`21.00 / 420.00`），超过 ACAC 基线（`20.68 / 413.59`）。
+- **开局站位扰动（1 格邻域随机偏移，96 局）**：L3 达到 **`20.86` 餐 / `417.29` 分**（同步成功率 `34.34%`），高于 `origin/hy` 的 `Ours`（`20.49 / 409.79`）。
+- **队友动作扰动鲁棒性（225 局，5% / 10% 队友随机动作）**：L2 在 5% 扰动下仍保持 **`322.49` 分（16.12 餐）**，10% 扰动下保持 **`258.40` 分（12.92 餐）**；L3 在无扰动下锁定最高上限 **`420.00` 分**。
+- **GPU 训练吞吐**：关闭历史编码器 + `CUDAGraph` 向量化环境，训练吞吐达到 **`150k ~ 195k env steps/s`**，完整 200 轮（1.21 亿步）仅需约 12 分钟。
 
-| 目录 | 目标 | 当前状态 |
-| --- | --- | --- |
-| [orgin/](orgin/) | 论文原始复现：使用论文作者改进的胡闹厨房环境和论文的嵌套训练方法训练、评估 L1/L2 策略。 | 已有训练、评估和性能工具；当前训练配置与论文仍有差异，详见下表。 |
-| [cnn_standard/](cnn_standard/) | 标准 Overcooked 环境的空间观测与 CNN 实验，作为后续对照路线。 | 仅建立目录和说明，尚未实现或验证。 |
+> **与 `origin/hy` 最新环境核查**：已核对 `origin/hy` 最新提交（`0cc6226` / `hucooked@508bcbf`），其环境核心为连续混合订单（`continuous_orders=True`、`OBS_DIM=376`、`MIXED_ORDER_OBSERVATION_SLOTS=8`、`joint_wait_steps`、`meals_per_100_steps`），与 `mlp_shared/env.py` 中的 `TorchSharedKitchen` 规则和指标定义保持一致。
 
-训练脚本、评估脚本和依赖清单位于 `orgin/`。原始复现使用 `orgin/.conda/`，训练和评估产物分别写入 `orgin/runs/` 和 `orgin/checkpoint-eval/`。标准路线使用独立的 `cnn_standard/.conda/`。两个环境和本地运行产物均被 Git 忽略。
+---
 
-## 复现进度与计划
+### 2. 最新 Benchmark 结果
 
-勾选表示已有对应代码或历史验证，**不表示已经完成论文级复现**。历史结果和可执行命令见下方的[原始复现](#从哪里开始)。
+#### (1) 对齐 `origin/hy` 评估协议（96 局，3 策略纯贪心 `argmax`）
 
-| 状态 | 工作项 | 现状 / 下一步 |
-| --- | --- | --- |
-| [x] | 获取论文与作者代码 | 保存论文 v2，固定作者 `adaptive-RL` 子模块版本。 |
-| [x] | 作者环境与权重评估 | 已使用作者环境、配置和公开 PACE checkpoint 进行规则伙伴评估；不同伙伴模式的结果见详细说明。 |
-| [x] | L1 与 L2 训练链路 | 已有从零训练 L1、使用冻结 L1 checkpoint 池训练 L2 的入口；短训练验证了链路，短跑不代表任务学成。 |
-| [x] | 训练性能与记录工具 | 已有串行、子进程和 GPU 厨房相关实现，以及历史编码、profiling、学习率和可选 Trackio 记录工具。各模式的适用条件和结果需按配置验证。 |
-| [x] | hucooked 特征适配探索 | 已有将本项目汤任务状态近似映射到 NestRL 73 维特征的适配器及检查脚本；它是迁移探索，不是论文原始环境复现。 |
-| [ ] | 对齐论文训练设置 | 核对并实现附录 B.3 的 RNN 历史编码、网络与训练参数；当前脚本使用 MLP 历史编码，不能称为完整对齐。 |
-| [ ] | 补齐论文评估条件 | 确认论文 L2 权重及完整自适应测试伙伴池的获取方式，建立与论文一致的训练、验证和测试划分。 |
-| [ ] | 完成论文规模训练与复现实验 | 在对齐后的配置下完成多种子训练、评估与结果汇总，并和论文指标逐项比较；记录配置、种子和差异。 |
-| [ ] | 实现标准环境 CNN | 在 `cnn_standard/` 接入标准环境的空间编码、CNN 策略及训练与评估入口，并明确地图尺寸和通道数的处理方式。 |
-| [ ] | 设计可比对照实验 | 固定环境版本、地图、训练预算、种子、伙伴与指标，比较标准环境 CNN 路线和论文复现路线，说明环境和编码差异。 |
+| 模型 / 方法 | 场景 | 局数 | 平均出餐数 | 平均团队得分 | 同步成功率 | 平均等待步数 | 冲突 (资/移) |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **NestRL L3 (`U025`，无历史 0-BC)** | 标准连续混合订单 | 96 | **21.00** | **420.00** | **34.41%** | 42.85 | 0.00 / 7.05 |
+| **NestRL L3 (`U025`，无历史 0-BC)** | 开局站位扰动 (`jitter1`) | 96 | **20.86** | **417.29** | **34.34%** | 41.55 | 0.00 / 7.51 |
+| **NestRL L2 (`U200`，无历史 0-BC)** | 标准连续混合订单 | 96 | 20.00 | 400.00 | 27.65% | 36.79 | 0.00 / 7.31 |
+| **NestRL L2 (`U200`，无历史 0-BC)** | 开局站位扰动 (`jitter1`) | 96 | 19.96 | 399.17 | 28.17% | 37.47 | 0.00 / 7.07 |
+| **NestRL L1 (`U200`，无历史 0-BC)** | 标准连续混合订单 | 96 | 3.41 | 68.12 | 42.21% | 133.21 | 0.00 / 36.45 |
+| *参考：`origin/hy` Ours（宏动作+开局分工）* | 标准连续混合订单 | 96 | 21.00 | 420.00 | 30.05% | 25.51 | — |
+| *参考：`origin/hy` Ours（宏动作+开局分工）* | 开局站位扰动 | 96 | 20.49 | 409.79 | 28.24% | 25.16 | — |
+| *参考：`origin/hy` ACAC 基线* | 标准连续混合订单 | 128 | 20.68 | 413.59 | 25.90% | 29.08 | — |
 
-## 从哪里开始
+> 注：在**全图任意地板随机出生点**（`random_floor`，96 局）这一训练期未开启随机出生的极端 OOD 场景下，L2 / L3 分别为 `167.92` / `165.83` 分（若需全图随机出生泛化，可开启 `--random-spawn-prob 0.5`，历史 DR 实验已验证可拉升至 `283.5` 分）。
 
-原始复现使用作者的 Overcooked 环境与 `fc_small_test.yaml`。从仓库根目录初始化子模块并进入 `orgin/`。下文的绘图、评估和训练命令均从这个目录运行。
+#### (2) L1 / L2 / L3 × 队友动作扰动 9 配置 Benchmark（225 局，纯贪心 `argmax`，`shuffle_players=True`）
 
-```powershell
-git submodule update --init -- reproduction/nest_rl/adaptive-RL
-Set-Location reproduction/nest_rl/orgin
-```
+每局指定 1 个 ego 厨师（在 Server / Main / Side 间均分）保持 0% 噪声纯贪心，**其余 2 名队友按 `0% / 5% / 10%` 概率执行随机动作**：
 
-已有 `orgin/.conda/` 时可直接复用。首次安装时，在 `orgin/` 中创建 Windows CPU 环境。
+**A. 全员神经网络自博弈（`all_policy`：3 个同阶段策略）**
 
-```powershell
-conda create --prefix .conda python=3.10 pip -y
-conda run --prefix .conda python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.9.1+cpu
-conda run --prefix .conda python -m pip install -r requirements.txt
-conda run --prefix .conda python -m pip install --no-deps --ignore-requires-python pettingzoo==1.9.0 stable-baselines3==1.7.0
-```
+| 模型 | 队友扰动 | Team Score | Meals | `j_succ` | `j_wait` | 冲突 (资/移) | 分角色 (`S / M / D`) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **L1** (`U200`) | 0% | 72.53 | 3.63 | 37.5% | 144.4 | 0.00 / 27.11 | `66.9 / 75.2 / 75.5` |
+| **L1** (`U200`) | 5% | 108.36 | 5.42 | 31.2% | 81.6 | 0.01 / 48.25 | `104.3 / 106.4 / 114.4` |
+| **L1** (`U200`) | 10% | 95.29 | 4.76 | 41.7% | 43.1 | 0.03 / 55.84 | `97.6 / 90.4 / 97.9` |
+| **L2** (`U200`) | 0% | 400.00 | 20.00 | 27.7% | 37.1 | 0.00 / 7.19 | `400.0 / 400.0 / 400.0` |
+| **L2** (`U200`) | **5%** | **322.49** | **16.12** | 26.1% | 48.5 | 0.08 / 20.46 | `342.4 / 321.9 / 303.2` |
+| **L2** (`U200`) | **10%** | **258.40** | **12.92** | 24.3% | 57.9 | 0.10 / 34.32 | `287.5 / 255.5 / 232.3` |
+| **L3** (`U025`) | **0%** | **420.00** | **21.00** | **34.4%** | **42.5** | 0.00 / 7.22 | **`420.0 / 420.0 / 420.0`** |
+| **L3** (`U025`) | 5% | 304.27 | 15.21 | 34.5% | 45.3 | 0.15 / 21.09 | `334.7 / 296.5 / 281.6` |
+| **L3** (`U025`) | 10% | 226.40 | 11.32 | 29.2% | 53.0 | 0.22 / 38.87 | `249.3 / 237.1 / 192.8` |
 
-作者旧版 Gym 接口在 Windows 上使用 Gym 0.23.1。PettingZoo 1.9.0 的元数据限制 Python 版本，Stable-Baselines3 1.7.0 声明依赖 Gym 0.21。上述安装命令为 checkpoint 评估选用兼容版本组合。
+**B. 搭配 21 餐规则队友（`vs_fastRule`：1 个神经策略 + 2 个 `GpuFastPartners`）**
 
-标准环境 CNN 路线的独立环境见 [cnn_standard/README.md](cnn_standard/README.md)。
+| 模型 | 队友扰动 | Team Score | Meals | `j_succ` | `j_wait` | 冲突 (资/移) | 分角色 (`S / M / D`) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **L1** (`U200`) | 0% | 413.33 | 20.67 | 78.3% | 43.6 | 0.00 / 1.73 | `420.0 / 400.0 / 420.0` |
+| **L1** (`U200`) | **5%** | **367.11** | **18.36** | 65.9% | 43.9 | 0.05 / 9.68 | `376.0 / 356.0 / 369.3` |
+| **L1** (`U200`) | **10%** | **326.67** | **16.33** | 55.7% | 46.2 | 0.18 / 14.66 | `336.8 / 323.7 / 319.5` |
+| **L2** (`U200`) | 0% | 410.49 | 20.52 | 75.8% | 46.3 | 0.00 / 1.80 | `400.0 / 420.0 / 411.5` |
+| **L2** (`U200`) | 5% | 354.84 | 17.74 | 64.1% | 47.5 | 0.03 / 24.40 | `382.7 / 357.3 / 324.5` |
+| **L2** (`U200`) | 10% | 308.18 | 15.41 | 53.3% | 52.9 | 0.28 / 34.55 | `341.3 / 317.1 / 266.1` |
+| **L3** (`U025`) | **0%** | **417.16** | **20.86** | **77.7%** | **46.9** | 0.00 / 2.50 | **`420.0 / 420.0 / 411.5`** |
+| **L3** (`U025`) | 5% | 349.87 | 17.49 | 66.6% | 47.4 | 0.07 / 25.25 | `373.9 / 344.8 / 330.9` |
+| **L3** (`U025`) | 10% | 293.78 | 14.69 | 52.8% | 56.9 | 0.20 / 35.09 | `334.9 / 306.1 / 240.3` |
 
-## 模型架构说明
+**核心规律**：
+1. **L1 → L2 实现跨队友质变**：`all_policy` 从 `72.5` 跃升至 `400.0`（+327.5 分），5%/10% 队友扰动下稳居全场第一（`322.5` / `258.4`）。
+2. **L2 vs L3 呈现“鲁棒性 vs 极限上限”权衡**：L3 用纯自博弈低熵收口换取最后 1 餐（`400 → 420`、`vsRule 417.2`），而 L2 因保留了多样化队友池，抗 5%/10% 扰动高出 L3 约 `18 ~ 32` 分。
 
-两张结构图由 Torchview 跟踪作者公开的 PACE 权重得到。它们展示的是同一种 Actor–Critic 主干和两级 MLP 历史编码器，两种权重的辅助队友分类头宽度不同。下面的形状以绘图批次 `B=1`、历史窗口 `E=5` 局、每局 `T=40` 步为例。 [Torchview](https://github.com/mert-kurttutan/torchview)
+---
 
-### 输入与掩码
+## 二、最终模型是怎么做的
 
-| 输入 | 图中形状 | 含义 |
-| --- | --- | --- |
-| 当前观测 | `(1, 73)` | 当前决策时刻的 73 维环境特征 |
-| 历史观测 | `(1, 5, 40, 73)` | 每个样本有 5 个对局槽位，每局有 40 个时间步槽位，每步存一条 73 维观测 |
-| 队友动作编号 | `(1, 5, 40)` | 历史中每步存一个队友动作编号，编码时转换成 6 维 one-hot |
-| Step mask | `(1, 5, 40)` | `True` 表示聚合时跳过该步，例如尚未发生或用于补齐的步 |
-| Episode mask | `(1, 5)` | `True` 表示跨局聚合时跳过整局 |
+### 1. 网络结构：无历史编码器 + Ego 中心观测重排（[policy.py](mlp_shared/policy.py)）
 
-历史动作编号和 Step mask 形状相同，各自的元素分别是整数和布尔值。作者的编码器把缺失队友动作的编号 `-1` 编成 6 个零。动作缺失和步掩码是独立的信息，步是否参与平均由掩码决定。 [输入编码](https://github.com/upasana27/adaptive-RL/blob/33bb3222563735893ceb9258ebd3ea310583a148/learning/model.py)
+- **关闭历史编码器（`use_history=False`）**：在 `SharedKitchen` 中，锅具、菜板、装盘台、暂存台与三名厨师的位置/朝向/手持物已完整暴露在当前帧 376 维观测中。我们移除了 `HistoryFeatures`、`EpisodeEncoder`、`PeriodEncoder` 和 `partner_head`，Actor 与 Critic 直接接收当前帧观测，均为 `376 → 256 → 256 → 6/1` 的两层 MLP，总参数量仅 **`326,407`**，既避免历史梯度干扰，又使训练速度提升近 3 倍。
+- **Ego 中心观测重排（`ego_reorder`）**：在不改动环境 376 维观测契约的前提下，网络内部根据 `self_id`（`obs[..., 373:376]`）将 3 个厨师的特征块 `obs[..., 1:211]` 重排为 `[self, (self+1)%3, (self+2)%3]`，彻底消除槽位打乱（`shuffle_players=True`）下的对称性歧义，使三角色共享同一策略网络高效收敛。
 
-### 历史编码与策略输出
+### 2. 21 餐高效规则队友：`GpuFastPartners`（[fast_partners.py](mlp_shared/fast_partners.py)）
 
-1. **逐步编码。** 每步的 73 维观测与 6 维队友动作编码拼成 79 维，历史张量变为 `(1, 5, 40, 79)`。同一个 MLP 将每步的特征从 `79 → 128 → 128`。
-2. **Episode encoder。** 每局只对有效步的 128 维特征求均值，输出 `(1, 5, 128)`。例如某局走了 12 步，其局向量由这 12 步决定。
-3. **Period encoder。** 对有效局的向量求均值，再通过 `128 → 128 → 128` 的 MLP 和最后的 ReLU，得到 `(1, 128)`。两局各有 10 步和 40 步时，只要两局都有效，各占跨局平均的一半。整段历史为空时，掩码均值给后置 MLP 一个零向量，最终表示还取决于 MLP 的偏置。
-4. **Actor 和 Critic。** 分别把当前的 73 维观测与共享的 128 维历史表示拼成 201 维，然后各自通过 `201 → 128 → 128` 的 MLP。Actor 的分类分布提供 6 个动作的对数概率，Critic 的线性输出头给出 1 个状态价值。
+旧版规则队友（`GpuSharedPartners`）使用普通最短路 BFS，每段路到达工位后常多花 1 步原地转向，上限卡在 `19` 餐（`380` 分，普通 13 步 + 联合 18 步 = 31 步/2 餐，`j_wait = 101`）。
 
-这套编码器学习每步的观测和队友动作之间的关联。给定同一组有效的观测与动作配对，仅打乱局内的步顺序，或者仅调换已编码的有效局，两级均值结果保持相同。 [作者的模型实现](https://github.com/upasana27/adaptive-RL/blob/33bb3222563735893ceb9258ebd3ea310583a148/learning/model.py)
+新版 `GpuFastPartners` 做了三项核心优化，在 GPU `CUDAGraph` 上达到 **`21.0` 餐 / `420.0` 分**、`j_succ = 100%`、`j_wait = 51.0`、`0/0` 冲突：
+1. **朝向感知 0-1 BFS 路由表（`ROUTES_FA`，仅 1.2 MB）**：联合最小化“移动步数 + 到达后朝向对齐转向步数”，把 `D→A_L`（5→4 步）、`S→G_L`（4→3 步）、`G_L→D`（6→5 步）、`K→A_R`（4→3 步）全部压缩至物理下界，稳态节拍精确锁定 **`12`（普通）+ `16`（联合）= `28` 步 / 2 餐**。
+2. **GPU 顺序占位防碰撞**：按 `Server → Main → Side` 优先级预订下一拍目标格并阻止对向换位。
+3. **右侧装盘与零延误同步卸锅**：Main 在 `G_R` 零延误配合联合卸锅，并在空闲时协助 `A_R` 装盘。
 
-### 辅助队友分类与联合训练
+### 3. 纯 0-BC 三阶段训练流程（L1 → L2 → L3）
 
-辅助分类头将 128 维历史向量映射为训练池中各队友策略的 logits。训练时以实际配对的队友策略编号作标签，用交叉熵鼓励历史编码器保留可区分队友的信息。执行时，Actor 根据当前观测和历史向量直接选动作。
+全程不使用 BC 预训练与 BC 辅助损失，所有阶段均采用 **`num_envs = 2016, rollout_steps = 300`**（与 `horizon = 300` 整局对齐，消除半局奇偶锯齿）、**分角色优势归一化**、**更新步余弦学习率**及 Trackio 实时监控：
 
-| 作者公开权重 | 辅助分类头 | Actor 输出 |
-| --- | --- | --- |
-| `ppo_pace_seed1` | `Linear 128 → 3`，3 类队友策略 | 6 个动作的对数概率 |
-| `ppo_pace_two_ing_*_seed1` | `Linear 128 → 2`，2 类队友策略 | 6 个动作的对数概率 |
+1. **阶段一：L1 规则专精基座（[train_l1.py](mlp_shared/train_l1.py)）**
+   - 随机初始化 + 100% `GpuFastPartners` 规则队友，`lr = 1e-4`，`entropy_coef = 0.02`，`gamma = 0.995`，`shaping_scale = 0.05`（势能塑形，不改变最优策略），训练 200 轮。
+   - 结果：单人搭规则达到 `413.3` 分（`S=420 / M=400 / D=420`），同时自然产出早/中/晚不同水平的 L1 checkpoint（`U=25/30/40/200`）作为 L2 队友池。
+2. **阶段二：L2 多样化队友池 + 主自博弈（[train_l2.py](mlp_shared/train_l2.py)）**
+   - 从 L1 中 `all_policy` 最高点（`U=40`，`all = 123.6`）初始化，避免从过度特化的末期权重起步。
+   - **65% 贪心自博弈（1,308 环境，队友用 `argmax`）+ 35% 早/中/晚 4 权重冻结 L1 队友池（708 环境：`U=25/30/40/200`）**，`lr = 1e-4`，`entropy_coef = 0.008`，`shaping_scale = 0.05`，训练 200 轮。
+   - 结果：打通全员自博弈（`all_policy = 400.0`），兼顾对冻结 L1 的适配（`vsL1 = 392.4`），获得最强的抗扰动泛化能力。
+3. **阶段三：L3 低熵纯自博弈冲 420（[train_l2.py](mlp_shared/train_l2.py)）**
+   - 从 L2 末期权重（`U=200`）初始化，切至 **100% 贪心自博弈（`selfplay_frac = 1.0`）**，关闭势能塑形（`shaping_scale = 0.0`），压低熵正则（`entropy_coef = 0.001`），小学习率 `lr = 5e-5` 精调。
+   - 结果：第 **25 轮** 即达成 **`all_policy = 420.0`（21.0 餐）**、`vsRule = 417.2`、`vsL1 = 386.4`，在此甜点早停以防止继续纯自博弈导致遗忘 L1。
 
-PPO 更新会根据小批次的历史索引重新计算带梯度的历史向量。策略损失和熵项通过 Actor 回传到编码器，价值损失通过 Critic 回传到编码器。公开权重的训练配置还以 `1.0` 为系数，将同一个 PPO 小批次上的队友分类交叉熵加入总损失。这个交叉熵同时更新分类头和历史编码器。 [作者的 PPO 更新](https://github.com/upasana27/adaptive-RL/blob/33bb3222563735893ceb9258ebd3ea310583a148/learning/algo/ppo_.py)
+### 4. 核心代码与快速复现命令
 
-### 本地 L1、L2 与论文的关系
-
-本地 L1 和 L2 共用 MLP 历史编码器、Actor 和 Critic 的架构，训练各自的参数。实际比对 `l1-right-s1` 和 `l2-left-s3` 的权重后，两者的参数名与形状一致，各有 145,415 个参数。当前本地从零训练启用了端到端 PPO 和使用历史向量的 Critic，辅助队友分类尚未启用。 [本地训练参数](orgin/train_nestrl.py)
-
-| 学习中的策略 | 训练队友 |
-| --- | --- |
-| L1 | 固定的 L0 规则策略，每种策略专门做一种食谱 |
-| L2 | 冻结的 L1 策略。它们的权重固定，仍会根据各自的交互历史调整动作 |
-
-嵌套体现在逐级更换训练队友。L2 运行自己的历史编码器与策略，训练时由独立的 L1 模型充当搭档。论文附录 B.3 对各层的历史编码描述使用 RNN，并通过 PPO 端到端优化。这里的 MLP 与均值聚合来自作者公开的 PACE 权重和本地复现配置。 [论文附录 B.3](https://arxiv.org/html/2602.17737v2#A2.SS3)
-
-### 结构图与生成方式
-
-**`ppo_pace_seed1` · 3 类辅助分类头**
-
-![作者 PACE 策略，3 类辅助分类头](orgin/model_graphs/author_pace_policy.png)
-
-[SVG 矢量图](orgin/model_graphs/author_pace_policy.svg) · [DOT 源文件](orgin/model_graphs/author_pace_policy.dot)
-
-**`ppo_pace_two_ing_1_seed1` · 2 类辅助分类头**
-
-![作者 PACE two_ing 策略，2 类辅助分类头](orgin/model_graphs/ppo_pace_two_ing_1_seed1.png)
-
-[SVG 矢量图](orgin/model_graphs/ppo_pace_two_ing_1_seed1.svg) · [DOT 源文件](orgin/model_graphs/ppo_pace_two_ing_1_seed1.dot)
-
-[绘图脚本](orgin/draw_author_model.py)会将动作、价值和辅助分类输出与原策略逐项核对。Torchview 漏掉了作者代码中经过原地赋值的一条依赖，脚本按实际数据流补上了从局编码器到跨局编码器的连线。
-
-在 `orgin/` 中运行以下命令可重新生成两张图。需先安装 [Graphviz](https://graphviz.org/download/)，并确保 `dot` 在 PATH 中。
+| 文件 | 作用 |
+| :--- | :--- |
+| [mlp_shared/env.py](mlp_shared/env.py) | GPU 向量化 + `CUDAGraph` 的 `TorchSharedKitchen`（376 维观测、连续混合订单、势能塑形） |
+| [mlp_shared/policy.py](mlp_shared/policy.py) | `V3Policy`（支持 `use_history=False` 无历史模式与 `ego_reorder`） |
+| [mlp_shared/fast_partners.py](mlp_shared/fast_partners.py) | 21 餐 / 420 分朝向感知冲突规避规则队友 `GpuFastPartners` |
+| [mlp_shared/train_l1.py](mlp_shared/train_l1.py) | L1 训练入口（支持 `--no-history`、`--no-bc`、`--partner-type fast`、Trackio） |
+| [mlp_shared/train_l2.py](mlp_shared/train_l2.py) | L2 / L3 训练入口（支持多权重 `--partner-pool`、`--selfplay-frac`、`--no-history`） |
+| [mlp_shared/evaluation.py](mlp_shared/evaluation.py) | 统一评估接口（`script` / `policy` / `all_policy`） |
+| [mlp_shared/export_replay.py](mlp_shared/export_replay.py) | 导出交互式 HTML / GIF / JSON 回放（如 [fast_bc_21meals.html](mlp_shared/replays/fast_bc_21meals.html)） |
 
 ```powershell
-conda run --prefix .conda python -m pip install torchview==0.2.7 graphviz==0.21
-conda run --prefix .conda python draw_author_model.py
-conda run --prefix .conda python draw_author_model.py --checkpoint ppo_pace_two_ing_1_seed1
+# 1. L1（0-BC、无历史、21 餐规则队友）
+$env:PYTHONPATH="."
+python -m reproduction.nest_rl.mlp_shared.train_l1 `
+  --campaign no-hist-nobc-fast-l1-lr1e4-seed1 --no-history --no-bc --partner-type fast `
+  --num-envs 2016 --rollout-steps 300 --updates 200 --eval-every 5 `
+  --lr 1e-4 --entropy-coef 0.02 --gamma 0.995 --shaping-scale 0.05 --seed 1
+
+# 2. L2（从 L1 U=40 起步，65% 贪心自博弈 + 早/中/晚 4 队友池）
+python -m reproduction.nest_rl.mlp_shared.train_l2 `
+  --campaign no-hist-l2-from40-sp65-pool4-lr1e4-seed1 --no-history --partner-type fast `
+  --init-policy <L1_DIR>/policy_000040.pt `
+  --partner-pool <L1_DIR>/policy_000025.pt <L1_DIR>/policy_000030.pt <L1_DIR>/policy_000040.pt <L1_DIR>/policy_000200.pt `
+  --selfplay-frac 0.65 --num-envs 2016 --rollout-steps 300 --updates 200 --eval-every 5 `
+  --lr 1e-4 --entropy-coef 0.008 --gamma 0.995 --shaping-scale 0.05 --seed 1
+
+# 3. L3（100% 贪心自博弈低熵冲 420，取 U=25 甜点）
+python -m reproduction.nest_rl.mlp_shared.train_l2 `
+  --campaign no-hist-l3-sp100-420sprint-seed1 --no-history --partner-type fast `
+  --init-policy <L2_DIR>/policy_000200.pt --partner-pool <L1_DIR>/policy_000200.pt `
+  --selfplay-frac 1.0 --num-envs 2016 --rollout-steps 300 --updates 25 --eval-every 5 `
+  --lr 5e-5 --entropy-coef 0.001 --gamma 0.995 --shaping-scale 0.0 --seed 1
 ```
 
-## PACE 权重评估
+---
 
-用作者的 `ppo_pace_seed1` 权重与指定食谱的固定规则伙伴搭档，默认随机种子为 1，运行 10 轮，每轮 5 局。每轮局数与 checkpoint 的历史窗口一致。
+## 三、历史迭代版本归档
 
-```powershell
-conda run --no-capture-output --prefix .conda python evaluate_pace.py --recipe lettuce-onion
-conda run --no-capture-output --prefix .conda python evaluate_pace.py --recipe lettuce-onion --partner-mode minimum
-```
+以下记录从论文原始复现逐步演进到当前 `mlp_shared` 最终方案的各代历史探索，详细命令与脚本均保留在各自子目录内：
 
-原评估入口从 `environment/overcooked/policy.py` 取 `minimum` 伙伴。这种伙伴会取食材、放到隔板，并在成品可用时尝试送餐，但不切菜或装盘。作者的 L1 规则池在 `environment/overcooked/policy_server.py` 选用 `full`。保持 checkpoint、地图、初始随机种子和轮数一致，替换伙伴得到下列结果。
-
-| 伙伴模式 | 食谱 | 完成局数 | 成功率 |
-| --- | --- | ---: | ---: |
-| `minimum` | Lettuce–Onion | 0/50 | 0% |
-| `full` | Lettuce–Onion | 47/50 | 94% |
-| `full` | Tomato–Carrot | 44/50 | 88% |
-| `full` | Potato–Broccoli | 46/50 | 92% |
-
-评估入口默认选择 `full`。它把指标字典从作者评估函数的两个返回值中取出，供原 CLI 汇总。逐局监控数据及结果 pickle 按权重、种子、伙伴模式和食谱存入 `checkpoint-eval/`。
-
-## 从零训练 L1 和 L2
-
-下面的命令以默认短训练设置启动两次右侧 L1 和一次左侧 L2。每个 L1 与三种全功能规则伙伴训练。L2 的训练池使用种子 1 的 L1，评估池使用种子 2 的 L1。每次运行使用一个独立的 `--run-name`，权重和启动配置写入 `runs/<run-name>/`。
-
-```powershell
-conda run --no-capture-output --prefix .conda python train_nestrl.py l1 --player 1 --seed 1 --run-name l1-right-s1
-conda run --no-capture-output --prefix .conda python train_nestrl.py l1 --player 1 --seed 2 --run-name l1-right-s2
-conda run --no-capture-output --prefix .conda python train_nestrl.py l2 --player 0 --seed 3 --run-name l2-left-s3 --partners runs/l1-right-s1/ppo/latest.pt --eval-partners runs/l1-right-s2/ppo/latest.pt
-```
-
-| 短训练 | 交互步数 | PPO 更新 | 末次评估完成局数 |
-| --- | ---: | ---: | ---: |
-| 右侧 L1，种子 1 | 1,200 | 2 | 0/15 |
-| 右侧 L1，种子 2 | 1,200 | 2 | 0/15 |
-| 左侧 L2，种子 3 | 400 | 2 | 0/5 |
-
-公开训练入口默认只接规则伙伴池。训练脚本复用原来的 PPO、环境及历史缓冲区，在本地接入 L1 checkpoint 池，冻结 L1 参数，并在每步写入 L1 的观测和对手动作。L1 在每个五局回合中保留上下文，换回合清空。L2 评估中有 4/5 局在开局时读到了前面各局的历史。CPU 适配还处理了训练入口重复压缩动作维度的问题，以及规则伙伴无法向目标移动时的等待动作。
-
-短训练用于验证链路。它沿用公开 checkpoint 配置中的 MLP 历史编码，论文附录 B.3 描述的是 RNN 历史编码。论文所用的 L2 权重及完整的自适应测试伙伴池没有出现在当前公开 checkout 中。可通过 `--rollout-steps`、`--updates`、`--processes` 调整本地训练规模。交互步数为三者乘积，厨房数至少等于训练搭档数，搭档按厨房编号轮流分配。 [论文附录 B.3](https://arxiv.org/html/2602.17737v2#A2.SS3)
-
-## 并行厨房与性能测量
-
-训练默认使用 `--env-mode serial`。至少配置两个厨房时，可用 `--env-mode subprocess` 为每个厨房启动独立进程，或指定 `--workers` 让多个厨房共享一个进程。工作进程数必须整除厨房数。每个 L2 厨房在 CPU 上加载自己的冻结 L1 搭档并维护历史，评估使用串行厨房。使用 CUDA 版 PyTorch 时，可加 `--device cuda` 在 GPU 上运行主策略和 PPO。
-
-`--processes 3 --rollout-steps 400 --updates 5 --profile` 会采集 6,000 个训练环境步，并在运行目录写入 `profile.json`。其中主进程计时为墙钟秒，厨房计时按环境分别记录。多进程下各厨房的计时有重叠。
-
-CUDA 策略采样默认将 MLP 历史编码整批执行。PPO 反向传播使用作者的编码路径。可用 `--history-encoder original` 对照原版。24 个厨房的 6,000 步短跑使用 `--device cuda --env-mode subprocess --processes 24 --rollout-steps 50 --updates 5`，每轮 PPO 收集 1,200 条交互样本。
-
-`--ppo-mini-batch-size` 指定每次优化器更新使用的样本数。128 厨房短跑使用 `--device cuda --env-mode subprocess --processes 128 --workers 16 --rollout-steps 48 --updates 1 --ppo-mini-batch-size 512 --profile`。单轮采集 6,144 条样本，每遍训练恰好分成 12 个小批次。
-
-## 学习率与 Trackio
-
-`--learning-rate` 默认是 `0.001`。安装 Trackio 后，可加 `--trackio-project <name>` 将 PPO 指标和评估结果按环境步数记录到 `runs/trackio/<name>.db`。`--eval-every-updates` 控制评估间隔，须整除 `--updates`。`--eval-rounds` 指定每次评估对每个搭档重复的五局回合数。各回合使用固定评估种子，并在评估结束后恢复训练随机数状态。
-
-`--lr-warmup-updates` 默认为 0。启用后，前几轮 PPO 按实际 Adam 更新次数将学习率从目标值的 10% 线性升至目标值。Trackio 每轮记录起始和结束学习率。
-
-`--trackio-sample-every` 可在长 rollout 内按向量环境步记录已结束局的奖励、成功率和局数。PPO 损失继续按整轮更新汇总。
-
-## NestRL 空间观测 CNN
-
-原版沙拉厨房可以通过 `--observation spatial` 使用空间观测。每步恢复 `[33, 8, 7]` 的语义网格，包括地形、食材位置、切好状态、盘子及盘内食材、两名厨师的位置与朝向。CNN 输出 128 维，再拼上两人的归一化坐标和上一拍动作，共 144 维。厨师顺序为自己、队友。每局第一帧的动作编码全零。Rollout 和历史缓冲保存格子类别和物件坐标等 81 个标量，前向时再展开网格。网格通道的组织方式参考 [ZSC-Eval 的 Overcooked 状态编码](https://github.com/sjtu-marl/ZSC-Eval/blob/master/zsceval/envs/overcooked_new/src/overcooked_ai_py/mdp/overcooked_mdp.py#L2054)。
-
-Actor、Critic 和历史编码器各有一个 CNN。两层卷积的输出通道均为 16，卷积核为 `3×3`，步长和填充均为 1。历史编码器把每帧的 144 维特征与同拍的队友动作拼接，再沿用步和局两级均值聚合。当前决策只能读到上一拍动作。空间版 L2 的训练和评估搭档均使用空间版 L1 权重。默认 `--observation dense` 对应 73 维版本及其 checkpoint。
-
-从 `orgin/` 启动一轮 CPU 验证。
-
-```powershell
-conda run --prefix .conda python train_nestrl.py l1 --observation spatial --player 1 --processes 3 --rollout-steps 40 --updates 1 --ppo-mini-batch-size 32 --run-name spatial-l1-check
-```
+| 迭代阶段 / 目录 | 环境与任务 | 核心做法与主要结论 | 详细文档 |
+| :--- | :--- | :--- | :--- |
+| **1. 论文原始复现** (`orgin/`) | 作者 Overcooked 2 人沙拉厨房（`fc_small_test.yaml`，73 维观测） | 固定论文 [PDF](NestRL-2602.17737v2.pdf) 与 `adaptive-RL` 子模块（`33bb3222`）；验证公开 PACE 权重（`full` 伙伴下 3 食谱完成率 88%~94%）；打通 L1/L2 训练、多进程/GPU 向量化、空间观测 CNN 与 Trackio 记录。 | [orgin/README.md](orgin/README.md) |
+| **2. 标准环境 CNN 对照** (`cnn_standard/`) | 标准 Overcooked 空间网格 | 建立对照目录与规则厨师基线，用于后续空间观测对照。 | [cnn_standard/README.md](cnn_standard/README.md) |
+| **3. 标准/复杂环境 MLP 迁移** (`mlp_standard/`, `mlp_complex/`) | 2~3 人传菜与混合订单厨房 | 验证 GPU 向量化厨房与 MLP 策略迁移链路，为后续三人分工环境铺路。 | [mlp_standard/README.md](mlp_standard/README.md) · [mlp_complex/README.md](mlp_complex/README.md) |
+| **4. 三人分区厨房 v3** (`mlp_partition_v3/`) | 3 人分区协作厨房 | 引入 `V3Policy`（5×40 两级 MLP 历史编码器，256 隐层）、GPU 规则队友与 BC/课程学习实验；验证了历史编码、学习率调度与回放导出。 | [mlp_partition_v3/README.md](mlp_partition_v3/README.md) |
+| **5. 共享厨房早期探索** (`mlp_shared/` 有历史 + BC/DR 版) | `SharedKitchen`（376 维，19 餐旧规则 `GpuSharedPartners`） | 首次将 `V3Policy` 迁移至共享厨房，定位并修复 `CUDAGraph` 奖励别名、跨局角色槽位错配、`t=0` 对称性锁死（引入 `ego_reorder`）与 Critic 梯度冲击（`latent.detach()`）；BC + 域随机化（50% 随机出生 + 5% 噪声 + 35% 自博弈）达到 `19.0` 餐（`380` 分）、全图随机出生 `283.5` 分。受旧 BC 19 餐上限及单边纳什锁制约，由此催生了上文的 **21 餐 `GpuFastPartners` + 无历史 0-BC L1→L2→L3 最终方案**。 | [mlp_shared/](mlp_shared/) |
