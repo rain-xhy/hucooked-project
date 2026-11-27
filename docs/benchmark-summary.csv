@@ -1,0 +1,9 @@
+checkpoint,episodes,team_score,meals_completed,sync_success_percent,joint_wait_steps,sync_aggregation,source
+ACAC / Ours,96,420.00,21.00,30.05,25.51,pooled,docs/branches/hy.md
+NestRL L3 U25,96,420.00,21.00,34.41,42.85,episode_mean,src/nest_rl/README.md
+NestRL L4 U165,96,420.00,21.00,26.22,43.03,episode_mean,src/nest_rl/README.md
+HAHA · 周期 BC,24,440.00,22.00,100.00,11.00,pooled,src/haha/leaderboard/shared/README.md
+HAHA · 分段 PPO,24,440.00,22.00,50.00,12.00,pooled,src/haha/leaderboard/shared/README.md
+E3T,100,400.00,20.00,14.86,66.46,episode_mean,src/e3t_20m/README.md
+MAT PPO U12,128,420.00,21.00,100.00,50.00,episode_mean,src/mat/README.md
+PPO–MLP 20M,12,400.00,20.00,71.43,58.25,episode_mean,src/stq/RESULTS.md
