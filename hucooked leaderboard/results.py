@@ -28,7 +28,30 @@ def score(row):
     return row.get("score", row.get("team_score"))
 
 
-def summary(rows):
+def order_delivery_metrics(rows):
+    """Pool released tickets and release-to-service durations across Shared episodes."""
+    released = served = total_steps = 0
+    for row in rows:
+        for order in row["orders"]:
+            if order["released_at"] < 0:
+                continue
+            released += 1
+            if order["status"] == "served":
+                duration = order["completed_at"] - order["released_at"]
+                if duration < 0:
+                    raise ValueError(f"Order {order['id']} was served before release")
+                served += 1
+                total_steps += duration
+    return {
+        "released_orders": released,
+        "served_orders": served,
+        "total_delivery_steps": total_steps,
+        "order_completion_rate": served / released if released else None,
+        "mean_delivery_steps": total_steps / served if served else None,
+    }
+
+
+def summary(rows, *, shared=False):
     values = [score(row) for row in rows]
     ticks = [row["ticks"] for row in rows if "ticks" in row]
     order_counts = {}
@@ -48,6 +71,8 @@ def summary(rows):
            if all("meals_completed" in row for row in rows) else {}),
         **({"mean_finish_steps": mean(ticks)} if ticks else {}),
         **{key: mean(row[key] for row in rows) for key in official_metrics},
+        **({"order_metrics": order_delivery_metrics(rows)}
+           if shared and all("orders" in row for row in rows) else {}),
     }
 
 
@@ -139,15 +164,16 @@ def finish(directory, metadata, env):
     for layout, seat, row in episodes(payload):
         by_map.setdefault(layout, {}).setdefault(seat, []).append(row)
     stats, best = {}, {}
+    shared = metadata["version"] == "shared"
     for map_name, groups in by_map.items():
         combined = [r for group in groups.values() for r in group]
-        stats[map_name] = summary(combined)
+        stats[map_name] = summary(combined, shared=shared)
         if "meals_per_100_steps" in stats[map_name]:
             reference = selected / "official-reference.json"
             if reference.is_file():
-                stats[map_name]["official_reference"] = summary(json.loads(reference.read_text()))
+                stats[map_name]["official_reference"] = summary(json.loads(reference.read_text()), shared=shared)
         if len(groups) > 1:
-            stats[map_name]["by_seat"] = {str(seat): summary(rows) for seat, rows in groups.items()}
+            stats[map_name]["by_seat"] = {str(seat): summary(rows, shared=shared) for seat, rows in groups.items()}
         seat, row = max(((seat, row) for seat, group in groups.items() for row in group), key=lambda entry: score(entry[1]))
         best[map_name] = {"seat": seat, **row}
     (directory / "scores.json").write_text(json.dumps(stats, indent=2) + "\n")

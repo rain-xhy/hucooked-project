@@ -16,6 +16,13 @@
     "three_contributor_meals": 22,
     "movement_conflicts": 0,
     "resource_conflicts": 0,
-    "mean_finish_steps": 300
+    "mean_finish_steps": 300,
+    "order_metrics": {
+      "released_orders": 576,
+      "served_orders": 528,
+      "total_delivery_steps": 14040,
+      "order_completion_rate": 0.9166666666666666,
+      "mean_delivery_steps": 26.59090909090909
+    }
   }
 }

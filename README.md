@@ -8,15 +8,17 @@
 
 五版都在同一固定厨房中运行。每局 300 步，普通订单和协作订单每送出一单均得 20 分。协作订单需要两名厨师在对应位置同时出锅。官方评估使用相同的 24 个种子（84031–84054）；这些结果衡量该厨房上的表现，跨地图泛化尚待验证。
 
-| 方法 | 执行时控制三名厨师的模型 | 平均出餐 | 平均得分 | 同步成功率 | 每局等待步数 |
-|---|---|---:|---:|---:|---:|
-| [随机初始化纯 PPO](hucooked%20leaderboard/shared/multi-agent/runs/01-pure-ppo-380/README.md) | 分层 Manager 和 Worker，执行参数 69,394 | 19 | 380 | 21.74% | 45 |
-| [420 规则策略 + BC](hucooked%20leaderboard/shared/multi-agent/runs/02-rule-bc-420/README.md) | 模仿规则分工与动作的 Manager 和 Worker，执行参数 69,394 | 21 | 420 | 18.03% | 50 |
-| [440 周期规则策略 + BC](hucooked%20leaderboard/shared/multi-agent/runs/03-rule-bc-440/README.md) | 可观测周期相位的 Manager 和 Worker，执行参数 85,007 | 22 | 440 | 100% | 11 |
-| [420 BC + 规划器引导的 Q 网络](hucooked%20leaderboard/shared/multi-agent/runs/04-planner-q-440/README.md) | 集中式联合动作网络，59,992 个参数，每步从 216 个动作组合中选一个 | 22 | 440 | 100% | 11 |
-| [420 BC + 分段高层 PPO](hucooked%20leaderboard/shared/multi-agent/runs/05-segment-ppo-440/README.md) | 78 个可学习高层参数，配合 13 个工作片段和导航程序 | 22 | 440 | 50% | 12 |
+| 方法 | 执行时控制三名厨师的模型 | 平均出餐 | 平均得分 | 同步成功率 | 每局等待步数 | 订单完成率¹ | 平均交付步数¹ |
+|---|---|---:|---:|---:|---:|---:|---:|
+| [随机初始化纯 PPO](hucooked%20leaderboard/shared/multi-agent/runs/01-pure-ppo-380/README.md) | 分层 Manager 和 Worker，执行参数 69,394 | 19 | 380 | 21.74% | 45 | 90.48% | 29.47 |
+| [420 规则策略 + BC](hucooked%20leaderboard/shared/multi-agent/runs/02-rule-bc-420/README.md) | 模仿规则分工与动作的 Manager 和 Worker，执行参数 69,394 | 21 | 420 | 18.03% | 50 | 91.30% | 27.71 |
+| [440 周期规则策略 + BC](hucooked%20leaderboard/shared/multi-agent/runs/03-rule-bc-440/README.md) | 可观测周期相位的 Manager 和 Worker，执行参数 85,007 | 22 | 440 | 100% | 11 | 91.67% | 26.59 |
+| [420 BC + 规划器引导的 Q 网络](hucooked%20leaderboard/shared/multi-agent/runs/04-planner-q-440/README.md) | 集中式联合动作网络，59,992 个参数，每步从 216 个动作组合中选一个 | 22 | 440 | 100% | 11 | 95.65% | 26.64 |
+| [420 BC + 分段高层 PPO](hucooked%20leaderboard/shared/multi-agent/runs/05-segment-ppo-440/README.md) | 78 个可学习高层参数，配合 13 个工作片段和导航程序 | 22 | 440 | 50% | 12 | 91.67% | 25.73 |
 
-**同步成功率**的分母是有效的协作出锅尝试步数。**等待步数**是协作菜具备出锅条件的步数减去成功出锅步数。最后一版每局 22 次尝试、11 次成功，仍然能交付全部 22 单。两个指标分别反映交互时机和等待成本。
+¹ 两项均汇总全部 24 局。订单完成率 = 已交付订单总数 ÷ 已发布订单总数。平均交付步数 = 已交付订单从发布到送达的总步数 ÷ 已交付订单总数。[查看公式与逐版计数](hucooked%20leaderboard/shared/README.md#订单指标的计算口径)
+
+**同步成功率**的分母是有效的协作出锅尝试步数。**等待步数**是协作菜具备出锅条件的步数减去成功出锅步数。最后一版每局 22 次尝试、11 次成功，共交付 22 单。两个指标分别反映交互时机和等待成本。
 
 三版 440 的证据含义各不相同。周期 BC 直接模仿一份已知能得 440 的排程。离线 Q 使用 420 策略与规划器候选各自的前 90 步，其中一个候选已知能得 440，再用出餐奖励估计长期动作价值。分段 PPO 从 420 模型的一局行为提取工作片段，只用自己采样的出餐回报学习分配、先后和工位；片段边界和底层导航由程序定义。把 420 行为转换成初始片段策略时实测为 20 分，第 23 轮更新后选出的确定性策略在原生环境复评为 24 局 440。
 

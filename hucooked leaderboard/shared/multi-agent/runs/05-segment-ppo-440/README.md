@@ -2,6 +2,8 @@
 
 每局平均出餐 **22.00** 单，团队得分 **440.00**，同步成功率 **50.00%**，等待 **12.00** 步。
 
+按[榜单计算口径](../../../README.md#订单指标的计算口径)汇总 24 局，已交付 528 单，共发布 576 单，订单完成率为 **91.67%**。已交付订单合计耗时 13,584 步，平均每单 **25.73 步**。
+
 Shared 三人连续订单，环境版本 `de37e0818c2e76311e105ab8689e5162bd84133f`，固定厨房，24 个配对种子 84031–84054，每局 300 步。同步成功率按各局成功出锅次数除以尝试步数后取平均。
 
 ## 模型与训练设置
@@ -14,4 +16,4 @@ Shared 三人连续订单，环境版本 `de37e0818c2e76311e105ab8689e5162bd8413
 
 ## 文件
 
-[入榜权重](train/best.pt) · [官方逐局评估](train/best-evaluation.json.gz) · [四项指标](scores.json) · [Unity 回放](replay/shared.ocrep.json) · [回放原始轨迹](replay/shared.trajectory.json) · [训练日志](evidence/progress.jsonl)
+[入榜权重](train/best.pt) · [官方逐局评估](train/best-evaluation.json.gz) · [指标与计数](scores.json) · [Unity 回放](replay/shared.ocrep.json) · [回放原始轨迹](replay/shared.trajectory.json) · [训练日志](evidence/progress.jsonl)
