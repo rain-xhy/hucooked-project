@@ -13,19 +13,20 @@
 
 ## 运行
 
-从仓库检出 `yhw` 分支后，在仓库根目录执行以下命令。训练所用的 SharedKitchen 引擎已随目录固定到 `de37e08`，可以跳过 Git 子模块初始化。历史 Colab 使用 Python 3.13.16、PyTorch 2.14.1+cu130 和 A100 80 GB，CPU 验证使用 Python 3.10.21、PyTorch 2.9.1。
+在仓库根目录用已激活的项目 Python 3.10 环境执行以下命令。当前训练和评估使用根目录的 `overcooked_env@508bcbf`。其 SharedKitchen 源码和原实验的 `de37e08` 一致，原检查点可直接评估或续训。历史 Colab 使用 Python 3.13.16、PyTorch 2.14.1+cu130 和 A100 80 GB，CPU 验证使用 Python 3.10.21、PyTorch 2.9.1。
 
 ```sh
-python -m pip install -r reproduction/e3t_20m/requirements.txt
-python -m reproduction.e3t_20m smoke --device cpu
-python -m reproduction.e3t_20m train --device cuda --workers 11 --out reproduction/e3t_20m/runs/seed42
+git submodule update --init overcooked_env
+python -m pip install -e ./overcooked_env -r src/e3t_20m/requirements.txt
+python -m src.e3t_20m smoke --device cpu
+python -m src.e3t_20m train --device cuda --workers 11 --out src/e3t_20m/runs/seed42
 ```
 
-训练命令负责创建两套网络与优化器、并行采样、参数更新、分段保存、开发集选型和最终留出评估。本地输出保存在 `reproduction/e3t_20m/runs/seed42/`。其中 `latest.pt` 保存模型、优化器、环境轨迹和随机数状态，`best.pt` 和 `selection.json` 记录开发集选出的模型与解码方式，`holdout.json` 保存最终逐局结果。中断后沿用相同训练配置和输出目录继续。单独复测本地生成的入选模型可使用 CPU。
+训练命令负责创建两套网络与优化器、并行采样、参数更新、分段保存、开发集选型和最终留出评估。本地输出保存在 `src/e3t_20m/runs/seed42/`。其中 `latest.pt` 保存模型、优化器、环境轨迹和随机数状态，`best.pt` 和 `selection.json` 记录开发集选出的模型与解码方式，`holdout.json` 保存最终逐局结果。中断后沿用相同训练配置和输出目录继续。单独复测本地生成的入选模型可使用 CPU。
 
 ```sh
-python -m reproduction.e3t_20m train --device cuda --workers 11 --out reproduction/e3t_20m/runs/seed42 --resume
-python -m reproduction.e3t_20m evaluate --device cpu --checkpoint reproduction/e3t_20m/runs/seed42/best.pt --out reproduction/e3t_20m/runs/seed42/reeval.json
+python -m src.e3t_20m train --device cuda --workers 11 --out src/e3t_20m/runs/seed42 --resume
+python -m src.e3t_20m evaluate --device cpu --checkpoint src/e3t_20m/runs/seed42/best.pt --out src/e3t_20m/runs/seed42/reeval.json
 ```
 
 `results/` 内的 JSON 和 CSV 来自已完成的纯 E3T 实验。模型权重与优化器状态由训练命令在本地生成。下文的计时对应历史硬件环境，新机器上可以用同一开发与留出协议对照结果。
@@ -37,22 +38,22 @@ python -m reproduction.e3t_20m evaluate --device cpu --checkpoint reproduction/e
 历史实验用独立进程把 `progress.jsonl` 同步到 Trackio 0.45.0。要查看自己训练中的曲线，可在仓库根目录创建单独的日志环境，运行以下命令。同步器每 15 秒读一次完整日志行，横轴为联合环境步。
 
 ```sh
-python -m venv reproduction/e3t_20m/runs/.venv-trackio
-reproduction/e3t_20m/runs/.venv-trackio/bin/python -m pip install 'trackio==0.45.0'
-reproduction/e3t_20m/runs/.venv-trackio/bin/python -m reproduction.e3t_20m.track_run --out reproduction/e3t_20m/runs/seed42 --follow
+python -m venv src/e3t_20m/runs/.venv-trackio
+src/e3t_20m/runs/.venv-trackio/bin/python -m pip install 'trackio==0.45.0'
+src/e3t_20m/runs/.venv-trackio/bin/python -m src.e3t_20m.track_run --out src/e3t_20m/runs/seed42 --follow
 ```
 
 在另一个终端从仓库根目录启动面板，打开终端打印的本地地址。Colab 可在笔记本中用 `google.colab.output.serve_kernel_port_as_iframe(7863)` 显示面板。曲线中的 `train/` 对应在线采样和优化，`validation/` 对应 32 局开发评估，`holdout/` 标在选中权重的步数。
 
 ```sh
-reproduction/e3t_20m/runs/.venv-trackio/bin/python -m reproduction.e3t_20m.track_run --out reproduction/e3t_20m/runs/seed42 --show
+src/e3t_20m/runs/.venv-trackio/bin/python -m src.e3t_20m.track_run --out src/e3t_20m/runs/seed42 --show
 ```
 
-训练结束后，省略 `--follow` 可一次性导入并核对全部日志。重复导入会跳过已有标量。若断点恢复重写了已经显示的步数，同步器和面板命令都可加 `--data-dir reproduction/e3t_20m/runs/seed42-trackio-resumed`，用恢复后的日志另建面板。数据库默认保存在训练输出目录旁的 `reproduction/e3t_20m/runs/seed42-trackio/`。[日志同步器源码](track_run.py)
+训练结束后，省略 `--follow` 可一次性导入并核对全部日志。重复导入会跳过已有标量。若断点恢复重写了已经显示的步数，同步器和面板命令都可加 `--data-dir src/e3t_20m/runs/seed42-trackio-resumed`，用恢复后的日志另建面板。数据库默认保存在训练输出目录旁的 `src/e3t_20m/runs/seed42-trackio/`。[日志同步器源码](track_run.py)
 
 ## 训练方法
 
-算法采用 Yan 等发表于 NeurIPS 2023 的 E3T。核心做法是在线混合当前策略和随机策略来生成训练队友，并用历史记录预测队友接下来的动作。三厨师、工位动作、奖励塑形和下面的网络规模属于本项目对 SharedKitchen 的适配。[E3T 原论文](https://proceedings.neurips.cc/paper_files/paper/2023/hash/07a363fd2263091c2063998e0034999c-Abstract-Conference.html) · [固定的 SharedKitchen 引擎](https://github.com/rain-xhy/hucooked/commit/de37e0818c2e76311e105ab8689e5162bd84133f)
+算法采用 Yan 等发表于 NeurIPS 2023 的 E3T。核心做法是在线混合当前策略和随机策略来生成训练队友，并用历史记录预测队友接下来的动作。三厨师、工位动作、奖励塑形和下面的网络规模属于本项目对 SharedKitchen 的适配。[E3T 原论文](https://proceedings.neurips.cc/paper_files/paper/2023/hash/07a363fd2263091c2063998e0034999c-Abstract-Conference.html) · [当前 SharedKitchen 版本](https://github.com/rain-xhy/hucooked/tree/508bcbf066216acb7bb66bdd2ecf9148bf73c7c1)
 
 **观测与动作。** 固定布局下，每名厨师的原生观测有 866 个值。去掉 490 维常量地图编码、追加自身的 70 维厨师状态后得到 446 维。适配器还将自己开局所在的三个官方出生格编码成独热向量，写入三个恒定的玩家激活位。策略在 14 个意图中选择，包括等待、让路、取主料、取配料、取盘、锅的西侧或东侧、切配、组装台的西侧或东侧、送餐，以及三种提前就位动作。动作掩码根据手持物、工位状态和占位限制可选意图。导航器负责寻路、避开已占用或已预留的格子，并执行一个原生移动、等待或互动动作。策略每个游戏步都能重新选择意图。适配器只调用引擎的单步寻路函数，三个厨师的工位意图均由网络选择。
 

@@ -7,12 +7,12 @@ from pathlib import Path
 import torch
 from filelock import FileLock, Timeout
 
-from . import shared_large
+from . import DEFAULT_OUT, shared_large
+from .shared_adapter import ARCHIVED_ENGINE_COMMIT
 from .shared_large import MODES, LargeConfig, LargeTraining, math_mode
 from .shared_train import ENGINE, load, save_json
 
 STAGES = (32_768, 1_572_864, 3_145_728, 4_718_592, 6_291_456)
-DEFAULT_OUT = Path("reproduction/e3t_20m/runs/seed42")
 
 
 def smoke(device):
@@ -103,7 +103,9 @@ def train(args):
             "steps": args.steps,
         }
         if args.resume:
-            if not manifest.is_file() or json.loads(manifest.read_text()) != protocol:
+            previous = json.loads(manifest.read_text()) if manifest.is_file() else None
+            archived_protocol = {**protocol, "engine": ARCHIVED_ENGINE_COMMIT}
+            if previous not in (protocol, archived_protocol):
                 raise ValueError("Use --resume with the same output directory and step target")
         else:
             if any(p.name != ".train.lock" for p in folder.iterdir()):

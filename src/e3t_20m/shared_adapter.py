@@ -5,16 +5,17 @@ from functools import lru_cache
 
 import numpy as np
 
-from .vendor.shared import SharedKitchen
-from .vendor.shared.kitchen import DIRECTIONS, INTERACT, STAY
-from .vendor.shared.layouts import (
+from overcooked_ai_py.cooperative.shared import SharedKitchen
+from overcooked_ai_py.cooperative.shared.kitchen import DIRECTIONS, INTERACT, STAY
+from overcooked_ai_py.cooperative.shared.layouts import (
     ASSEMBLY_PORTS,
     COOKER_PORTS,
     FLOOR,
     STATIONS,
 )
 
-ENGINE_COMMIT = "de37e0818c2e76311e105ab8689e5162bd84133f"
+ENGINE_COMMIT = "508bcbf066216acb7bb66bdd2ecf9148bf73c7c1"
+ARCHIVED_ENGINE_COMMIT = "de37e0818c2e76311e105ab8689e5162bd84133f"
 ENGINE_FINGERPRINT = "675c139d2478d5ea790931989baba22e0bc36758a037a4a5f482caadbd4ccbc0"
 
 

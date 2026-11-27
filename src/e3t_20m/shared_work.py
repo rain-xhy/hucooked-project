@@ -5,9 +5,9 @@ from numbers import Integral
 import numpy as np
 
 from .shared_adapter import ASSEMBLE_W, COOK_E, COOK_W, SharedE3TEnv, route
-from .vendor.shared.controller import navigation_action
-from .vendor.shared.kitchen import DIRECTIONS, STAY
-from .vendor.shared.layouts import FLOOR, SPAWNS
+from overcooked_ai_py.cooperative.shared.controller import navigation_action
+from overcooked_ai_py.cooperative.shared.kitchen import DIRECTIONS, STAY
+from overcooked_ai_py.cooperative.shared.layouts import FLOOR, SPAWNS
 
 # These are public positions on the pinned layout. All three chefs get the same
 # menu. A staging choice moves one tile toward a position, or waits on arrival.

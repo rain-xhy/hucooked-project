@@ -10,7 +10,7 @@ from dataclasses import asdict
 import numpy as np
 import torch
 
-from .shared_adapter import ENGINE_COMMIT
+from .shared_adapter import ARCHIVED_ENGINE_COMMIT, ENGINE_COMMIT
 from .shared_work import SharedWorkEnv
 
 ENGINE = ENGINE_COMMIT
@@ -426,7 +426,7 @@ class Training(Model):
 
 
 def load_weights(model, d):
-    if d["engine"] != ENGINE or d["actions"] != model.actions:
+    if d["engine"] not in (ENGINE, ARCHIVED_ENGINE_COMMIT) or d["actions"] != model.actions:
         raise ValueError("Engine or action-space checkpoint mismatch")
     model.policy.load_state_dict(d["policy"])
     model.predictor.load_state_dict(d["predictor"])
