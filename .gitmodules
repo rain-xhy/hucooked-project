@@ -1,5 +1,5 @@
 [submodule "hucooked"]
-	path = hucooked
+	path = overcooked_env
 	url = https://github.com/rain-xhy/hucooked.git
 [submodule "replay_frontend"]
 	path = replay_frontend

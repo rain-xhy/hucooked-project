@@ -1,0 +1,38 @@
+# Python environments and caches
+.conda/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Training outputs and checkpoints
+**/runs/
+!/runs/
+/runs/*
+!/runs/.gitkeep
+checkpoints/
+wandb/
+trackio/
+*.pt
+*.pth
+*.ckpt
+*.log
+*.tmp
+
+# Local settings and system files
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Evaluation outputs
+checkpoint-eval/
