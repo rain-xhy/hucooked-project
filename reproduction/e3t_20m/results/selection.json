@@ -1,0 +1,8 @@
+{
+  "selected_step": 2752512,
+  "mode": "greedy",
+  "stage": "ppo",
+  "team_score": 400.0,
+  "validation_seed": 918401,
+  "validation_episodes": 32
+}
