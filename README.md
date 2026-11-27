@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="assets/readme/hero.svg" width="100%" alt="HuCooked，多智能体强化学习协作厨房，在复杂地图中学习分工、交接与协同决策">
+  <img src="docs/images/hero.svg" width="100%" alt="HuCooked，多智能体强化学习协作厨房，在复杂地图中学习分工、交接与协同决策">
 </p>
 
 <p align="center">
-  <a href="#演示"><img src="assets/readme/nav-demo.svg" width="104" height="40" alt="演示"></a>
-  <a href="#方法"><img src="assets/readme/nav-method.svg" width="104" height="40" alt="方法"></a>
-  <a href="#实验成绩"><img src="assets/readme/nav-results.svg" width="132" height="40" alt="实验成绩"></a>
-  <a href="#运行说明"><img src="assets/readme/nav-usage.svg" width="132" height="40" alt="运行说明"></a>
-  <a href="#参考仓库"><img src="assets/readme/nav-references.svg" width="132" height="40" alt="参考仓库"></a>
-  <a href="#贡献者"><img src="assets/readme/nav-contributors.svg" width="116" height="40" alt="贡献者"></a>
+  <a href="#演示"><img src="docs/images/nav-demo.svg" width="104" height="40" alt="演示"></a>
+  <a href="#方法"><img src="docs/images/nav-method.svg" width="104" height="40" alt="方法"></a>
+  <a href="#实验成绩"><img src="docs/images/nav-results.svg" width="132" height="40" alt="实验成绩"></a>
+  <a href="#运行说明"><img src="docs/images/nav-usage.svg" width="132" height="40" alt="运行说明"></a>
+  <a href="#参考仓库"><img src="docs/images/nav-references.svg" width="132" height="40" alt="参考仓库"></a>
+  <a href="#贡献者"><img src="docs/images/nav-contributors.svg" width="116" height="40" alt="贡献者"></a>
 </p>
 
 HuCooked 以《胡闹厨房》式协作任务为载体，探索多智能体深度强化学习在复杂地图中的分工与配合。研究关注取料、加工、交接和上菜之间的任务衔接，以及空间约束与共享资源下的协同决策。
@@ -16,8 +16,8 @@ HuCooked 以《胡闹厨房》式协作任务为载体，探索多智能体深�
 ## 演示
 
 <p align="center">
-  <a href="doc/media/kitchen-gallery.gif">
-    <img src="doc/media/kitchen-gallery.gif" alt="四宫格日景正视回放，依次展示 Shared Kitchen、Cramped Room、Asymmetric Advantages 与 Counter Circuit 的协作出餐" width="100%">
+  <a href="docs/images/kitchen-gallery.gif">
+    <img src="docs/images/kitchen-gallery.gif" alt="四宫格日景正视回放，依次展示 Shared Kitchen、Cramped Room、Asymmetric Advantages 与 Counter Circuit 的协作出餐" width="100%">
   </a>
   <br>
   <sub>四种厨房 · 日景正视图 · 10 秒同步展示 · 点击查看原图</sub>
@@ -30,10 +30,10 @@ HuCooked 以《胡闹厨房》式协作任务为载体，探索多智能体深�
 
 | 位置 | 地图 | 智能体 / 策略 | 原始回放 |
 | :--- | :--- | :--- | :--- |
-| 左上 | Shared Kitchen | 三人共享 `420sprint` 策略 | [下载](doc/media/hy420.replay.json) |
-| 右上 | Cramped Room | 上游自我对弈模型 | [下载](doc/media/cramped_room.ocrep.json) |
-| 左下 | Asymmetric Advantages | 上游 `GreedyHumanModel` | [下载](doc/media/asymmetric_advantages.ocrep.json) |
-| 右下 | Counter Circuit | 上游 `GreedyHumanModel` | [下载](doc/media/counter_circuit_o_1order.ocrep.json) |
+| 左上 | Shared Kitchen | 三人共享 `420sprint` 策略 | [下载](docs/media/hy420.replay.json) |
+| 右上 | Cramped Room | 上游自我对弈模型 | [下载](docs/media/cramped_room.ocrep.json) |
+| 左下 | Asymmetric Advantages | 上游 `GreedyHumanModel` | [下载](docs/media/asymmetric_advantages.ocrep.json) |
+| 右下 | Counter Circuit | 上游 `GreedyHumanModel` | [下载](docs/media/counter_circuit_o_1order.ocrep.json) |
 
 共享厨房使用 fork 中的 `hy` 环境 `de37e08` 和 `420sprint` 第 60 次更新的模型，该次完整对局在 300 步内完成 21 份餐、获得 420 分。其余三图使用同一 fork 中保留的上游原生环境。Cramped Room 使用 `checkpoint-550` 自我对弈模型，另外两图使用规划策略。
 
@@ -98,10 +98,10 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 | :--- | :--- |
 | 环境安装 | [厨房环境说明](overcooked_env/README.md)，当前共享厨房固定为 `overcooked_env@508bcbf` |
 | 查看回放 | [回放前端说明](replay_frontend/README.md) |
-| ACAC 协作 | [方法组件与评估结果](doc/branches/hy.md) |
+| ACAC 协作 | [方法组件与评估结果](docs/branches/hy.md) |
 | NestRL | [训练配置、复现命令与 L1–L4 评测](src/nest_rl/README.md)，L5 已废弃 |
 | STQ 基线 | [LIPO、CoMeDi、HiPT 与 PPO 训练和评测](src/stq/README.md) |
-| HAHA 与分段 PPO | [训练入口、共享厨房榜单与权重复评](doc/branches/fgy.md) |
+| HAHA 与分段 PPO | [训练入口、共享厨房榜单与权重复评](docs/branches/fgy.md) |
 
 <details>
 <summary>项目目录</summary>
@@ -118,7 +118,7 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 ├── scripts/         # 运行与实验脚本
 ├── tests/           # 测试
 ├── runs/            # 本地实验输出
-└── doc/             # 项目文档
+└── docs/            # 项目文档
 ```
 
 <sub>训练权重、实验输出、Python 环境与缓存由根目录的 .gitignore 管理。</sub>
@@ -189,5 +189,5 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 ---
 
 <p align="center">
-  <sub>深度强化学习课程小组作业 · <a href="doc/团队作业要求DRLv1-1A.md">课程项目要求</a></sub>
+  <sub>深度强化学习课程小组作业 · <a href="docs/团队作业要求DRLv1-1A.md">课程项目要求</a></sub>
 </p>
