@@ -1,0 +1,14 @@
+{
+  "state": "running",
+  "pid": 2522511,
+  "physical_gpu": 1,
+  "cuda_visible_devices": "1",
+  "mode": "rl",
+  "backbone": "transformer",
+  "env_steps": 48715200,
+  "rl_env_steps": 48715200,
+  "effective_total_env_steps": 100000000,
+  "updated_at": "2026-11-27T13:05:21.270653+00:00",
+  "update": 10149,
+  "elapsed_seconds": 95079.47675149993
+}

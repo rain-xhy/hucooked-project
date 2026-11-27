@@ -1,0 +1,185 @@
+{
+  "algorithm": "CoMeDi",
+  "arguments": {
+    "output": "/home/shaotianqi/hucooked/comedi/results",
+    "steps": 16000000,
+    "num_envs": 16,
+    "rollout": 300,
+    "population": 8,
+    "rounds_per_convention": 128,
+    "seed": 1,
+    "device": "cuda:0",
+    "workers": 4,
+    "gamma": 0.9985,
+    "gae_lambda": 0.95,
+    "epochs": 4,
+    "minibatches": 8,
+    "lr": 0.0003,
+    "clip": 0.2,
+    "entropy_coef": 0.001,
+    "value_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "sp_fraction": 0.5,
+    "xp_fraction": 0.25,
+    "xp_weight": 0.5,
+    "xp_probe_fraction": 0.2,
+    "mp_weight": 1.0,
+    "mp_prefix_max": 64,
+    "mp_current_prob": 0.5,
+    "cbr_fraction": 0.1,
+    "cbr_sp_fraction": 0.5,
+    "cbr_bc_coef": 0.5,
+    "eval_interval": 500000,
+    "eval_episodes": 12,
+    "save_interval": 250000,
+    "max_seconds": 158219,
+    "resume": null,
+    "warm_start_conventions": false,
+    "demonstrations": "/home/shaotianqi/hucooked/baseline_common/demonstrations.npz",
+    "bc_epochs": 64,
+    "smoke": false
+  },
+  "budgets_jointenvsteps": {
+    "requested_total": 16000000,
+    "effective_total": 16000000,
+    "demonstration_env_steps": 9600,
+    "effective_rl_total": 15990400,
+    "population_total": 14391360,
+    "cbr_total": 1599040,
+    "conventions": [
+      {
+        "sp": 1798912,
+        "xp": 0,
+        "mp": 0
+      },
+      {
+        "sp": 899456,
+        "xp": 449728,
+        "mp": 449728
+      },
+      {
+        "sp": 899456,
+        "xp": 449728,
+        "mp": 449728
+      },
+      {
+        "sp": 899456,
+        "xp": 449728,
+        "mp": 449728
+      },
+      {
+        "sp": 899456,
+        "xp": 449728,
+        "mp": 449728
+      },
+      {
+        "sp": 899456,
+        "xp": 449728,
+        "mp": 449728
+      },
+      {
+        "sp": 899456,
+        "xp": 449728,
+        "mp": 449728
+      },
+      {
+        "sp": 899488,
+        "xp": 449744,
+        "mp": 449744
+      }
+    ],
+    "cbr": {
+      "cbr_sp": 799520,
+      "cbr_bc": 799520
+    }
+  },
+  "source_hashes": {
+    "comedi/__init__.py": "219e71fca34e11af4966a446f8b5d41509ae6052ff16d3ccf68e39e7942eb1b2",
+    "comedi/algorithm.py": "c006a991aeb43c098fac0f3fdf1738d63e9d295c5bab0f0d549786edab8fe565",
+    "comedi/model.py": "1d430ab68409edc3f9ba21f6bbfe4d9975c4eaef11468b742a522b270bd08a63",
+    "comedi/runner.py": "314f93e58f27cd33661a17dfd95ed3e7d64bf1a2120875e319e4748b78e3ab90",
+    "comedi/tests/test_protocol.py": "30762595a93218f4bb9005e0cdce8e850a15aef3d7b5d0e76edd31feb8cc73ca",
+    "comedi/tests/test_runner_mock.py": "fdd018cee344a0087175db4bfb4504c16d8b4d6c6b60e12a1a8a1fd370afdf4b",
+    "comedi/train.py": "ac73af6964a6288daf6f61f8e6a5e6f56be17cb34e6fdae74f6903a8fc9e1674",
+    "baseline_common/__init__.py": "d986d0c0196475f69d02f5a8d5fee75f7766cf0eca0131e9988bd8bbf7bb92da",
+    "baseline_common/demonstrations.py": "fe96993350f713f3e6c3326aa3f6b0e9f578d3ad39b006a9eeb4ee667bf632d4",
+    "baseline_common/envs.py": "0158edba8ac7b61764694cc88d40f085f1e9f36c6bbe9551ad4c810690fd07a5",
+    "baseline_common/launch_suite.py": "410b52f0736fedb9b42c545b950ddc974fb57d1c2049c44734bb34bc251c13d6",
+    "baseline_common/runtime.py": "2e722aba1e858a4d9e99785309b04f812a842cc9d86cc2b7a1e6603d33251255",
+    "baseline_common/tests.py": "db75d57fbb8be7525ff7d2391648ee45345c8060784b0845aaef165ad24d3851",
+    "baseline_common/verify.py": "987a1534b4a3771b07751731efb96ab222a9d814c8621960138cbe613bc643fb",
+    "src/overcooked_ai_py/cooperative/__init__.py": "3f60b0e3c4a3cc8384459458a46e1515a1f4e101cb85c60fae9f38e2e4081248",
+    "src/overcooked_ai_py/cooperative/controller.py": "4add23cdb8bbae591212b45eb8fe143533c02276912b0de8d84285d3609d6b6a",
+    "src/overcooked_ai_py/cooperative/diagnostics.py": "909c87c2f069e41c2b7ad0052b1b980f14f5b68d666dbb6fcbd7b80514ec0a31",
+    "src/overcooked_ai_py/cooperative/kitchen.py": "7934b9fa961ea331abe08c1fe2b98d8e4ed1ce255aba7d4ebf49e8f34f16bf35",
+    "src/overcooked_ai_py/cooperative/layouts.py": "797d5effd7f979c7c33a5c9ed67a48d39d8602e3b23f2dbd5fcbe36ebc426010",
+    "src/overcooked_ai_py/cooperative/model.py": "c9a7e845c82d548433e03a77b8c49dc7a13982a257ac01ee205315361fac49a5",
+    "src/overcooked_ai_py/cooperative/parallel.py": "9f8b13ce8e7487840828ce7de1bce62f1edb3924a6ed7346c47dba44f81df9de",
+    "src/overcooked_ai_py/cooperative/presets.py": "ba6a525bfc3e7571249194bef35f3e02c3e889daa48f741add140c7ba511fce3",
+    "src/overcooked_ai_py/cooperative/shared/__init__.py": "933cf97312ec1232998cfbbc1725a3beec616d9a04c0cfdfc3c9737b536794dd",
+    "src/overcooked_ai_py/cooperative/shared/controller.py": "ec64ace25649749d29c54bf5128b90d4f6278ea02a90ddda55fa75ef22957df7",
+    "src/overcooked_ai_py/cooperative/shared/kitchen.py": "7eff2c56e26c7cc6d9a614e94ecad1b0415374a7a906c0899e18923283dc6e3f",
+    "src/overcooked_ai_py/cooperative/shared/layouts.py": "59cb206ef4e3e2139532f96e9409968e018e14deffd5780404fa6ad8d4a84178",
+    "src/overcooked_ai_py/cooperative/shared/model.py": "809a3672555744c9c72ac6b72b0bf8f4c02b7f085d9a305103f033c2f6237667",
+    "src/overcooked_ai_py/cooperative/shared/parallel.py": "c3e22d409ea762b4915cea15ca227ed3fa119ab3ba476564d29e286dc6b163ec",
+    "src/overcooked_ai_py/cooperative/shared/rendering.py": "b3879c510ef720185417d5fe25f7502d774c3856a2ee4cb2f3e99e1e23f76de7",
+    "demonstrations:/home/shaotianqi/hucooked/baseline_common/demonstrations.npz": "e3331df4601872378d3d2a8a45b35ae4e48d714fe3d58b211201359c0f1c8047"
+  },
+  "protocol": {
+    "population": "sequential growth; each new convention starts from fresh random weights",
+    "actor_update": "one joint SP + negative weighted XP + positive MP update per round",
+    "xp_roles": "all six nonempty proper current/prior role masks for three agents",
+    "xp_selection": "maximum current-round cross-play score; low-env-count probes are sampled approximations",
+    "mp": "random old/new prefix, current-policy suffix only",
+    "cbr": "each round collects student SP for PPO and frozen-teacher self-play for BC only; teacher IDs stay fixed within each episode",
+    "demonstration_warm_start": "the native rules dataset initializes every new convention and the CBR actor; its environment steps are budgeted once"
+  },
+  "budget_rounding": "requested joint steps round up to a vector boundary; phase allocations end at complete rounds",
+  "checkpoint_retention": "latest.pt plus immutable step_<actual_joint_steps>.pt snapshots at save intervals and final completion",
+  "environment": "SharedKitchen",
+  "environment_commit": "de37e0818c2e76311e105ab8689e5162bd84133f",
+  "demonstrations": {
+    "path": "/home/shaotianqi/hucooked/baseline_common/demonstrations.npz",
+    "env_steps": 9600,
+    "bc_epochs": 64,
+    "batch_size": 512
+  },
+  "observation": {
+    "vector": [
+      3,
+      866
+    ],
+    "state": [
+      863
+    ],
+    "spatial": [
+      3,
+      26,
+      7,
+      7
+    ]
+  },
+  "native_episode_metrics": [
+    "team_score",
+    "meals_completed",
+    "normal_completed",
+    "joint_completed",
+    "joint_successes",
+    "joint_attempt_success_rate",
+    "joint_wait_steps",
+    "three_contributor_meals",
+    "resource_conflicts",
+    "movement_conflicts",
+    "ticks",
+    "meals_per_100_steps"
+  ],
+  "episode_summary_additions": [
+    "episode",
+    "training_reward",
+    "training_shaping"
+  ],
+  "action_dim": 6,
+  "roles": 3,
+  "validation": "SharedKitchen team_score with KitchenBatch(train=False)",
+  "resume_semantics": "checkpoints are saved at complete round boundaries; environments reset on resume"
+}

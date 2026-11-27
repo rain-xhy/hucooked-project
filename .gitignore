@@ -40,3 +40,8 @@ checkpoint-eval/
 # Branch-specific exclusions
 /.environment/
 /hucooked haha/haha/cache/
+
+# Additional branch exclusions
+# STQ full training records and final checkpoint release assets
+/artifacts/
+**/metrics.jsonl
