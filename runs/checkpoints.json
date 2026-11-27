@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "checkpoints": [
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/original/multi-agent/runs/20261124-fresh/train/best.pt",
+      "path": "runs/haha/original/multi-agent/runs/20261124-fresh/train/best.pt",
+      "sha256": "3c2afb7ab2086e655208a804f79ed0e7f7508a5d5fb2b9ad1e96e7484dcd0fcf",
+      "bytes": 389669,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/original/multi-agent/runs/20261124-fresh/train/last.pt",
+      "path": "runs/haha/original/multi-agent/runs/20261124-fresh/train/last.pt",
+      "sha256": "c2799637b537dd88b8e62474d7dd711d247c1b7a5ebad5649e8c3ba86bcd8028",
+      "bytes": 389669,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/original/single-agent/runs/20261124-fresh/train/best.pt",
+      "path": "runs/haha/original/single-agent/runs/20261124-fresh/train/best.pt",
+      "sha256": "3c2afb7ab2086e655208a804f79ed0e7f7508a5d5fb2b9ad1e96e7484dcd0fcf",
+      "bytes": 389669,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/original/single-agent/runs/20261124-fresh/train/last.pt",
+      "path": "runs/haha/original/single-agent/runs/20261124-fresh/train/last.pt",
+      "sha256": "86ae483ca901e6bb5f03dbaee9672b295c6ed8cfa08e8799ba21cf7579272a69",
+      "bytes": 389669,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/shared/multi-agent/runs/01-pure-ppo-380/train/best.pt",
+      "path": "runs/haha/shared/multi-agent/runs/01-pure-ppo-380/train/best.pt",
+      "sha256": "14cd80657c92fbc44589501103c3416706919a12a7e0c34ab8d019fb3bdd5622",
+      "bytes": 407397,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/shared/multi-agent/runs/02-rule-bc-420/train/best.pt",
+      "path": "runs/haha/shared/multi-agent/runs/02-rule-bc-420/train/best.pt",
+      "sha256": "b433c80d1c490ae35cdea4c487f00f06978870ae3bf7faf6a12409714ab93b1b",
+      "bytes": 407397,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/shared/multi-agent/runs/03-rule-bc-440/train/best.pt",
+      "path": "runs/haha/shared/multi-agent/runs/03-rule-bc-440/train/best.pt",
+      "sha256": "379a011e62601a4597948a9d6daad73ac05cab0197f1330edbb3d8a505156f2b",
+      "bytes": 509621,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/shared/multi-agent/runs/04-planner-q-440/train/best.pt",
+      "path": "runs/haha/shared/multi-agent/runs/04-planner-q-440/train/best.pt",
+      "sha256": "32e8d3eeea725df40a0072a5b906e49adaa8ea50ed09e96fb71f722102f798fb",
+      "bytes": 242621,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/shared/multi-agent/runs/05-segment-ppo-440/train/best.pt",
+      "path": "runs/haha/shared/multi-agent/runs/05-segment-ppo-440/train/best.pt",
+      "sha256": "a0d5bc1607396f5fb64854cafb29f189d6d487b81918a9da2a5ecaca4a5a5bfc",
+      "bytes": 2968,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v1/multi-agent/runs/20261124-fresh/train/best.pt",
+      "path": "runs/haha/v1/multi-agent/runs/20261124-fresh/train/best.pt",
+      "sha256": "b7fcab8fe8660d7a07dd27df033edbedcea3cd6a63fad46b8b9649a4d75d26f1",
+      "bytes": 570405,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v1/multi-agent/runs/20261124-fresh/train/last.pt",
+      "path": "runs/haha/v1/multi-agent/runs/20261124-fresh/train/last.pt",
+      "sha256": "fbabc23116d5667f908dc4b4d68b67df9b44d1b1b4c1b78ae3135dacdeb8130f",
+      "bytes": 570405,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v1/single-agent/runs/20261124-fresh/train/best.pt",
+      "path": "runs/haha/v1/single-agent/runs/20261124-fresh/train/best.pt",
+      "sha256": "b7fcab8fe8660d7a07dd27df033edbedcea3cd6a63fad46b8b9649a4d75d26f1",
+      "bytes": 570405,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v1/single-agent/runs/20261124-fresh/train/last.pt",
+      "path": "runs/haha/v1/single-agent/runs/20261124-fresh/train/last.pt",
+      "sha256": "4d36d5662b13d398a6cbb703a09cc6735526c6c98565cbc0c14869cc0e2ddb30",
+      "bytes": 570405,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v2/multi-agent/runs/20261124-fresh/train/best.pt",
+      "path": "runs/haha/v2/multi-agent/runs/20261124-fresh/train/best.pt",
+      "sha256": "f35bd805bf4f292cfa6e6289b8504b2efc10a7a942fbfa71b8488f34d68e3d7d",
+      "bytes": 407589,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v2/multi-agent/runs/20261124-fresh/train/last.pt",
+      "path": "runs/haha/v2/multi-agent/runs/20261124-fresh/train/last.pt",
+      "sha256": "98770c07171e1b0e404770a7924fa4f0bc0d404cfa69ed8300e6ddccca074f66",
+      "bytes": 407589,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v2/single-agent/runs/20261124-fresh/train/best.pt",
+      "path": "runs/haha/v2/single-agent/runs/20261124-fresh/train/best.pt",
+      "sha256": "f35bd805bf4f292cfa6e6289b8504b2efc10a7a942fbfa71b8488f34d68e3d7d",
+      "bytes": 407589,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v2/single-agent/runs/20261124-fresh/train/last.pt",
+      "path": "runs/haha/v2/single-agent/runs/20261124-fresh/train/last.pt",
+      "sha256": "b4825a50aae22e7ad28372635f1056cb516823e8f9519e4f346f5a933891d6e5",
+      "bytes": 407589,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v3/multi-agent/runs/20261124-fresh/train/best.pt",
+      "path": "runs/haha/v3/multi-agent/runs/20261124-fresh/train/best.pt",
+      "sha256": "b2249feaf4cf87504903e1fa156f6b8a84fe1c98e711dc18b8a849c5b7ef43e2",
+      "bytes": 185765,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v3/multi-agent/runs/20261124-fresh/train/last.pt",
+      "path": "runs/haha/v3/multi-agent/runs/20261124-fresh/train/last.pt",
+      "sha256": "3860c1dcaf3321d44b64688511b4653178aff261eee654762871314af7cd5f41",
+      "bytes": 185765,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v3/multi-agent/runs/20261124-fresh/worker-pretrain/best.pt",
+      "path": "runs/haha/v3/multi-agent/runs/20261124-fresh/worker-pretrain/best.pt",
+      "sha256": "6d2115218aa25f63d0e06f3940bd1d0adc4539b5a5fc280116c1320247314f0c",
+      "bytes": 185765,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v3/multi-agent/runs/20261124-fresh/worker-pretrain/last.pt",
+      "path": "runs/haha/v3/multi-agent/runs/20261124-fresh/worker-pretrain/last.pt",
+      "sha256": "bd8426800fe81e054055166db52b94c55393ec32baf63b47201f32af3e39ca70",
+      "bytes": 185765,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v3/single-agent/runs/20261124-fresh/train/best.pt",
+      "path": "runs/haha/v3/single-agent/runs/20261124-fresh/train/best.pt",
+      "sha256": "b7d67251c8ba4fe2aca1f54e7af2548b287121e633fcfa5f5edc85fe82c732cc",
+      "bytes": 137481,
+      "publish": true
+    },
+    {
+      "method": "haha",
+      "source": "src/haha/leaderboard/v3/single-agent/runs/20261124-fresh/train/last.pt",
+      "path": "runs/haha/v3/single-agent/runs/20261124-fresh/train/last.pt",
+      "sha256": "a63d63644a308f33f66afdb34047f8c1be93af3a3cad2587dfaa9c03fde4db56",
+      "bytes": 137481,
+      "publish": true
+    },
+    {
+      "method": "nest_rl",
+      "stage": "l1",
+      "source": "src/nest_rl/mlp_shared/runs/no-hist-nobc-fast-l1-lr1e4-seed1/ppo/policy_000025.pt",
+      "path": "runs/nest_rl/l1/policy_000025.pt",
+      "sha256": "57956c32f9f843e344256823dbb49206bd7778a39f676be35a6baa9952617845",
+      "bytes": 1311667,
+      "publish": true
+    },
+    {
+      "method": "nest_rl",
+      "stage": "l1",
+      "source": "src/nest_rl/mlp_shared/runs/no-hist-nobc-fast-l1-lr1e4-seed1/ppo/policy_000030.pt",
+      "path": "runs/nest_rl/l1/policy_000030.pt",
+      "sha256": "4892fdd909e06f4b816eec3817cde15166348320d5b79b5659c0718e21fdb7ba",
+      "bytes": 1311667,
+      "publish": true
+    },
+    {
+      "method": "nest_rl",
+      "stage": "l1",
+      "source": "src/nest_rl/mlp_shared/runs/no-hist-nobc-fast-l1-lr1e4-seed1/ppo/policy_000040.pt",
+      "path": "runs/nest_rl/l1/policy_000040.pt",
+      "sha256": "45ec2a200dd83af071d5fffbed89f93947a0318d76e5a68aef828d908d2c8e64",
+      "bytes": 1311667,
+      "publish": true
+    },
+    {
+      "method": "nest_rl",
+      "stage": "l1",
+      "source": "src/nest_rl/mlp_shared/runs/no-hist-nobc-fast-l1-lr1e4-seed1/ppo/policy_000200.pt",
+      "path": "runs/nest_rl/l1/policy_000200.pt",
+      "sha256": "15881eca71004e6f2bce29a4fe8a62d9e6353e15a7bcb0f8ef4e3f37d903b017",
+      "bytes": 1311667,
+      "publish": true
+    },
+    {
+      "method": "nest_rl",
+      "stage": "l2",
+      "source": "src/nest_rl/mlp_shared/runs/no-hist-l2-from40-sp65-pool4-lr1e4-seed1/l2/policy_000200.pt",
+      "path": "runs/nest_rl/l2/policy_000200.pt",
+      "sha256": "64fff3a0eda4d24d7073c68adfd8ef8d8ded8b86de7a4589cf963186220d0c88",
+      "bytes": 1311987,
+      "publish": true
+    },
+    {
+      "method": "nest_rl",
+      "stage": "l3",
+      "source": "src/nest_rl/mlp_shared/runs/no-hist-l3-sp100-420sprint-seed1/l2/policy_000025.pt",
+      "path": "runs/nest_rl/l3/policy_000025.pt",
+      "sha256": "c715014687955cbd03d37124726a3da8185fec4a2ded86e6c6fc8ec594ee46c4",
+      "bytes": 1311731,
+      "publish": true
+    },
+    {
+      "method": "nest_rl",
+      "stage": "l4",
+      "source": "reproduction/nest_rl/mlp_shared/runs/no-hist-l4-from-l3u025-rspawn100-noise5-sparse-seed1/l4/best.pt",
+      "path": "runs/nest_rl/l4/best.pt",
+      "sha256": "e56377930aa8f68abd857a3a7ce5ed130b9c4fd4edd00acfd083736551be1582",
+      "bytes": 1311825,
+      "publish": true
+    }
+  ]
+}

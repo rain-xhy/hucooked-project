@@ -624,7 +624,16 @@ def main():
         source_stage = "ppo_update" if args.resume_last else "best-evaluation"
         base_steps = next(row["environment_steps"] for row in reversed(previous) if row["stage"] == source_stage)
         filename = "last.pt" if args.resume_last else "best.pt"
-        weights = torch.load(args.resume / filename, map_location="cpu", weights_only=True)
+        checkpoint = args.resume / filename
+        if not checkpoint.is_file():
+            leaderboard = Path(__file__).resolve().parents[1]
+            try:
+                relative = checkpoint.resolve().relative_to(leaderboard)
+            except ValueError:
+                pass
+            else:
+                checkpoint = leaderboard.parents[2] / "runs/haha" / relative
+        weights = torch.load(checkpoint, map_location="cpu", weights_only=True)
         source_width = weights["manager.0.weight"].shape[0]
         width = args.manager_width if args.manager_width is not None else source_width
         if width < source_width:

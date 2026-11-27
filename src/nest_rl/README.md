@@ -181,6 +181,7 @@ L4 按本节相同设置补测：`45` 个 GPU 环境 × `5` 批，每个受测�
 | [mlp_shared/export_replay.py](mlp_shared/export_replay.py) | 导出交互式 HTML / GIF / JSON 回放（如 [fast_bc_21meals.html](mlp_shared/replays/fast_bc_21meals.html)） |
 
 ```powershell
+# 发布权重位于根目录 runs/nest_rl/l1 至 l4；完整清单见 runs/checkpoints.json。
 # 1. L1（0-BC、无历史、21 餐规则队友）
 $env:PYTHONPATH="."
 python -m src.nest_rl.mlp_shared.train_l1 `
@@ -191,15 +192,15 @@ python -m src.nest_rl.mlp_shared.train_l1 `
 # 2. L2（从 L1 U=40 起步，65% 贪心自博弈 + 早/中/晚 4 队友池）
 python -m src.nest_rl.mlp_shared.train_l2 `
   --campaign no-hist-l2-from40-sp65-pool4-lr1e4-seed1 --no-history --partner-type fast `
-  --init-policy <L1_DIR>/policy_000040.pt `
-  --partner-pool <L1_DIR>/policy_000025.pt <L1_DIR>/policy_000030.pt <L1_DIR>/policy_000040.pt <L1_DIR>/policy_000200.pt `
+  --init-policy runs/nest_rl/l1/policy_000040.pt `
+  --partner-pool runs/nest_rl/l1/policy_000025.pt runs/nest_rl/l1/policy_000030.pt runs/nest_rl/l1/policy_000040.pt runs/nest_rl/l1/policy_000200.pt `
   --selfplay-frac 0.65 --num-envs 2016 --rollout-steps 300 --updates 200 --eval-every 5 `
   --lr 1e-4 --entropy-coef 0.008 --gamma 0.995 --shaping-scale 0.05 --seed 1
 
 # 3. L3（100% 贪心自博弈低熵冲 420，取 U=25 甜点）
 python -m src.nest_rl.mlp_shared.train_l2 `
   --campaign no-hist-l3-sp100-420sprint-seed1 --no-history --partner-type fast `
-  --init-policy <L2_DIR>/policy_000200.pt --partner-pool <L1_DIR>/policy_000200.pt `
+  --init-policy runs/nest_rl/l2/policy_000200.pt --partner-pool runs/nest_rl/l1/policy_000200.pt `
   --selfplay-frac 1.0 --num-envs 2016 --rollout-steps 300 --updates 25 --eval-every 5 `
   --lr 5e-5 --entropy-coef 0.001 --gamma 0.995 --shaping-scale 0.0 --seed 1
 
@@ -207,7 +208,7 @@ python -m src.nest_rl.mlp_shared.train_l2 `
 # campaign 使用新的输出目录名；训练结果保存在对应目录的 l4/ 下。
 python -m src.nest_rl.mlp_shared.train_l4 `
   --campaign no-hist-l4-from-l3u025-rspawn100-noise5-sparse-seed1 `
-  --init-policy <L3_DIR>/policy_000025.pt --device cuda `
+  --init-policy runs/nest_rl/l3/policy_000025.pt --device cuda `
   --num-envs 1008 --minibatch-size 3024 --updates 200 --eval-every 5 `
   --lr 5e-5 --partner-noise 0.05 --seed 1
 ```

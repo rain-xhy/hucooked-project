@@ -12,8 +12,8 @@ Shared 三人连续订单，环境版本 `de37e0818c2e76311e105ab8689e5162bd8413
 - RTX 3090 上运行 64 个独立高层策略，每个策略每轮采样 512 个完整回合，回合长度 300 步。第 23 次更新后选中确定性策略。全体共 753,664 局、226,099,200 个训练环境步；对应入榜个体为 11,776 局、3,532,800 步。每轮 3 次裁剪策略梯度更新，共 69 次优化器步。Adam 学习率 0.075，比例裁剪 0.8–1.2，优先级探索标准差 4。
 - 奖励依据团队交餐分数，同分时使用出餐时间，按批内相对回报加权。训练未读入 440 规划示范。最终在原生环境独立重新加载权重，复核 24 局，和训练结束时的官方评估逐局一致。
 - 原训练日志没有逐轮耗时。能核实的上界约为 **2 分 21 秒**：同一服务器上先结束的对照评估归档于 UTC 12:13:01，本次高层 PPO 结束训练并完成 24 局评估后开始写归档于 12:15:21。文件头精度为秒，差值 140 秒，含两项之间空档和评估，不作为精确训练耗时。
-- 从 420 权重训练及从本版权重复评的入口为 leaderboard 下的 `shared/autonomous_options.py`；训练用 `--method ppo --seed 491 --checkpoint`，复评用 `--evaluate-policy train/best.pt --output <新目录>`。
+- 从 420 权重训练及从本版权重复评的入口为 leaderboard 下的 `shared/autonomous_options.py`；训练用 `--method ppo --seed 491 --checkpoint`。从仓库根目录复评时，权重参数为 `--evaluate-policy runs/haha/shared/multi-agent/runs/05-segment-ppo-440/train/best.pt --output <新目录>`。
 
 ## 文件
 
-[入榜权重](train/best.pt) · [官方逐局评估](train/best-evaluation.json.gz) · [指标与计数](scores.json) · [Unity 回放](replay/shared.ocrep.json) · [回放原始轨迹](replay/shared.trajectory.json) · [训练日志](evidence/progress.jsonl)
+[入榜权重](../../../../../../../runs/haha/shared/multi-agent/runs/05-segment-ppo-440/train/best.pt) · [官方逐局评估](train/best-evaluation.json.gz) · [指标与计数](scores.json) · [Unity 回放](replay/shared.ocrep.json) · [回放原始轨迹](replay/shared.trajectory.json) · [训练日志](evidence/progress.jsonl)

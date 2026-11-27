@@ -117,11 +117,11 @@ Windows 遇到路径过长时，使用 `git -c core.longpaths=true submodule upd
 │   └── haha/        # HAHA、分段 PPO 与榜单
 ├── scripts/         # 运行与实验脚本
 ├── tests/           # 测试
-├── runs/            # 本地实验输出
+├── runs/            # 按方法归档的权重与本地实验输出
 └── docs/            # 项目文档
 ```
 
-<sub>训练权重、实验输出、Python 环境与缓存由根目录的 .gitignore 管理。</sub>
+<sub>精选模型权重见 <a href="runs/README.md">runs/</a>；其余训练输出、Python 环境与缓存由 .gitignore 忽略。STQ 权重继续通过 Release 分发。</sub>
 
 </details>
 

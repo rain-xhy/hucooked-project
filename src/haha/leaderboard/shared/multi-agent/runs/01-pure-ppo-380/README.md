@@ -16,4 +16,4 @@ Shared 三人连续订单，环境版本 `de37e0818c2e76311e105ab8689e5162bd8413
 
 ## 文件
 
-[入榜权重](train/best.pt) · [官方逐局评估](train/best-evaluation.json.gz) · [指标与计数](scores.json) · [Unity 回放](replay/shared.ocrep.json) · [回放原始轨迹](replay/shared.trajectory.json) · [训练日志](evidence/progress.jsonl)
+[入榜权重](../../../../../../../runs/haha/shared/multi-agent/runs/01-pure-ppo-380/train/best.pt) · [官方逐局评估](train/best-evaluation.json.gz) · [指标与计数](scores.json) · [Unity 回放](replay/shared.ocrep.json) · [回放原始轨迹](replay/shared.trajectory.json) · [训练日志](evidence/progress.jsonl)

@@ -40,7 +40,7 @@
 五个入榜目录使用相同结构：
 
 - `README.md` 记录权重来源、训练轮数、环境步数、局数、学习率、耗时和计时范围。
-- `train/best.pt` 是该方法的入榜权重。五种方法的参数格式分别由对应模型定义解释。
+- 入榜权重统一保存在根目录 `runs/haha/shared/multi-agent/runs/<版本>/train/best.pt`。五种方法的参数格式分别由对应模型定义解释。
 - `train/best-evaluation.json.gz` 是 24 局原生评估，含逐步动作、事件、奖励和订单。
 - `scores.json` 是机器可读指标，`evidence/` 保存原始日志及该版所需的配置或规划输入。
 - `replay/shared.ocrep.json` 可直接在 Unity 播放器中打开；`shared.trajectory.json` 是可重新渲染的轨迹。每份回放使用种子 84031，含 300 个动作步、301 帧。
@@ -58,7 +58,7 @@ python src/haha/leaderboard/prepare_environments.py shared
 
 repo_root="$PWD"
 board="$repo_root/src/haha/leaderboard"
-runs="$board/shared/multi-agent/runs"
+runs="$repo_root/runs/haha/shared/multi-agent/runs"
 export PYTHONPATH="$repo_root/overcooked_env/src:$repo_root/src:$board${PYTHONPATH:+:$PYTHONPATH}"
 work_dir="$(mktemp -d)"
 ```
@@ -108,7 +108,7 @@ python -m v2.train --device cpu --seed 488 --mode multi --profile continuous \
 
 ```bash
 python "$board/shared/train_schedule.py" \
-  --plan "$runs/03-rule-bc-440/evidence/plan.json" --output "$work_dir/rule-bc-440"
+  --plan "$board/shared/multi-agent/runs/03-rule-bc-440/evidence/plan.json" --output "$work_dir/rule-bc-440"
 ```
 
 **4．420 BC + 规划器引导的离线 Q。** 使用归档的三个候选方案和第二版的权重。此入口在 CUDA 上训练两种宽度，归档的是宽度 128 的开放动作评估版本。
@@ -116,7 +116,7 @@ python "$board/shared/train_schedule.py" \
 ```bash
 python "$board/shared/prep_neural_q.py" \
   --checkpoint "$runs/02-rule-bc-420/train/best.pt" \
-  --proposals "$runs/04-planner-q-440/evidence/proposals" \
+  --proposals "$board/shared/multi-agent/runs/04-planner-q-440/evidence/proposals" \
   --output "$work_dir/planner-q"
 ```
 
