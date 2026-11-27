@@ -1,0 +1,7927 @@
+{
+  "header": {
+    "schema_version": 1,
+    "source_version": "2.0.0",
+    "terrain": [
+      "XXXPPXXX",
+      "X      X",
+      "D XXXX S",
+      "X      X",
+      "XXXOOXXX"
+    ],
+    "layout_name": "counter_circuit_o_1order",
+    "tick_rate": 6,
+    "horizon": 300,
+    "complete": false,
+    "dynamics": "new",
+    "timebase": "synthetic",
+    "players": [
+      {
+        "id": "player_0",
+        "is_human": false
+      },
+      {
+        "id": "player_1",
+        "is_human": false
+      }
+    ],
+    "mdp_params_json": "{\"layout_name\": \"counter_circuit_o_1order\", \"terrain\": [[\"X\", \"X\", \"X\", \"P\", \"P\", \"X\", \"X\", \"X\"], [\"X\", \" \", \" \", \" \", \" \", \" \", \" \", \"X\"], [\"D\", \" \", \"X\", \"X\", \"X\", \"X\", \" \", \"S\"], [\"X\", \" \", \" \", \" \", \" \", \" \", \" \", \"X\"], [\"X\", \"X\", \"X\", \"O\", \"O\", \"X\", \"X\", \"X\"]], \"start_player_positions\": [[3, 3], [3, 1]], \"start_bonus_orders\": [], \"rew_shaping_params\": {\"PLACEMENT_IN_POT_REW\": 3, \"DISH_PICKUP_REWARD\": 3, \"SOUP_PICKUP_REWARD\": 5, \"DISH_DISP_DISTANCE_REW\": 0, \"POT_DISTANCE_REW\": 0, \"SOUP_DISTANCE_REW\": 0}, \"start_all_orders\": [{\"ingredients\": [\"onion\", \"onion\", \"onion\"]}], \"num_items_for_soup\": 3, \"old_dynamics\": false}",
+    "source": "upstream-GreedyHumanModel",
+    "seed": 7,
+    "custom_initial_state": true,
+    "clip_start_tick": 183,
+    "clip_end_tick": 243
+  },
+  "frames": [
+    {
+      "time": 0.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                2
+              ]
+            }
+          },
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 183
+      },
+      "score": 0.0
+    },
+    {
+      "time": 0.16666666666666785,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              5,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 184
+      },
+      "score": 0.0
+    },
+    {
+      "time": 0.33333333333333215,
+      "state": {
+        "players": [
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              6,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 185
+      },
+      "score": 0.0
+    },
+    {
+      "time": 0.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              6,
+              2
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 186
+      },
+      "score": 0.0
+    },
+    {
+      "time": 0.6666666666666679,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              6,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 187
+      },
+      "score": 0.0
+    },
+    {
+      "time": 0.8333333333333321,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              5,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 188
+      },
+      "score": 0.0
+    },
+    {
+      "time": 1.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              6,
+              3
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 1,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 1
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 189
+      },
+      "score": 0.0
+    },
+    {
+      "time": 1.1666666666666679,
+      "state": {
+        "players": [
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              5,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 2,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 2
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 190
+      },
+      "score": 0.0
+    },
+    {
+      "time": 1.3333333333333321,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              4,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 3,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 3
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 191
+      },
+      "score": 0.0
+    },
+    {
+      "time": 1.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              3,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 4,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 4
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 192
+      },
+      "score": 0.0
+    },
+    {
+      "time": 1.6666666666666643,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              2,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 5,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 5
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 193
+      },
+      "score": 0.0
+    },
+    {
+      "time": 1.8333333333333357,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                1,
+                2
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 6,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 6
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 194
+      },
+      "score": 0.0
+    },
+    {
+      "time": 2.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              3
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 7,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 7
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 195
+      },
+      "score": 0.0
+    },
+    {
+      "time": 2.1666666666666643,
+      "state": {
+        "players": [
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                2,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              3,
+              3
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 8,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 8
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 196
+      },
+      "score": 0.0
+    },
+    {
+      "time": 2.3333333333333357,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              3,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 9,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 9
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 197
+      },
+      "score": 0.0
+    },
+    {
+      "time": 2.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              3,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                3,
+                3
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 10,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 10
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 198
+      },
+      "score": 0.0
+    },
+    {
+      "time": 2.6666666666666643,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                3
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 11,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 11
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 199
+      },
+      "score": 0.0
+    },
+    {
+      "time": 2.8333333333333357,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                3
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 12,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 12
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 200
+      },
+      "score": 0.0
+    },
+    {
+      "time": 3.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                2
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 13,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 13
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 201
+      },
+      "score": 0.0
+    },
+    {
+      "time": 3.1666666666666643,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 14,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 14
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 202
+      },
+      "score": 0.0
+    },
+    {
+      "time": 3.3333333333333357,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 15,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 15
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 203
+      },
+      "score": 0.0
+    },
+    {
+      "time": 3.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 16,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 16
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 204
+      },
+      "score": 0.0
+    },
+    {
+      "time": 3.6666666666666643,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                4,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 17,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 17
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 205
+      },
+      "score": 0.0
+    },
+    {
+      "time": 3.8333333333333357,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 18,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 18
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 206
+      },
+      "score": 0.0
+    },
+    {
+      "time": 4.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 19,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 19
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 207
+      },
+      "score": 0.0
+    },
+    {
+      "time": 4.166666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 20,
+            "is_cooking": false,
+            "is_ready": true,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 20
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 208
+      },
+      "score": 0.0
+    },
+    {
+      "time": 4.333333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                4,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 20,
+            "is_cooking": false,
+            "is_ready": true,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 20
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 209
+      },
+      "score": 0.0
+    },
+    {
+      "time": 4.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 20,
+            "is_cooking": false,
+            "is_ready": true,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 20
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 210
+      },
+      "score": 0.0
+    },
+    {
+      "time": 4.666666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                3,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 20,
+            "is_cooking": false,
+            "is_ready": true,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 20
+          },
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 211
+      },
+      "score": 0.0
+    },
+    {
+      "time": 4.833333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "soup",
+              "position": [
+                3,
+                1
+              ],
+              "_ingredients": [
+                {
+                  "name": "onion",
+                  "position": [
+                    3,
+                    1
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    3,
+                    1
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    3,
+                    1
+                  ]
+                }
+              ],
+              "cooking_tick": 20,
+              "is_cooking": false,
+              "is_ready": true,
+              "is_idle": false,
+              "cook_time": 20,
+              "_cooking_tick": 20
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 212
+      },
+      "score": 0.0
+    },
+    {
+      "time": 5.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "soup",
+              "position": [
+                4,
+                1
+              ],
+              "_ingredients": [
+                {
+                  "name": "onion",
+                  "position": [
+                    4,
+                    1
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    4,
+                    1
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    4,
+                    1
+                  ]
+                }
+              ],
+              "cooking_tick": 20,
+              "is_cooking": false,
+              "is_ready": true,
+              "is_idle": false,
+              "cook_time": 20,
+              "_cooking_tick": 20
+            }
+          },
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 213
+      },
+      "score": 0.0
+    },
+    {
+      "time": 5.166666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              5,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "soup",
+              "position": [
+                5,
+                1
+              ],
+              "_ingredients": [
+                {
+                  "name": "onion",
+                  "position": [
+                    5,
+                    1
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    5,
+                    1
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    5,
+                    1
+                  ]
+                }
+              ],
+              "cooking_tick": 20,
+              "is_cooking": false,
+              "is_ready": true,
+              "is_idle": false,
+              "cook_time": 20,
+              "_cooking_tick": 20
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 214
+      },
+      "score": 0.0
+    },
+    {
+      "time": 5.333333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              6,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "soup",
+              "position": [
+                6,
+                1
+              ],
+              "_ingredients": [
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    1
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    1
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    1
+                  ]
+                }
+              ],
+              "cooking_tick": 20,
+              "is_cooking": false,
+              "is_ready": true,
+              "is_idle": false,
+              "cook_time": 20,
+              "_cooking_tick": 20
+            }
+          },
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                3,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 215
+      },
+      "score": 0.0
+    },
+    {
+      "time": 5.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              6,
+              2
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": {
+              "name": "soup",
+              "position": [
+                6,
+                2
+              ],
+              "_ingredients": [
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    2
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    2
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    2
+                  ]
+                }
+              ],
+              "cooking_tick": 20,
+              "is_cooking": false,
+              "is_ready": true,
+              "is_idle": false,
+              "cook_time": 20,
+              "_cooking_tick": 20
+            }
+          },
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                3,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 216
+      },
+      "score": 0.0
+    },
+    {
+      "time": 5.666666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              6,
+              2
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "soup",
+              "position": [
+                6,
+                2
+              ],
+              "_ingredients": [
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    2
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    2
+                  ]
+                },
+                {
+                  "name": "onion",
+                  "position": [
+                    6,
+                    2
+                  ]
+                }
+              ],
+              "cooking_tick": 20,
+              "is_cooking": false,
+              "is_ready": true,
+              "is_idle": false,
+              "cook_time": 20,
+              "_cooking_tick": 20
+            }
+          },
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 217
+      },
+      "score": 0.0
+    },
+    {
+      "time": 5.833333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              6,
+              2
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 218
+      },
+      "score": 20.0
+    },
+    {
+      "time": 6.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              6,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 219
+      },
+      "score": 20.0
+    },
+    {
+      "time": 6.166666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              5,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 220
+      },
+      "score": 20.0
+    },
+    {
+      "time": 6.333333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 221
+      },
+      "score": 20.0
+    },
+    {
+      "time": 6.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              2,
+              3
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 222
+      },
+      "score": 20.0
+    },
+    {
+      "time": 6.666666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                4,
+                3
+              ]
+            }
+          },
+          {
+            "position": [
+              3,
+              3
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 223
+      },
+      "score": 20.0
+    },
+    {
+      "time": 6.833333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              5,
+              3
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                5,
+                3
+              ]
+            }
+          },
+          {
+            "position": [
+              3,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 224
+      },
+      "score": 20.0
+    },
+    {
+      "time": 7.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              6,
+              3
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                6,
+                3
+              ]
+            }
+          },
+          {
+            "position": [
+              3,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                3,
+                3
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 225
+      },
+      "score": 20.0
+    },
+    {
+      "time": 7.166666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              6,
+              2
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                6,
+                2
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                3
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 226
+      },
+      "score": 20.0
+    },
+    {
+      "time": 7.333333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              6,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                6,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              3
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                3
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 227
+      },
+      "score": 20.0
+    },
+    {
+      "time": 7.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              5,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                5,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                2
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 228
+      },
+      "score": 20.0
+    },
+    {
+      "time": 7.666666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                4,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                1,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 229
+      },
+      "score": 20.0
+    },
+    {
+      "time": 7.833333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                4,
+                1
+              ]
+            }
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                2,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 230
+      },
+      "score": 20.0
+    },
+    {
+      "time": 8.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                3,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 231
+      },
+      "score": 20.0
+    },
+    {
+      "time": 8.166666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "onion",
+              "position": [
+                3,
+                1
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 1,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 1
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 232
+      },
+      "score": 20.0
+    },
+    {
+      "time": 8.333333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              4,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 2,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 2
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 233
+      },
+      "score": 20.0
+    },
+    {
+      "time": 8.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              3,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 3,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 3
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 234
+      },
+      "score": 20.0
+    },
+    {
+      "time": 8.666666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 4,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 4
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 235
+      },
+      "score": 20.0
+    },
+    {
+      "time": 8.833333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 5,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 5
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 236
+      },
+      "score": 20.0
+    },
+    {
+      "time": 9.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 6,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 6
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 237
+      },
+      "score": 20.0
+    },
+    {
+      "time": 9.166666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                1,
+                2
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 7,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 7
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 238
+      },
+      "score": 20.0
+    },
+    {
+      "time": 9.333333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                1,
+                3
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 8,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 8
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 239
+      },
+      "score": 20.0
+    },
+    {
+      "time": 9.5,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              -1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                1,
+                2
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 9,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 9
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 240
+      },
+      "score": 20.0
+    },
+    {
+      "time": 9.666666666666664,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                1,
+                2
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 10,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 10
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 241
+      },
+      "score": 20.0
+    },
+    {
+      "time": 9.833333333333336,
+      "state": {
+        "players": [
+          {
+            "position": [
+              1,
+              1
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              2
+            ],
+            "orientation": [
+              0,
+              -1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                1,
+                2
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 11,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 11
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 242
+      },
+      "score": 20.0
+    },
+    {
+      "time": 10.0,
+      "state": {
+        "players": [
+          {
+            "position": [
+              2,
+              1
+            ],
+            "orientation": [
+              1,
+              0
+            ],
+            "held_object": null
+          },
+          {
+            "position": [
+              1,
+              3
+            ],
+            "orientation": [
+              0,
+              1
+            ],
+            "held_object": {
+              "name": "dish",
+              "position": [
+                1,
+                3
+              ]
+            }
+          }
+        ],
+        "objects": [
+          {
+            "name": "soup",
+            "position": [
+              4,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  4,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": 12,
+            "is_cooking": true,
+            "is_ready": false,
+            "is_idle": false,
+            "cook_time": 20,
+            "_cooking_tick": 12
+          },
+          {
+            "name": "soup",
+            "position": [
+              3,
+              0
+            ],
+            "_ingredients": [
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "name": "onion",
+                "position": [
+                  3,
+                  0
+                ]
+              }
+            ],
+            "cooking_tick": -1,
+            "is_cooking": false,
+            "is_ready": false,
+            "is_idle": true,
+            "cook_time": -1,
+            "_cooking_tick": -1
+          }
+        ],
+        "bonus_orders": [],
+        "all_orders": [
+          {
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ]
+          }
+        ],
+        "timestep": 243
+      },
+      "score": 20.0
+    }
+  ],
+  "segments": [
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        3,
+        0
+      ],
+      "events": [
+        {
+          "kind": "potting_onion",
+          "agent_index": 0,
+          "position": [
+            3,
+            0
+          ]
+        },
+        {
+          "kind": "optimal_onion_potting",
+          "agent_index": 0,
+          "position": [
+            3,
+            0
+          ]
+        },
+        {
+          "kind": "viable_onion_potting",
+          "agent_index": 0,
+          "position": [
+            3,
+            0
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [
+        {
+          "kind": "start_cooking",
+          "agent_index": -1,
+          "position": [
+            3,
+            0
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        1,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        3,
+        0
+      ],
+      "events": [
+        {
+          "kind": "dish_pickup",
+          "agent_index": 0,
+          "position": [
+            0,
+            2
+          ]
+        },
+        {
+          "kind": "useful_dish_pickup",
+          "agent_index": 0,
+          "position": [
+            0,
+            2
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        5
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [
+        {
+          "kind": "onion_pickup",
+          "agent_index": 1,
+          "position": [
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "useful_onion_pickup",
+          "agent_index": 1,
+          "position": [
+            3,
+            4
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [
+        {
+          "kind": "soup_ready",
+          "agent_index": -1,
+          "position": [
+            3,
+            0
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        5,
+        0
+      ],
+      "events": [
+        {
+          "kind": "soup_pickup",
+          "agent_index": 0,
+          "position": [
+            3,
+            0
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        1,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        5
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        3
+      ],
+      "events": [
+        {
+          "kind": "potting_onion",
+          "agent_index": 1,
+          "position": [
+            3,
+            0
+          ]
+        },
+        {
+          "kind": "optimal_onion_potting",
+          "agent_index": 1,
+          "position": [
+            3,
+            0
+          ]
+        },
+        {
+          "kind": "viable_onion_potting",
+          "agent_index": 1,
+          "position": [
+            3,
+            0
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        3
+      ],
+      "sparse_reward": 20.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [
+        {
+          "kind": "soup_delivery",
+          "agent_index": 0,
+          "position": [
+            7,
+            2
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        1,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        1,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [
+        {
+          "kind": "onion_pickup",
+          "agent_index": 0,
+          "position": [
+            4,
+            4
+          ]
+        },
+        {
+          "kind": "useful_onion_pickup",
+          "agent_index": 0,
+          "position": [
+            4,
+            4
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        5
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [
+        {
+          "kind": "onion_pickup",
+          "agent_index": 1,
+          "position": [
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "useful_onion_pickup",
+          "agent_index": 1,
+          "position": [
+            3,
+            4
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        0,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        2
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        3,
+        0
+      ],
+      "events": [
+        {
+          "kind": "potting_onion",
+          "agent_index": 0,
+          "position": [
+            4,
+            0
+          ]
+        },
+        {
+          "kind": "optimal_onion_potting",
+          "agent_index": 0,
+          "position": [
+            4,
+            0
+          ]
+        },
+        {
+          "kind": "viable_onion_potting",
+          "agent_index": 0,
+          "position": [
+            4,
+            0
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        5,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [
+        {
+          "kind": "start_cooking",
+          "agent_index": -1,
+          "position": [
+            4,
+            0
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        5
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        3
+      ],
+      "events": [
+        {
+          "kind": "potting_onion",
+          "agent_index": 1,
+          "position": [
+            3,
+            0
+          ]
+        },
+        {
+          "kind": "optimal_onion_potting",
+          "agent_index": 1,
+          "position": [
+            3,
+            0
+          ]
+        },
+        {
+          "kind": "viable_onion_potting",
+          "agent_index": 1,
+          "position": [
+            3,
+            0
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        1,
+        3
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        1,
+        5
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        3
+      ],
+      "events": [
+        {
+          "kind": "dish_pickup",
+          "agent_index": 1,
+          "position": [
+            0,
+            2
+          ]
+        },
+        {
+          "kind": "useful_dish_pickup",
+          "agent_index": 1,
+          "position": [
+            0,
+            2
+          ]
+        }
+      ],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        3,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        1,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        1,
+        0
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    },
+    {
+      "kind": "step",
+      "actions": [
+        2,
+        1
+      ],
+      "sparse_reward": 0.0,
+      "reward_known": true,
+      "shaped_reward_by_agent": [
+        0,
+        0
+      ],
+      "events": [],
+      "sync_handoffs": []
+    }
+  ],
+  "diagnostics": []
+}

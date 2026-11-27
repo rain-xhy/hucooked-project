@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="232" height="80" viewBox="0 0 232 80" role="img" aria-labelledby="title">
+  <title id="title">贡献者</title>
+  <rect x="1" y="1" width="230" height="78" rx="18" fill="#193b43" stroke="#36545a" stroke-width="2"/>
+  <g transform="translate(45 22) scale(1.5)" fill="none" stroke="#66d0b6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="9" cy="7" r="3"/>
+    <path d="M2 21v-3a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v3m1-17a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v3"/>
+  </g>
+  <text x="97" y="51" fill="#f5f1e8" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="600">贡献者</text>
+</svg>

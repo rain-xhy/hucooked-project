@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="208" height="80" viewBox="0 0 208 80" role="img" aria-labelledby="title">
+  <title id="title">方法</title>
+  <rect x="1" y="1" width="206" height="78" rx="18" fill="#193b43" stroke="#36545a" stroke-width="2"/>
+  <g transform="translate(48 22) scale(1.5)" fill="none" stroke="#66d0b6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m8 10 8-4M8 14l8 4"/>
+    <circle cx="5" cy="12" r="3"/>
+    <circle cx="19" cy="5" r="3"/>
+    <circle cx="19" cy="19" r="3"/>
+  </g>
+  <text x="100" y="51" fill="#f5f1e8" font-family="Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="600">方法</text>
+</svg>

@@ -1,0 +1,4695 @@
+{
+  "mode": "420sprint-policy-u60-native-hy",
+  "layout": [
+    "XXXXMXX",
+    "X     L",
+    "X  G  K",
+    "S  A  X",
+    "X  B  X",
+    "D     X",
+    "XXXXXXX"
+  ],
+  "width": 7,
+  "height": 7,
+  "horizon": 300,
+  "chop_steps": 2,
+  "complete": false,
+  "frames": [
+    {
+      "tick": 12,
+      "actions": [
+        "INT",
+        "INT",
+        "INT"
+      ],
+      "score": 0.0,
+      "reward": 0.0,
+      "normal_completed": 0,
+      "joint_completed": 0,
+      "joint_wait_steps": 0,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": "PL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 0,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 12,
+          "slot": "side"
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 12,
+          "units": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 13,
+      "actions": [
+        "INT",
+        "S",
+        "E"
+      ],
+      "score": 0.0,
+      "reward": 0.0,
+      "normal_completed": 0,
+      "joint_completed": 0,
+      "joint_wait_steps": 0,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "S",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": "MEAL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 0,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            0
+          ],
+          "tick": 13,
+          "order_id": 0,
+          "units": [
+            0,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 14,
+      "actions": [
+        "INT",
+        "W",
+        "STAY"
+      ],
+      "score": 0.0,
+      "reward": 0.0,
+      "normal_completed": 0,
+      "joint_completed": 0,
+      "joint_wait_steps": 0,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 0,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            0
+          ],
+          "tick": 14,
+          "order_id": 0
+        }
+      ]
+    },
+    {
+      "tick": 15,
+      "actions": [
+        "W",
+        "INT",
+        "N"
+      ],
+      "score": 0.0,
+      "reward": 0.0,
+      "normal_completed": 0,
+      "joint_completed": 0,
+      "joint_wait_steps": 0,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "N",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 4,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 0,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            1
+          ],
+          "tick": 15,
+          "order_id": 1
+        }
+      ]
+    },
+    {
+      "tick": 16,
+      "actions": [
+        "INT",
+        "STAY",
+        "N"
+      ],
+      "score": 20.0,
+      "reward": 20.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 0,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 3,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            0
+          ],
+          "tick": 16,
+          "order_id": 0,
+          "units": [
+            0,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 17,
+      "actions": [
+        "N",
+        "STAY",
+        "E"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 0,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 2,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 2,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 18,
+      "actions": [
+        "E",
+        "STAY",
+        "INT"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 0,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": "RS"
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 1,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 18,
+          "units": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 19,
+      "actions": [
+        "INT",
+        "W",
+        "S"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 0,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "S",
+          "held": "RS"
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "main_cooked",
+          "order_id": 1,
+          "actors": [],
+          "tick": 19
+        }
+      ]
+    },
+    {
+      "tick": 20,
+      "actions": [
+        "INT",
+        "INT",
+        "E"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "RS"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            1
+          ],
+          "tick": 20,
+          "order_id": 1,
+          "units": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 21,
+      "actions": [
+        "S",
+        "STAY",
+        "INT"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "RS",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 21
+        }
+      ]
+    },
+    {
+      "tick": 22,
+      "actions": [
+        "S",
+        "STAY",
+        "INT"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 4,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "RS",
+        "prog": 1
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 22,
+          "units": [
+            4
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 23,
+      "actions": [
+        "S",
+        "INT",
+        "INT"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 5,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "CS",
+        "prog": 2
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 23,
+          "units": [
+            4
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 24,
+      "actions": [
+        "W",
+        "N",
+        "INT"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "CS"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "tick": 25,
+      "actions": [
+        "INT",
+        "INT",
+        "S"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "W",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 3,
+          "facing": "S",
+          "held": "CS"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 25,
+          "units": [
+            5
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 25,
+          "units": [
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 26,
+      "actions": [
+        "N",
+        "S",
+        "W"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 4,
+          "facing": "N",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "S",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": "CS"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 27,
+      "actions": [
+        "N",
+        "W",
+        "INT"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "N",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 27,
+          "slot": "side"
+        }
+      ]
+    },
+    {
+      "tick": 28,
+      "actions": [
+        "E",
+        "INT",
+        "E"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 4,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            1
+          ],
+          "tick": 28,
+          "order_id": 2
+        }
+      ]
+    },
+    {
+      "tick": 29,
+      "actions": [
+        "INT",
+        "INT",
+        "N"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "N",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 3,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": "PL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            0
+          ],
+          "tick": 29,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 30,
+      "actions": [
+        "INT",
+        "INT",
+        "N"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 2,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": "MEAL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            0
+          ],
+          "tick": 30,
+          "order_id": 1,
+          "units": [
+            3,
+            4,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 31,
+      "actions": [
+        "INT",
+        "STAY",
+        "E"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 1,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            0
+          ],
+          "tick": 31,
+          "order_id": 1
+        }
+      ]
+    },
+    {
+      "tick": 32,
+      "actions": [
+        "W",
+        "STAY",
+        "INT"
+      ],
+      "score": 20.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 0,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": "RS"
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 1,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 32,
+          "units": [
+            7
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 2,
+          "actors": [],
+          "tick": 32
+        }
+      ]
+    },
+    {
+      "tick": 33,
+      "actions": [
+        "INT",
+        "INT",
+        "S"
+      ],
+      "score": 40.0,
+      "reward": 20.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "S",
+          "held": "RS"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "serve",
+          "actors": [
+            0
+          ],
+          "tick": 33,
+          "order_id": 1,
+          "units": [
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "type": "unload",
+          "actors": [
+            1
+          ],
+          "tick": 33,
+          "order_id": 2,
+          "units": [
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 34,
+      "actions": [
+        "S",
+        "N",
+        "E"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 4,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "RS"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 35,
+      "actions": [
+        "S",
+        "INT",
+        "INT"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "RS",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 35
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 35,
+          "units": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 36,
+      "actions": [
+        "W",
+        "S",
+        "INT"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "S",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "RS",
+        "prog": 1
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 36,
+          "units": [
+            7
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 37,
+      "actions": [
+        "INT",
+        "W",
+        "INT"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "W",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": "RM"
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "CS",
+        "prog": 2
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            2
+          ],
+          "tick": 37,
+          "units": [
+            7
+          ],
+          "progress": 2
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 37,
+          "units": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 38,
+      "actions": [
+        "N",
+        "INT",
+        "INT"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 4,
+          "facing": "N",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "CS"
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 4,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            1
+          ],
+          "tick": 38,
+          "order_id": 3
+        },
+        {
+          "type": "take_cutting",
+          "actors": [
+            2
+          ],
+          "tick": 38
+        }
+      ]
+    },
+    {
+      "tick": 39,
+      "actions": [
+        "N",
+        "N",
+        "S"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "N",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 5,
+          "y": 3,
+          "facing": "S",
+          "held": "CS"
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 3,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 40,
+      "actions": [
+        "E",
+        "E",
+        "W"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": "CS"
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 2,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 41,
+      "actions": [
+        "INT",
+        "INT",
+        "INT"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 1,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": "PL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            0
+          ],
+          "tick": 41,
+          "slot": "plate"
+        },
+        {
+          "type": "place_assembly",
+          "actors": [
+            2
+          ],
+          "tick": 41,
+          "slot": "side"
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 41,
+          "units": [
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 42,
+      "actions": [
+        "INT",
+        "S",
+        "N"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 1,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "S",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "N",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": "MEAL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            0
+          ],
+          "tick": 42,
+          "order_id": 2,
+          "units": [
+            6,
+            7,
+            9
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 3,
+          "actors": [],
+          "tick": 42
+        }
+      ]
+    },
+    {
+      "tick": 43,
+      "actions": [
+        "INT",
+        "E",
+        "N"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 2,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            0
+          ],
+          "tick": 43,
+          "order_id": 2
+        }
+      ]
+    },
+    {
+      "tick": 44,
+      "actions": [
+        "W",
+        "INT",
+        "S"
+      ],
+      "score": 40.0,
+      "reward": 0.0,
+      "normal_completed": 1,
+      "joint_completed": 1,
+      "joint_wait_steps": 3,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "S",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "RS",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 2,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            1
+          ],
+          "tick": 44
+        }
+      ]
+    },
+    {
+      "tick": 45,
+      "actions": [
+        "INT",
+        "INT",
+        "W"
+      ],
+      "score": 60.0,
+      "reward": 20.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 4,
+      "unmatched_steps": 0,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "RS",
+        "prog": 1
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            1
+          ],
+          "tick": 45,
+          "units": [
+            10
+          ],
+          "progress": 1
+        },
+        {
+          "type": "serve",
+          "actors": [
+            0
+          ],
+          "tick": 45,
+          "order_id": 2,
+          "units": [
+            6,
+            7,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 46,
+      "actions": [
+        "N",
+        "INT",
+        "INT"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 5,
+      "unmatched_steps": 1,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 2,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "CS",
+        "prog": 2
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            1
+          ],
+          "tick": 46,
+          "units": [
+            10
+          ],
+          "progress": 2
+        }
+      ]
+    },
+    {
+      "tick": 47,
+      "actions": [
+        "E",
+        "INT",
+        "INT"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 6,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "CS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            1
+          ],
+          "tick": 47
+        }
+      ]
+    },
+    {
+      "tick": 48,
+      "actions": [
+        "INT",
+        "S",
+        "INT"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 3,
+          "facing": "S",
+          "held": "CS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "unload",
+          "actors": [
+            0,
+            2
+          ],
+          "tick": 48,
+          "order_id": 3,
+          "units": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 49,
+      "actions": [
+        "S",
+        "W",
+        "N"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": "CS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 50,
+      "actions": [
+        "S",
+        "INT",
+        "INT"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 4,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": "RM"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 50,
+          "slot": "side"
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 50,
+          "units": [
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 51,
+      "actions": [
+        "S",
+        "E",
+        "S"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 5,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "S",
+          "held": "RM"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 52,
+      "actions": [
+        "W",
+        "N",
+        "W"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": "RM"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 53,
+      "actions": [
+        "INT",
+        "N",
+        "STAY"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "W",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": "RM"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 53,
+          "units": [
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 54,
+      "actions": [
+        "N",
+        "N",
+        "INT"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 4,
+          "facing": "N",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 4,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            2
+          ],
+          "tick": 54,
+          "order_id": 4
+        }
+      ]
+    },
+    {
+      "tick": 55,
+      "actions": [
+        "N",
+        "E",
+        "STAY"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "N",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 3,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 56,
+      "actions": [
+        "E",
+        "INT",
+        "STAY"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 2,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 56,
+          "units": [
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 57,
+      "actions": [
+        "INT",
+        "S",
+        "INT"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "S",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 1,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": "PL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            0
+          ],
+          "tick": 57,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 58,
+      "actions": [
+        "INT",
+        "E",
+        "INT"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "normal"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": "MEAL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            0
+          ],
+          "tick": 58,
+          "order_id": 3,
+          "units": [
+            8,
+            10,
+            12
+          ]
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 4,
+          "actors": [],
+          "tick": 58
+        }
+      ]
+    },
+    {
+      "tick": 59,
+      "actions": [
+        "INT",
+        "INT",
+        "INT"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "RS",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_cutting",
+          "actors": [
+            1
+          ],
+          "tick": 59
+        },
+        {
+          "type": "take_meal",
+          "actors": [
+            0
+          ],
+          "tick": 59,
+          "order_id": 3
+        },
+        {
+          "type": "unload",
+          "actors": [
+            2
+          ],
+          "tick": 59,
+          "order_id": 4,
+          "units": [
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 60,
+      "actions": [
+        "W",
+        "INT",
+        "E"
+      ],
+      "score": 60.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 1,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "RS",
+        "prog": 1
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 3,
+          "kind": "joint",
+          "status": "started"
+        },
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            1
+          ],
+          "tick": 60,
+          "units": [
+            13
+          ],
+          "progress": 1
+        }
+      ]
+    },
+    {
+      "tick": 61,
+      "actions": [
+        "INT",
+        "INT",
+        "STAY"
+      ],
+      "score": 80.0,
+      "reward": 20.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "CS",
+        "prog": 2
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "chop",
+          "actors": [
+            1
+          ],
+          "tick": 61,
+          "units": [
+            13
+          ],
+          "progress": 2
+        },
+        {
+          "type": "serve",
+          "actors": [
+            0
+          ],
+          "tick": 61,
+          "order_id": 3,
+          "units": [
+            8,
+            10,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 62,
+      "actions": [
+        "S",
+        "INT",
+        "INT"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 4,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "CS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "E",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_cutting",
+          "actors": [
+            1
+          ],
+          "tick": 62
+        }
+      ]
+    },
+    {
+      "tick": 63,
+      "actions": [
+        "S",
+        "S",
+        "N"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "S",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 3,
+          "facing": "S",
+          "held": "CS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 64,
+      "actions": [
+        "W",
+        "W",
+        "INT"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": "CS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 1,
+          "facing": "N",
+          "held": "RM"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_source",
+          "actors": [
+            2
+          ],
+          "tick": 64,
+          "units": [
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 65,
+      "actions": [
+        "INT",
+        "INT",
+        "S"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 5,
+          "facing": "W",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 4,
+          "y": 3,
+          "facing": "W",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "S",
+          "held": "RM"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            1
+          ],
+          "tick": 65,
+          "slot": "side"
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            0
+          ],
+          "tick": 65,
+          "units": [
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 66,
+      "actions": [
+        "N",
+        "E",
+        "W"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 4,
+          "facing": "N",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": "RM"
+        }
+      ],
+      "cooker": {
+        "item": "",
+        "rem": 0,
+        "kind": ""
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "active"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 67,
+      "actions": [
+        "N",
+        "N",
+        "INT"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "N",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 4,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "load",
+          "actors": [
+            2
+          ],
+          "tick": 67,
+          "order_id": 5
+        }
+      ]
+    },
+    {
+      "tick": 68,
+      "actions": [
+        "E",
+        "N",
+        "STAY"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "PL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "N",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 3,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": []
+    },
+    {
+      "tick": 69,
+      "actions": [
+        "INT",
+        "E",
+        "INT"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 2,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "CM",
+        "side": "CS",
+        "plate": "PL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "place_assembly",
+          "actors": [
+            0
+          ],
+          "tick": 69,
+          "slot": "plate"
+        }
+      ]
+    },
+    {
+      "tick": 70,
+      "actions": [
+        "INT",
+        "INT",
+        "INT"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": ""
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 1,
+          "facing": "E",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "RM",
+        "rem": 1,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": "MEAL"
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "assemble",
+          "actors": [
+            0
+          ],
+          "tick": 70,
+          "order_id": 4,
+          "units": [
+            11,
+            13,
+            15
+          ]
+        },
+        {
+          "type": "take_source",
+          "actors": [
+            1
+          ],
+          "tick": 70,
+          "units": [
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 71,
+      "actions": [
+        "INT",
+        "S",
+        "INT"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 7,
+      "unmatched_steps": 2,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 2,
+          "y": 3,
+          "facing": "E",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "S",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": [
+        {
+          "type": "take_meal",
+          "actors": [
+            0
+          ],
+          "tick": 71,
+          "order_id": 4
+        },
+        {
+          "type": "main_cooked",
+          "order_id": 5,
+          "actors": [],
+          "tick": 71
+        }
+      ]
+    },
+    {
+      "tick": 72,
+      "actions": [
+        "W",
+        "E",
+        "INT"
+      ],
+      "score": 80.0,
+      "reward": 0.0,
+      "normal_completed": 2,
+      "joint_completed": 2,
+      "joint_wait_steps": 8,
+      "unmatched_steps": 3,
+      "chefs": [
+        {
+          "id": 0,
+          "x": 1,
+          "y": 3,
+          "facing": "W",
+          "held": "MEAL"
+        },
+        {
+          "id": 1,
+          "x": 5,
+          "y": 2,
+          "facing": "E",
+          "held": "RS"
+        },
+        {
+          "id": 2,
+          "x": 4,
+          "y": 2,
+          "facing": "W",
+          "held": ""
+        }
+      ],
+      "cooker": {
+        "item": "CM",
+        "rem": 0,
+        "kind": "joint"
+      },
+      "cutting": {
+        "item": "",
+        "prog": 0
+      },
+      "asm": {
+        "main": "",
+        "side": "",
+        "plate": ""
+      },
+      "buf": "",
+      "orders": [
+        {
+          "id": 4,
+          "kind": "normal",
+          "status": "started"
+        },
+        {
+          "id": 5,
+          "kind": "joint",
+          "status": "started"
+        }
+      ],
+      "events": []
+    }
+  ],
+  "metadata": {
+    "provenance": {
+      "environment_commit": "de37e0818c2e76311e105ab8689e5162bd84133f",
+      "environment_fingerprint": "675c139d2478d5ea790931989baba22e0bc36758a037a4a5f482caadbd4ccbc0",
+      "checkpoint": "src\\nest_rl\\mlp_shared\\runs\\no-hist-l3-sp100-420sprint-seed1\\l2\\policy_000060.pt",
+      "checkpoint_sha256": "2852e17d47bb5374f7b86c8206e943c7df2f989b1c7e5a4573b610a4de93b593",
+      "seed": 1,
+      "horizon": 300,
+      "metrics": {
+        "normal_completed": 11,
+        "joint_completed": 10,
+        "joint_ready_steps": 54,
+        "joint_attempt_steps": 34,
+        "joint_successes": 11,
+        "unmatched_attempt_steps": 23,
+        "resource_conflicts": 0,
+        "movement_conflicts": 6,
+        "team_score": 420.0,
+        "meals_completed": 21,
+        "ticks": 300,
+        "joint_attempt_success_rate": 0.3235294117647059,
+        "joint_wait_steps": 43,
+        "three_contributor_meals": 21,
+        "meals_per_100_steps": 7.0
+      }
+    },
+    "clip_start_tick": 12,
+    "clip_end_tick": 72,
+    "renderer": "local codex/v3-replay 072387b, Unity Editor 6000.6.9f1",
+    "view": "LongEdge",
+    "camera_pitch": 48,
+    "display_fps": 12,
+    "duration_seconds": 10
+  }
+}
